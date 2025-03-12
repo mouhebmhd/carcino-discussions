@@ -1,0 +1,27 @@
+.section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #ff4500;
+    padding: 50px;
+    color: white;
+}
+
+.text-container {
+    max-width: 40%;
+}
+
+.text-container h1 {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    color: black;
+}
+
+.text-container p {
+    font-size: 1.1rem;
+    color: black;
+}
+
+.image-content img {
+    width: 500px;
+}
