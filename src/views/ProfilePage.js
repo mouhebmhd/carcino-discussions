@@ -1,5 +1,6 @@
 import React from "react";
 import "../styles/ProfilePage.css";
+
 const ProfilePageP = () => {
   return (
     <div className="profile-container">

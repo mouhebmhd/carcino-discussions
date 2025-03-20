@@ -7,20 +7,25 @@ import SignupS from "./views/Signup";
 import Community from "./views/Community";
 import ProfilePageP from "./views/ProfilePage";
 
+
+import Home from "./views/Home.js";
+
 function App() {
   return (
     <Router>
-      <div className="app-container">
-        <Header />
-        <SidebarS />
+      
+       
+
         <main className="main-content">
           <Routes>
-            <Route path="/" element={<SignupS />} />
-            <Route path="/community" element={<Community />} />
+          <Route path="/Home" element={<Home />} />
+          <Route path="/SidebarS" element={<SidebarS />} />
+            <Route path="/Community" element={<Community />} />
             <Route path="/profile" element={<ProfilePageP />} />
+            <Route path="/SignupS" element={<SignupS />} />
           </Routes>
         </main>
-      </div>
+      
     </Router>
   );
 }

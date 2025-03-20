@@ -11,7 +11,7 @@ function SidebarS() {
         <li><FaUsers /> Groups</li>
         <li><FaFile /> Pages</li>
         <li><FaCalendar /> Events</li>
-        <li><Link to="/profil"><FaUser/> Profile</Link></li>
+        <li><Link to="/profile"><FaUser/>Profile</Link></li>
         <li><FaEllipsisH /> See More</li>
       </ul>
     </div>

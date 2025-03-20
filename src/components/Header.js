@@ -1,6 +1,6 @@
 import React from "react";
 import "../styles/Header.css";
-
+import { Link } from "react-router-dom";
  function Header()
  {
   return (
@@ -10,9 +10,10 @@ import "../styles/Header.css";
       </div>
       
       <nav className="nav">
-        <a href="#">Company</a>
-        <a href="#">Values</a>
-        <a href="#">News</a>
+        <Link to="#">Company</Link>
+        <Link to="/Community">Community</Link>
+        <Link to="#">Values</Link>
+        <Link to="#">News</Link>
         </nav>
         <button className="visit-btn">Visit Carcino-Disc</button>
   
