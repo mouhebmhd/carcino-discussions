@@ -1,0 +1,19 @@
+.profile-container {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .profile-header {
+    position: relative;
+  }
+  
+  .banner {
+    width: 100%;
+    height: 200px;
+  }
+  .profile-stats {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 10px;
+  }

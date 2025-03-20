@@ -14,7 +14,7 @@ import "../styles/Header.css";
         <a href="#">Values</a>
         <a href="#">News</a>
         </nav>
-        <button className="visit-btn">Visit Reddit</button>
+        <button className="visit-btn">Visit Carcino-Disc</button>
   
     </header>
   

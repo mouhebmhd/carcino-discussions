@@ -1,0 +1,58 @@
+.numbers {
+    background: black;
+    color: white;
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.numbers h2 {
+    font-size: 2.5rem;
+}
+
+.numbers p {
+    font-size: 1.2rem;
+    margin-top: 10px;
+    opacity: 0.8;
+}
+
+.numbers .date {
+    margin-bottom: 30px;
+    font-size: 1rem;
+}
+
+.stats {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+.stat-box {
+    background: white;
+    color: rgb(224, 28, 28);
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    width: 100px;
+}
+
+.stat-box h3 {
+    font-size: 2rem;
+    color: #ff4500;
+}
+
+.stat-box p {
+    font-size: 1rem;
+    color: #0e0d0d;
+}
+
+.press-btn {
+    background: #ff4500;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1rem;
+    border-radius: 5px;
+    margin-top: 20px;
+    cursor: pointer;
+}
