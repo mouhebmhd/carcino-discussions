@@ -47,7 +47,7 @@ function App() {
             <Route path="/Network" element={<Network />} />
             <Route path="/Post" element={<Post />} />
             <Route path="/SectionC" element={<SectionC />} />
-            <Route path="/PersonalLandingPageC" element={<PersonalLandingPage />} />
+            <Route path="/" element={<PersonalLandingPage />} />
             <Route path="/ContactForm" element={<ContactForm />} />
             <Route path="/AboutUs" element={<AboutUs />} />
             <Route path="/Team" element={<Team />} />

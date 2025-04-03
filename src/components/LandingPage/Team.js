@@ -3,8 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Card, Col, Row, Image } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub, faTwitter, faLinkedin } from '@fortawesome/free-brands-svg-icons';
-import NavBr from './NavBr';
-import Footer from './Footer';
+
 
 const teamMembers = [
   {
@@ -21,7 +20,7 @@ const teamMembers = [
 function Team() {
   return (
     <>
-      <NavBr />
+      
       <div className="container py-5">
         <h2 className="text-center mb-4">Meet the team</h2>
         <Row className="g-4 d-flex justify-content-center">
@@ -57,7 +56,7 @@ function Team() {
           ))}
         </Row>
       </div>
-      <Footer />
+      
     </>
   );
 }

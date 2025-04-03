@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import NavBr from './NavBr';
-import Footer from './Footer';
+
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -57,7 +56,7 @@ const ContactForm = () => {
     <div className="d-flex flex-column">
       <main className="flex-shrink-0">
         {/* Navigation */}
-      <NavBr /> 
+      
 
         {/* Page content */}
         <section className="py-5">
@@ -167,8 +166,7 @@ const ContactForm = () => {
         </section>
       </main>
       
-      {/* Footer */}
-      <Footer />
+      
     </div>
   );
 };

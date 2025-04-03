@@ -1,11 +1,10 @@
 import React from 'react'
-import NavBr from './NavBr'
-import Footer from './Footer'
+
 
 function AboutUs() {
   return (
     <div>
-        <NavBr />
+        
         <section className="about-section bg-light py-5">
     <div className="container px-4">
       <div className="row justify-content-center">
@@ -44,7 +43,7 @@ function AboutUs() {
       </div>
     </div>
   </section>
-  <Footer />
+  
   </div>
   )
 }
