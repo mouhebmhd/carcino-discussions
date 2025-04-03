@@ -1,0 +1,31 @@
+.comments-container {
+    max-width: 600px;
+    margin: 20px auto;
+    font-family: Arial, sans-serif;
+    
+  }
+  
+  .comment {
+    display: flex;
+    align-items: flex-start;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+    
+  }
+  
+  .comment-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .comment-content {
+    flex: 1;
+    
+  }
+  
+  .comment-date {
+    color: gray;
+    font-size: 12px;
+  }

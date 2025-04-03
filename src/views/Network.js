@@ -1,10 +1,11 @@
-import React from "react";
-import SidebarS from "../components/Sidebar";
-import NavbarN from "../components/Navbar";
-import SuggestionsS from "../components/Suggestions";
-import NewsN from "../components/News";
+import React from 'react'
+import SuggestionsS from '../components/Suggestions'
+import NewsN from '../components/News'
+import NavbarN from '../components/Navbar'
+import SidebarS from '../components/Sidebar'
+import { BiSearch } from "react-icons/bi";
 
-function Community() {
+function Network() {
   return (
     <div className="community-page">
       <NavbarN />
@@ -16,7 +17,27 @@ function Community() {
           </div>
           
           {/* Main content column */}
-          <div className="col-md-7 p-4 main-content">
+          <div className="col-md-7 p-3 main-content">
+            {/* Search bar */}
+            <div className="container mb-4">
+              <div className="row">
+                <div className="col-12">
+                  <form className="d-flex">
+                    <div className="input-group">
+                      <input className="form-control form-control-lg" type="search" placeholder="Search" aria-label="Search" />
+                      <button className="btn btn-primary px-4" type="submit">
+                        <BiSearch size={24} color="#ffffff" />
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h3>People You Want To Connect</h3>
+            </div>
+            
             {/* Groups */}
             <div className="groups-container">
               {/* Long Term Investing */}
@@ -31,7 +52,7 @@ function Community() {
                       height="100" 
                     />
                     <div className="text-center mt-2">
-                      <small className="text-muted">220 Members</small>
+                      <small className="text-muted">220 Followers</small>
                     </div>
                   </div>
                   <div className="flex-grow-1">
@@ -56,7 +77,7 @@ function Community() {
                       height="100" 
                     />
                     <div className="text-center mt-2">
-                      <small className="text-muted">423 Members</small>
+                      <small className="text-muted">423 Followers</small>
                     </div>
                   </div>
                   <div className="flex-grow-1">
@@ -81,7 +102,7 @@ function Community() {
                       height="100" 
                     />
                     <div className="text-center mt-2">
-                      <small className="text-muted">315 Members</small>
+                      <small className="text-muted">315 Followers</small>
                     </div>
                   </div>
                   <div className="flex-grow-1">
@@ -160,7 +181,7 @@ function Community() {
         }
       `}</style>
     </div>
-  );
+  )
 }
 
-export default Community;
+export default Network

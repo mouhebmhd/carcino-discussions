@@ -1,0 +1,50 @@
+.video-page {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+  
+  .content {
+    display: flex;
+    flex: 1;
+  }
+  
+  .sidebar {
+    width: 250px;
+    background: #f5f5f5;
+    padding: 20px;
+  }
+  
+  .main-content {
+    flex: 1;
+    padding: 20px;
+    background: white;
+  }
+  
+  h2 {
+    color: #333;
+  }
+  
+  .post {
+    background: #fff;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .post-video {
+    width: 100%;
+    border-radius: 8px;
+  }
+  
+  .post-actions {
+    margin-top: 10px;
+  }
+  
+  .post-actions button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-right: 10px;
+  }

@@ -7,11 +7,12 @@ function SidebarS() {
     <div className="sidebar">
       <ul>
         <li><FaBell /> Notifications</li>
-        <li><FaEnvelope /> Messages</li>
         <li><FaUsers /> Groups</li>
         <li><FaFile /> Pages</li>
         <li><FaCalendar /> Events</li>
-        <li><Link to="/profile"><FaUser/>Profile</Link></li>
+        <li><FaUser /> Profile</li>
+       
+        
         <li><FaEllipsisH /> See More</li>
       </ul>
     </div>
