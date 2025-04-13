@@ -1,0 +1,17 @@
+.navbarBrand
+{
+    color: var(--mainColor);
+    font-weight: 600;
+    font-size: 20px;
+}
+.navLink:hover
+{
+    color: var(--mainColor);
+}
+.mainSection
+{
+    background-image: url("../../images/8310265.jpg");
+    background-size: cover;
+    height: 95vh;
+    margin: 0;
+}

@@ -1,6 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
+import 'animate.css';
+
 import Header from "./components/Header";
 import SidebarS from "./components/Sidebar";
 import SignupS from "./views/Signup";
@@ -33,6 +35,8 @@ function App() {
 
         <main className="main-content">
           <Routes>
+          <Route path="/" element={<PersonalLandingPage />} />
+
           <Route path="/Home" element={<Home />} />
           <Route path="/SidebarS" element={<SidebarS />} />
             <Route path="/Community" element={<Community />} />
@@ -47,7 +51,6 @@ function App() {
             <Route path="/Network" element={<Network />} />
             <Route path="/Post" element={<Post />} />
             <Route path="/SectionC" element={<SectionC />} />
-            <Route path="/" element={<PersonalLandingPage />} />
             <Route path="/ContactForm" element={<ContactForm />} />
             <Route path="/AboutUs" element={<AboutUs />} />
             <Route path="/Team" element={<Team />} />

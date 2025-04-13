@@ -1,50 +1,38 @@
 import React from 'react';
-import NavBr from './NavBr';
+import NavBar from './NavBar';
 import Footer from './Footer';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AboutUs from './AboutUs';
 import Team from './Team';
 import ContactForm from './Contact';
-
+import Services from './services';
+import styles from "./style.module.css"
 const PersonalLandingPage = () => {
   return (
-    <div className="d-flex flex-column h-100">
-      <main className="flex-shrink-0">
+    <div className="m-0 p-0" id='home'>
+      <main className="m-0 p-0">
         {/* Navigation */}
-        <NavBr />
+        <NavBar />
 
         {/* Header */}
-        <header className="py-5 bg-light">
-          <div className="container px-5 pb-5">
-            <div className="row gx-5 align-items-center">
+        <div className={`m-0 p-0 py-5  ${styles.mainSection}`}>
+          <div className="container  ">
+            <div className="row gx-5 ">
               
-              {/* Texte de l'en-tête */}
-              <div className="col-xxl-5 text-center text-xxl-start">
-                <h2 className="fs-3 fw-light text-muted">CarsinoDisc</h2>
-                <h1 className="display-3 fw-bolder mb-4">
-                  <span className="text-primary">Ensemble, partageons l’espoir</span>
-                </h1>
-              </div>
+              
+             
 
-              {/* Image de profil */}
-              <div className="col-xxl-7 d-flex justify-content-center mt-4 mt-xxl-0">
-                <div className="profile bg-gradient-primary-to-secondary rounded-circle shadow-lg">
-                  <img className="profile-img img-fluid rounded-circle" src="4.jpg" alt="CarsinoDisc - Communauté d'entraide" />
-                </div>
-              </div>
+              
 
             </div>
           </div>
-        </header>
+        </div>
 
         {/* Sections */}
-        <section id="about" className="about-section bg-light py-3">
           <AboutUs />
-        </section>
+          <Services />
 
-        <section id="team" className="team-section bg-light py-3">
           <Team />
-        </section>
 
         <section id="contact" className="py-3">
           <ContactForm />
