@@ -13,14 +13,22 @@ const port=portPrimary || portSecondary || portTertiary;
 //connect to database 
 const connectToDatabase=require("./database/connectDatabase");
 connectToDatabase();
-// importing routers
-// import user Router
-const userRoute=require("./routes/userRoute");
-server.use("/",userRoute)
+
+server.use(express.json())
+
 server.use(cors())
-//import communauty Router 
+
+/***************** ADDING ROUTES ***********************/
+/* COMMUNITY ROUTE */
 const communityRoute=require("./routes/communauteRoute");
 server.use("/",communityRoute)
+/* USER ROUTE */
+const userRoute=require("./routes/userRoute");
+server.use("/",userRoute)
+
+
+
+
 server.listen(port,()=>{
     console.log(`the server is running on port ${port}`)
 })

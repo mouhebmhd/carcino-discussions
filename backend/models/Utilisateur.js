@@ -3,13 +3,13 @@ const mongoose = require('mongoose');
 const UtilisateurSchema = new mongoose.Schema({
   userId: { type: String },
   nom: { type: String },
-  prénom: { type: String },
+  prenom: { type: String },
   dateNaissance: { type: String },
-  âge: { type: String },
+  age: { type: String },
   email: { type: String },
   motDePasse: { type: String },
-  numéroTéléphone: { type: String },
-  rôle: { type: String, enum: ["membre", "modérateur", "administrateur"], default: "membre" }
+  numeroTelephone: { type: String },
+  role: { type: String, enum: ["membre", "moderateur", "administrateur"], default: "membre" }
 });
 
 module.exports = mongoose.model('Utilisateur', UtilisateurSchema);
