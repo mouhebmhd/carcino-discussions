@@ -23,10 +23,32 @@ server.use(cors())
 const communityRoute=require("./routes/communauteRoute");
 server.use("/",communityRoute)
 /* USER ROUTE */
-const userRoute=require("./routes/userRoute");
-server.use("/",userRoute)
+const UtilisateurRoute=require("./routes/UtilisateurRoute");
+server.use("/",UtilisateurRoute)
 
+/* Abonnement ROUTE */
+const AbonnementRoute=require("./routes/AbonnementRoute");
+server.use("/",AbonnementRoute)
 
+/* commentaire ROUTE */
+const CommentaireRoute=require("./routes/CommentaireRoute");
+server.use("/",CommentaireRoute)
+
+/* Interaction ROUTE */
+const InteractionRoute=require("./routes/InteractionRoute");
+server.use("/",InteractionRoute)
+
+/* permission ROUTE */
+const PermissionRoute=require("./routes/PermissionRoute");
+server.use("/",PermissionRoute)
+
+/* PieceJointe ROUTE */
+const PieceJointeRoute=require("./routes/PieceJointeRoute");
+server.use("/",PieceJointeRoute)
+
+/* Publication ROUTE */
+const PublicationRoute=require("./routes/PublicationRoute");
+server.use("/",PublicationRoute)
 
 
 server.listen(port,()=>{
