@@ -1,5 +1,5 @@
 const UtilisateurSchema=require("../models/Utilisateur.js");
-
+const bcrypt=require("bcrypt")
 const getAllUtilisateur=async (req,res)=>{ 
 
     try
@@ -28,7 +28,10 @@ const getUtilisateurById = async (req, res) => {
 // add utilisateur
 const addUtilisateur = async (req, res) => {
     try {
-      const newUtilisateur = new UtilisateurSchema(req.body);
+      const userData=req.body;
+      userData["motDePasse"]=bcrypt.hashSync(userData["motDePasse"],10);
+      
+      const newUtilisateur = new UtilisateurSchema(userData);
   
       const savedUtilisateur = await newUtilisateur.save();
       res.status(200).json(savedUtilisateur);
