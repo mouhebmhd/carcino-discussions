@@ -25,7 +25,7 @@ function AboutUs() {
               <p className="text-muted fs-5 mb-5 lh-base">
               Thanks to a structure based on thematic communities, meaningful discussions, and an intelligent classification system for posts, CarsinoDisc makes it easier to exchange essential information while promoting mutual support and awareness.    
                         
-              <p className="mainTextColor fs-4 text-center p-2">Together, let’s build a space for listening, sharing, and hope.</p>
+              <span className=" d-block mainTextColor fs-4 text-center p-2">Together, let’s build a space for listening, sharing, and hope.</span>
               </p>
             </div>
           </div>

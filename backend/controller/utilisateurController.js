@@ -1,5 +1,7 @@
 const UtilisateurSchema=require("../models/Utilisateur.js");
-const bcrypt=require("bcrypt")
+const bcrypt=require("bcrypt");
+const jsonwebToken=require("jsonwebtoken")
+const secretKey="3493eb041692ecfe5ca21a854a5641a6d32c4bf0849141552ef62920664e5e4b";
 const getAllUtilisateur=async (req,res)=>{ 
 
     try
@@ -68,11 +70,22 @@ const addUtilisateur = async (req, res) => {
   const loginUtilisateur = async (req, res) => {
     try {
       const { email, password } = req.body;
+      
       const Utilisateur = await UtilisateurSchema.findOne({ email });
-      if (!Utilisateur || Utilisateur.password !== password) {
+      if (!Utilisateur ) {
         return res.status(401).json({ error: "Invalid credentials" });
       }
-      res.status(200).json({ message: "Login successful", Utilisateur });
+      const isPasswordValid=await bcrypt.compare(password,Utilisateur.motDePasse);
+      if(isPasswordValid)
+      {
+        const generatedToken=jsonwebToken.sign({Utilisateur},secretKey,{expiresIn:"24h"})
+    
+        res.status(200).json({ message: "Login successful", userData:Utilisateur,token:generatedToken });
+      }
+      else 
+      {
+        res.status(200).json({ message: "Login error", Utilisateur });
+      }
     } catch (error) {
       res.status(400).json({ error: error.message });
     }

@@ -25,7 +25,7 @@ function SignupS() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3001/api/utilisateur/signup", formData);
+      const response = await axios.post("http://localhost:3030/Utilisateur/postUtilisateur/", formData);
       console.log("Utilisateur créé :", response.data);
       alert("Inscription réussie !");
     } catch (error) {

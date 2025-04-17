@@ -11,21 +11,31 @@ function Login() {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post("http://localhost:5000/api/auth/login", {
+      const response = await axios.post("http://localhost:3030/utilisateur/login", {
         email,
         password,
       });
-
-      const userData = response.data;
-      setUser(userData);
-      localStorage.setItem("user", JSON.stringify(userData));
+      console.log("token is  ",response)
+      
+      if(response.data.message=="Login error")
+      {
+        console.log("login error")
+      }
+      else 
+      {
+        
+        setUser(response.data.userData);
+        localStorage.setItem("user", JSON.stringify(response.data.userData));
+      }
+      
+      
     } catch (error) {
       console.error("Login failed:", error);
-      alert("Login failed. Please check your credentials.");
+      console.log("Login failed. Please check your credentials.");
     }
   };
 
-  useEffect(() => {
+   useEffect(() => {
     if (user) {
       switch (user.role) {
         case "moderateur":
