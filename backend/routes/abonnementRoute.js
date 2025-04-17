@@ -4,7 +4,7 @@ const {getAllAbonnement,
     getAbonnementById,
     addAbonnement,
     updateAbonnement,
-    deleteAbonnement,} =require("../controller/Abonnement.js")
+    deleteAbonnement,} =require("../controller/abonnementsController.js")
 
 /**************** GET ROUTES  ************/
 // get all abonnement
