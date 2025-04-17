@@ -1,4 +1,4 @@
-const Permission=require("../models/Permission");
+const PermissionSchema=require("../models/Permission.js");
 
 
 
@@ -8,7 +8,7 @@ const getAllPermissions=async (req,res)=>{
 
     try
     {
-        const Permission=await Permission.find();
+        const Permission=await PermissionSchema.find();
         res.status(200).json(Permission);
     }
     catch(error)

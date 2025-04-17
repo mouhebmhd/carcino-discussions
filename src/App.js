@@ -26,6 +26,14 @@ import PersonalLandingPage from "./components/LandingPage/home.js";
 import ContactForm from "./components/LandingPage/Contact.js";
 import AboutUs from "./components/LandingPage/AboutUs.js";
 import Team from "./components/LandingPage/Team.js";
+import ModeratorDashboard from "./components/Moderateur/ModerateurM.js";
+import ProfileManager from "./components/Moderateur/profilManager.js";
+import CommunityManager from "./components/Moderateur/communityManager.js";
+import AddCommunity from "./components/Moderateur/AddCommunity.js";
+import NotificationManager from "./components/Moderateur/notificationManager.js";
+import UsersManager from "./components/Moderateur/userManager.js";
+import PublicationsManager from "./components/Moderateur/publicationManager.js";
+
 
 function App() {
   return (
@@ -54,9 +62,16 @@ function App() {
             <Route path="/ContactForm" element={<ContactForm />} />
             <Route path="/AboutUs" element={<AboutUs />} />
             <Route path="/Team" element={<Team />} />
+            <Route path="/communities" element={<CommunityManager />} />
+            <Route path="/ajouter-communaute" element={<AddCommunity />} />
+            <Route path="/notifications" element={<NotificationManager />} />
+            <Route path="/users" element={<UsersManager />} />
+            <Route path="/publications" element={<PublicationsManager />} />
+            <Route path="/dashboard" element={<ModeratorDashboard />} />
+            <Route path="/profile" element={<ProfileManager />} />
+      
             
-
-            
+          
 
           </Routes>
         </main>
