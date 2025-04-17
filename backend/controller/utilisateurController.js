@@ -70,7 +70,6 @@ const addUtilisateur = async (req, res) => {
   const loginUtilisateur = async (req, res) => {
     try {
       const { email, password } = req.body;
-      
       const Utilisateur = await UtilisateurSchema.findOne({ email });
       if (!Utilisateur ) {
         return res.status(401).json({ error: "Invalid credentials" });
@@ -79,7 +78,6 @@ const addUtilisateur = async (req, res) => {
       if(isPasswordValid)
       {
         const generatedToken=jsonwebToken.sign({Utilisateur},secretKey,{expiresIn:"24h"})
-    
         res.status(200).json({ message: "Login successful", userData:Utilisateur,token:generatedToken });
       }
       else 
@@ -90,7 +88,20 @@ const addUtilisateur = async (req, res) => {
       res.status(400).json({ error: error.message });
     }
   }
-
+  // login utilisateur
+  const getUserRole = async (req, res) => {
+    try {
+      const email = req.params.email.substring(1);
+      const Utilisateur = await UtilisateurSchema.findOne({ email });
+      if (!Utilisateur ) {
+        return res.status(401).json({ error: "user not found" });
+      }
+      return res.status(200).json({ userRole: Utilisateur.role });
+    } 
+    catch (error) {
+      res.status(400).json({ error: "user not found" });
+    }
+  }
   const logoutUtilisateur = async (req, res) => {
     try {
       res.status(200).json({ message: "Logout successful" });
@@ -98,8 +109,6 @@ const addUtilisateur = async (req, res) => {
       res.status(400).json({ error: error.message });
     }
   }
-
-
   module.exports =
   {
     getUtilisateurById,
@@ -109,4 +118,5 @@ const addUtilisateur = async (req, res) => {
     deleteUtilisateur,
     loginUtilisateur,
     logoutUtilisateur,
+    getUserRole
   };

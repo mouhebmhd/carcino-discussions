@@ -30,16 +30,7 @@ const AddCommunity = () => {
           ></textarea>
         </div>
 
-        <div className="mb-3">
-          <label className="form-label fw-semibold">
-            <i className="bi bi-people-fill me-2 text-secondary"></i>Nombre de membres
-          </label>
-          <input
-            type="number"
-            className="form-control"
-            placeholder="Combien de membres souhaitez-vous accueillir?"
-          />
-        </div>
+        
 
         <div className="mb-4">
           <label className="form-label fw-semibold">

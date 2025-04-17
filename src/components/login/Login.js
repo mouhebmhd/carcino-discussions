@@ -45,7 +45,7 @@ function Login() {
           navigate("/admin-dashboard");
           break;
         default:
-          navigate("/membre-dashboard");
+          navigate("/home");
       }
     }
   }, [user, navigate]);

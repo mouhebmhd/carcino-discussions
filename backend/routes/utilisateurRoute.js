@@ -6,14 +6,18 @@ const { getUtilisateurById,
     updateUtilisateur,
     deleteUtilisateur,
     loginUtilisateur,
-    logoutUtilisateur,} =require("../controller/utilisateurController.js")
+    logoutUtilisateur,
+    getUserRole
+
+} =require("../controller/utilisateurController.js")
 
 /**************** GET ROUTES  ************/
 // get all utilisateur
 router.get("/getAllUtilisateur/",getAllUtilisateur);
 //get utilisateur by ID 
 router.get("/Utilisateur/getUtilisateurById/:id",getUtilisateurById);
-
+//get utilisateur by ID 
+router.get("/Utilisateur/getUserRole/:email",getUserRole);
 /**************** DELETE ROUTES  ************/
 //delete utilisateur
 router.delete("/Utilisateur/deleteUtilisateur/:id",deleteUtilisateur);
