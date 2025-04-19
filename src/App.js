@@ -34,7 +34,7 @@ import NotificationManager from "./components/Moderateur/notificationManager.js"
 import UsersManager from "./components/Moderateur/userManager.js";
 import PublicationsManager from "./components/Moderateur/publicationManager.js";
 import ProfileEditForm from "./components/ProfileP.js";
-
+import TumorAnalysisApp from "./components/Analyse.js"
 function App() {
   return (
     <Router>
@@ -70,6 +70,7 @@ function App() {
             <Route path="/dashboard" element={<ModeratorDashboard />} />
             <Route path="/profile" element={<ProfileManager />} />
             <Route path="/profilep" element={<ProfileEditForm />} />
+            <Route path="/analyse" element={<TumorAnalysisApp />} />
       
             
           
