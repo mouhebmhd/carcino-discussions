@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import '../styles/ProfilePage.css';
-
 import NavbarN from "../components/Navbar.js";
+import { useNavigate } from 'react-router-dom'; // ✅ import navigation
 
 const ProfilePage = () => {
+  const navigate = useNavigate(); // ✅ navigation hook
   const [showFollower, setShowFollower] = useState(false);
   const [showFollowing, setShowFollowing] = useState(false);
   const [showPostsOnly, setShowPostsOnly] = useState(true);
@@ -38,6 +39,17 @@ const ProfilePage = () => {
             <h2 className='profile-data_up_Name'>{userinfo.Name}</h2>
             <div className='profile-data_up_username'>@{userinfo.username}</div>
             <div className='profile-data_up_bio'>{userinfo.bio}</div>
+
+            
+            <div style={{ marginTop: '10px' }}>
+              <button
+                className="btn btn-sm btn-outline-primary"
+                onClick={() => navigate("/profilep")}
+              >
+                 Modifier le profil
+              </button>
+            </div>
+
             <div className='profile-data_up_stats'>
               <div className='profile_post_btn' style={showPostsOnly ? { color: 'red' } : { color: 'black' }} onClick={() => setShowPostsOnly(true)}>
                 {userinfo.posts.length} Posts
@@ -50,6 +62,7 @@ const ProfilePage = () => {
               </div>
             </div>
           </div>
+
           {showPostsOnly && (
             <div className='profile_posts'>
               {userinfo.posts.map((post) => (

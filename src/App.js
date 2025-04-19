@@ -33,7 +33,7 @@ import AddCommunity from "./components/Moderateur/AddCommunity.js";
 import NotificationManager from "./components/Moderateur/notificationManager.js";
 import UsersManager from "./components/Moderateur/userManager.js";
 import PublicationsManager from "./components/Moderateur/publicationManager.js";
-
+import ProfileEditForm from "./components/ProfileP.js";
 
 function App() {
   return (
@@ -69,6 +69,7 @@ function App() {
             <Route path="/publications" element={<PublicationsManager />} />
             <Route path="/dashboard" element={<ModeratorDashboard />} />
             <Route path="/profile" element={<ProfileManager />} />
+            <Route path="/profilep" element={<ProfileEditForm />} />
       
             
           
