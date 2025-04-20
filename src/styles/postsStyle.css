@@ -12,6 +12,18 @@
     width: 78%;
     margin-inline:5px;
   }
+  .newPost button:hover
+  {
+    background-color: #8e7ab7;
+    color: #fff;
+    font-weight: 600;
+  }
+  .newPost button
+  {
+    background-color: #B39AE5;
+    color: #fff;
+    font-weight: 600;
+  }
   .container-fluid {
     flex: 1;
     display: flex;

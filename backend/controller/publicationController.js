@@ -37,7 +37,6 @@ const addPublication = async (req, res) => {
       var newPublication = (req.body);
       newPublication["publicationId"]=pubId;
       newPublication=new PublicationSchema(newPublication)
-  
       const savedPublication = await newPublication.save();
       res.status(200).json(savedPublication);
     } catch (error) {

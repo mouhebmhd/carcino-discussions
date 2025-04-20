@@ -1,6 +1,8 @@
 import React from 'react'
 import * as bootstrap from 'bootstrap';
 import { FaHeart } from "react-icons/fa";
+import { MdOutlinePublish } from "react-icons/md";
+
 import { FaHeartCrack } from "react-icons/fa6";
 import "../styles/postsStyle.css"
 import PostDetails from '../components/postDetails.js';
@@ -9,7 +11,9 @@ import NavbarN from '../components/Navbar.js';
 import SidebarS from '../components/Sidebar.js';
 import axios from 'axios';
 import { useState,useEffect } from 'react';
+import NewPost from '../components/newPost.js';
 export default function Home() {
+  
   const user=localStorage.getItem("user")
   const [communities,setCommunties]=useState([]); 
   const [posts,setPosts]=useState([]);
@@ -80,39 +84,8 @@ export default function Home() {
           
           {/* Main content column */}
           <div className="col-md-7 p-4 main-content">
-            {/* Groups */}
-            <div className="groups-container">
-              {
-                communities.map((community,index)=>{
-                  return <div className="card mb-4 border-0 shadow-sm">
-                <div className="card-body d-flex">
-                  <div className="me-3">
-                    <img 
-                      src="avat.jpg" 
-                      alt="Long Term Investing" 
-                      className="rounded-circle" 
-                      width="100" 
-                      height="100" 
-                    />
-                    <div className="text-center mt-2">
-                      <small className="text-muted">{community.nombreMembre} Members</small>
-                    </div>
-                  </div>
-                  <div className="flex-grow-1">
-                    <div className="d-flex justify-content-between align-items-start">
-                      <h4 className="mb-2">{community.nomCommunaute}</h4>
-                      <button className="btn btn-outline-danger rounded-pill px-4">Follow</button>
-                    </div>
-                    <p className="text-muted">{community.descriptionCommunaute}</p>
-                  </div>
-                </div>
-              </div>
-                })
-              }
-              
-              
-        
-            </div>
+          <NewPost onAddPost={()=>{loadData()}}></NewPost>
+          
             <div className="postsContainer">
            {posts.map((post,index)=>{
             return(
@@ -133,7 +106,7 @@ export default function Home() {
                    <h5 className="mb-2">{post.titrePublication}</h5>
                  </div>
                  <p className="text-muted">{post.contenuPublication}</p>
-                 <span className="alert alert-success rounded-pill p-2 tagAlert w-auto" style={{fontSize:"12px"}}>{post.tagPublication}</span>
+                 <span className="alert alert-success rounded-pill p-2 tagAlert w-auto" style={{fontSize:"12px"}}>{post.communityTag}</span>
                </div>
              </div>
              <div className="actions d-flex flex-wrap justify-content-center column-gap-2 row-gap-2">
@@ -151,6 +124,7 @@ export default function Home() {
                      <span><RiExpandDiagonalLine className='fs-4 mx-2'/>View Details</span> 
                
                    </button>
+                   {post.publisherId==user.userId && <p className='alert alert-danger'>my own post</p>}
              </div>
 
            </div>

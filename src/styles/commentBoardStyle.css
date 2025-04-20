@@ -14,18 +14,18 @@
   }
   .deleteComment
   {
-    background-color: #D53343;
+    background-color: #FFC099;
   }
   .updateComment
   {
-    background-color: #F7CC03;
+    background-color: #9BD0A4;
   }
   .commentIconContainer
   {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background-color: var(--mainColor);
+    background-color: #B39AE5;
     font-size: 25px ;
     color: #fff;
     display: flex;

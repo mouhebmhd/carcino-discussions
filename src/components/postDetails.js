@@ -90,9 +90,18 @@ export default function PostDetails(props) {
             ))}
           </div>
 
-          <div className="modal-footer">
-            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" className="btn btn-primary">Understood</button>
+          <div className="newcomment p-2">
+            <h5 className='text-center'>New Comment</h5>
+            <input
+              type="text"
+              className='commentInput'
+              placeholder='Your Comment Text here'
+              value={newComment}
+              onChange={(e) => setNewComment(e.target.value)}
+            />
+            <button className='btn btn-success mt-2' onClick={submitNewComment}>
+              <span className="mx-1 fs-5"><IoIosSend /></span> 
+            </button>
           </div>
 
           <h5 className="modal-title text-center">Comments</h5>
@@ -118,19 +127,7 @@ export default function PostDetails(props) {
 )}
 
 
-          <div className="newcomment p-2">
-            <h5 className='text-center'>New Comment</h5>
-            <input
-              type="text"
-              className='commentInput'
-              placeholder='Your Comment Text here'
-              value={newComment}
-              onChange={(e) => setNewComment(e.target.value)}
-            />
-            <button className='btn btn-success mt-2' onClick={submitNewComment}>
-              <span className="mx-1 fs-5"><IoIosSend /></span> Submit
-            </button>
-          </div>
+          
         </div>
       </div>
     </div>
