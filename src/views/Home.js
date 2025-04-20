@@ -83,7 +83,7 @@ export default function Home() {
           </div>
           
           {/* Main content column */}
-          <div className="col-md-7 p-4 main-content">
+          <div className="col12 p-4 main-content">
           <NewPost onAddPost={()=>{loadData()}}></NewPost>
           
             <div className="postsContainer">

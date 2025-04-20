@@ -1,14 +1,17 @@
-import React, { useState } from 'react';
 import '../styles/ProfilePage.css';
+import React, { useEffect, useState } from 'react';
+import { Modal, Form, Button, Container, Row, Col } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from 'axios';
 import NavbarN from "../components/Navbar.js";
 import { useNavigate } from 'react-router-dom'; // ✅ import navigation
-
+import PersonalProfile from '../components/PersonalProfile.js';
 const ProfilePage = () => {
-  const navigate = useNavigate(); // ✅ navigation hook
+  const navigate = useNavigate(); 
   const [showFollower, setShowFollower] = useState(false);
   const [showFollowing, setShowFollowing] = useState(false);
   const [showPostsOnly, setShowPostsOnly] = useState(true);
-
+  const profile=JSON.parse(localStorage.getItem("user"))
   const userinfo = {
     Name: 'Nawres dhahri',
     username: 'Norrs',
@@ -42,12 +45,7 @@ const ProfilePage = () => {
 
             
             <div style={{ marginTop: '10px' }}>
-              <button
-                className="btn btn-sm btn-outline-primary"
-                onClick={() => navigate("/profilep")}
-              >
-                 Modifier le profil
-              </button>
+              <PersonalProfile></PersonalProfile>
             </div>
 
             <div className='profile-data_up_stats'>
@@ -63,21 +61,22 @@ const ProfilePage = () => {
             </div>
           </div>
 
-          {showPostsOnly && (
-            <div className='profile_posts'>
-              {userinfo.posts.map((post) => (
-                <div key={post.id} className='profile_single_post'>
-                  <img src={post.url} alt='Post' />
-                  <div className='profile_single_post_stats'>
-                    <div>
-                      {post.likes} Likes &nbsp; {post.comments} Comments
-                    </div>
-                    <div className='profile_post_caption'>{post.caption}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
+          <Container className="mb-4">
+  <h3 className="text-center mb-4">Mon Profil</h3>
+  <Row className="justify-content-center">
+    <Col md={8}>
+      <div className="border p-4 rounded shadow-sm" style={{ backgroundColor: '#f8f9fa' }}>
+        <p><strong>Nom :</strong> {profile.nom}</p>
+        <p><strong>Prénom :</strong> {profile.prenom}</p>
+        <p><strong>Date de naissance :</strong> {profile.dateNaissance}</p>
+        <p><strong>Âge :</strong> {profile.age}</p>
+        <p><strong>Email :</strong> {profile.email}</p>
+        <p><strong>Numéro de téléphone :</strong> {profile.numeroTelephone}</p>
+      </div>
+    </Col>
+  </Row>
+</Container>
+
         </div>
       </div>
     </div>
