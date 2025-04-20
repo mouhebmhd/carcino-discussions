@@ -5,7 +5,7 @@ const StorySection = () => {
   const stories = new Array(5).fill("Your Story");
 
   return (
-    <div className="story-section">
+    <div className="story-section justify-content-center">
       {stories.map((story, index) => (
         <div key={index} className="story">
           <span>{story}</span>

@@ -13,7 +13,7 @@ const { getUtilisateurById,
 
 /**************** GET ROUTES  ************/
 // get all utilisateur
-router.get("/getAllUtilisateur/",getAllUtilisateur);
+router.get("/Utilisateur/getAllUtilisateur/",getAllUtilisateur);
 //get utilisateur by ID 
 router.get("/Utilisateur/getUtilisateurById/:id",getUtilisateurById);
 //get utilisateur by ID 

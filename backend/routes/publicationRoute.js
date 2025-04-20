@@ -8,7 +8,7 @@ const { getAllPublication,
 
 /**************** GET ROUTES  ************/
 // get all publication
-router.get("//getAllPublication/",getAllPublication);
+router.get("/Publication/getAllPublication/",getAllPublication);
 //get publication by ID 
 router.get("/Publication/getPublicationById/:id",getPublicationById);
 
@@ -16,7 +16,7 @@ router.get("/Publication/getPublicationById/:id",getPublicationById);
 //delete publication
 router.delete("/Publication/deletePublication/:id",deletePublication);
 /**************** UPDATE ROUTES  ************/
-router.put("/Publication/updatePublcation/:id",updatePublication)
+router.put("/Publication/updatePublication/",updatePublication)
 
 /**************** POST ROUTES  ************/
 router.post("/Publication/postPublication/",addPublication)

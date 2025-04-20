@@ -62,7 +62,28 @@ const addInteraction = async (req, res) => {
       res.status(400).json({ error: error.message });
     }
   }
+  const getInteractionsByPostId = async (req, res) => {
+    try {
+      const { id } = req.params;
+      const Interaction = await Interaction.findOne({publicationId:id});
+      if (!Interaction) return res.status(404).json({ error: "interaction not found" });
+      res.status(200).json(Interaction);
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
 
+  }
+  const getInteractionsByPublisherId = async (req, res) => {
+    try {
+      const { id } = req.params;
+      const Interaction = await Interaction.findOne({interactorId:id});
+      if (!Interaction) return res.status(404).json({ error: "interaction not found" });
+      res.status(200).json(Interaction);
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
+
+  }
 
   module.exports =
   {
@@ -71,6 +92,8 @@ const addInteraction = async (req, res) => {
     addInteraction,
     updateInteraction,
     deleteInteraction,
+    getInteractionsByPublisherId,
+    getInteractionsByPostId
   };
   
  

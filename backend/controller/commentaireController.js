@@ -17,9 +17,20 @@ const getAllCommentaire=async (req,res)=>{
 const getCommentaireById = async (req, res) => {
     try {
       const { id } = req.params;
-      const Commentaire = await Commentaire.findOne({commentaireId:id});
+      const Commentaire = await commentaireSchema.findOne({commentaireId:id});
       if (!Commentaire) return res.status(404).json({ error: "Commentaire not found" });
       res.status(200).json(Commentaire);
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
+
+  }
+  const getCommentairesByPostId = async (req, res) => {
+    try {
+      const { id } = req.params;
+      const Commentaires = await commentaireSchema.find({publicationId:id});
+      if (!Commentaires) return res.status(404).json({ error: "Commentaires not found" });
+      res.status(200).json(Commentaires);
     } catch (error) {
       res.status(400).json({ error: error.message });
     }
@@ -28,8 +39,10 @@ const getCommentaireById = async (req, res) => {
 // add commentaire
 const addCommentaire = async (req, res) => {
     try {
-      const newCommentaire = new commentaireSchema(req.body);
-  
+      const comments = await commentaireSchema.find();
+      const commentId = comments.length + 1; 
+      var newCommentaire = new commentaireSchema(req.body);
+      newCommentaire["commentaireId"]=commentId;
       const savedCommentaire = await newCommentaire.save();
       res.status(200).json(savedCommentaire);
     } catch (error) {
@@ -41,7 +54,7 @@ const addCommentaire = async (req, res) => {
     try {
       const { id } = req.params;
       console.log(id)
-      const updatedCommentaire = await Commentaire.findOneAndUpdate({commentaireId:{$eq:id}}, req.body, { new: true });
+      const updatedCommentaire = await commentaireSchema.findOneAndUpdate({commentaireId:{$eq:id}}, req.body, { new: true });
       if (!updatedCommentaire) return res.status(404).json({ error: "Comentaire not found" });
       res.status(200).json(updatedCommentaire);
     } catch (error) {
@@ -54,7 +67,7 @@ const addCommentaire = async (req, res) => {
      
       const { id } = req.params;
       console.log(id)
-      const deleted = await Commentaire.findOneAndDelete({commentaireId:{$eq:id}});
+      const deleted = await commentaireSchema.findOneAndDelete({commentaireId:{$eq:id}});
       if (!deleted) return res.status(404).json({ error: "Commentaire not found" });
       res.status(200).json({ message: "Commentaire deleted successfully" });
     } catch (error) {
@@ -69,6 +82,6 @@ const addCommentaire = async (req, res) => {
     getCommentaireById,
     addCommentaire,
     updateCommentaire,
-    deleteCommentaire,
+    deleteCommentaire,getCommentairesByPostId
   };
  
