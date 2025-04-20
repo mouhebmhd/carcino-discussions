@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
-
+import loginImage from "../../images/undraw_secure-login_m11a.png"
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -52,7 +52,7 @@ function Login() {
 
   return (
     <div>
-      <section className="vh-100" style={{ backgroundColor: "#9A616D" }}>
+      <section className="vh-100 m-0 p-0" style={{ backgroundColor: "#9A616D" }}>
         <div className="container py-5 h-100">
           <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col col-xl-10">
@@ -60,7 +60,7 @@ function Login() {
                 <div className="row g-0">
                   <div className="col-md-7 col-lg-5 d-none d-md-block d-flex justify-content-center align-items-center h-100">
                     <img
-                      src="Mobile login-amico.png"
+                      src={loginImage}
                       alt="login form"
                       className="img-fluid"
                       style={{ borderRadius: "1rem", maxHeight: "80%" }}
@@ -73,7 +73,7 @@ function Login() {
                         <div className="d-flex align-items-center mb-3 pb-1">
                           <i
                             className="fas fa-cubes fa-2x me-3"
-                            style={{ color: "#ff6219" }}
+                            style={{ color: "#FF69B4" }}
                           ></i>
                           <span className="h1 fw-bold mb-0">Bienvenue</span>
                         </div>

@@ -6,8 +6,7 @@ body {
 }
 
 .App {
-  display: flex;
-  flex-direction: column;
+
   height: 100vh;
 }
 
@@ -43,10 +42,7 @@ body {
   height: auto;
 }
 
-.main-container {
-  display: flex;
-  flex: 1;
-}
+
 
 
 .sidebar {
