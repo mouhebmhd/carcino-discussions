@@ -50,6 +50,8 @@ function NavbarN() {
   <CgProfile className="fs-4"></CgProfile>
     Mon Profil
   </Nav.Link>
+  
+  
 </Nav>
       </Navbar.Collapse>
       <Form className="d-flex">

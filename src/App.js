@@ -35,6 +35,8 @@ import UsersManager from "./components/Moderateur/userManager.js";
 import PublicationsManager from "./components/Moderateur/publicationManager.js";
 import ProfileEditForm from "./components/PersonalProfile.js";
 import TumorAnalysisApp from "./components/Analyse.js"
+import AdminDashboard from "./components/admin/adminA.js";
+ 
 function App() {
   return (
     <Router>
@@ -70,6 +72,8 @@ function App() {
             <Route path="/dashboard" element={<ModeratorDashboard />} />
             <Route path="/profile" element={<ProfileManager />} />
             <Route path="/analyse" element={<TumorAnalysisApp />} />
+            <Route path="/admin" element={<AdminDashboard />} />
+           
       
             
           
