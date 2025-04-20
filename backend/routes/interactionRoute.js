@@ -1,16 +1,22 @@
 const express=require("express");
 const router=express.Router();
-const {  getAllInteraction,
+const {   getAllInteraction,
     getInteractionById,
     addInteraction,
     updateInteraction,
-    deleteInteraction,} =require("../controller/interactionController.js")
+    deleteInteraction,
+    getInteractionsByPublisherId,
+    getInteractionsByPostId} =require("../controller/interactionController.js")
 
 /**************** GET ROUTES  ************/
 // get all interaction 
 router.get("/Interaction/getAllInteraction/",getAllInteraction);
 //get interaction by ID 
 router.get("/Interaction/getInteractionById/:id",getInteractionById);
+// get all interactions by publisher id 
+router.get("/Interaction/getAllInteractionByPublisher/:id",getInteractionsByPublisherId);
+//get interaction by by post id 
+router.get("/Interaction/getInteractionByPost/:id",getInteractionsByPostId);
 
 /**************** DELETE ROUTES  ************/
 //delete interaction 

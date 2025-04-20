@@ -1,0 +1,133 @@
+.aa0 {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-color: #f6f8fa;
+  }
+  .deleteComment,.updateComment
+  {
+    width: 30px;
+    height: 30px;
+    border:none;
+    color: #fff;
+    border-radius: 50%;
+    margin-inline: 5px;
+  }
+  .deleteComment
+  {
+    background-color: #FFC099;
+  }
+  .updateComment
+  {
+    background-color: #9BD0A4;
+  }
+  .commentIconContainer
+  {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #B39AE5;
+    font-size: 25px ;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .ah2 {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .ah1 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .ah0 {
+    margin-top: 20px;
+  }
+  
+  .af9 {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .af7 {
+    background-color: #ffffff;
+    border: 1px solid #e1e4e8;
+    border-radius: 8px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .ag5 {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  
+  .ag5 img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+  
+  .ac2 {
+    flex: 1;
+  }
+  
+  .ac4 {
+    font-weight: bold;
+    font-size: 16px;
+  }
+  
+  .ac5 {
+    margin-top: 5px;
+    font-size: 14px;
+    color: #333;
+  }
+  
+  .ac1 {
+    margin-top: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-size: 13px;
+    color: #666;
+  }
+  
+  .ac1 u {
+    text-decoration: underline;
+  }
+  
+  .ac0 {
+    margin-left: auto;
+  }
+  
+  .ab3 {
+    width: 10px;
+    height: 10px;
+    background-color: green;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  
+  .ag6 {
+    flex: 0 0 auto;
+  }
+  
+  .ag7 {
+    font-size: 12px;
+    color: #888;
+    margin-left: auto;
+  }
+  
+  .ag8,
+  .ag9 {
+    display: none; /* Placeholder for future elements */
+  }
+  

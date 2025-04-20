@@ -1,4 +1,4 @@
-const UtilisateurSchema=require("../models/Utilisateur.js");
+const UtilisateurSchema=require("../models/Utilisateur");
 const bcrypt=require("bcrypt");
 const jsonwebToken=require("jsonwebtoken")
 const secretKey="3493eb041692ecfe5ca21a854a5641a6d32c4bf0849141552ef62920664e5e4b";
@@ -18,9 +18,9 @@ const getAllUtilisateur=async (req,res)=>{
 // get utilisateur by id 
 const getUtilisateurById = async (req, res) => {
     try {
-      const { id } = req.params;
-      const Utilisateur = await Utilisateur.findOne({UserId:id});
-      if (!Utilisateur) return res.status(404).json({ error: "utilisateur not found" });
+      var { id } = req.params;
+      const Utilisateur = await UtilisateurSchema.findOne({userId:id});
+     
       res.status(200).json(Utilisateur);
     } catch (error) {
       res.status(400).json({ error: error.message });
@@ -30,7 +30,11 @@ const getUtilisateurById = async (req, res) => {
 // add utilisateur
 const addUtilisateur = async (req, res) => {
     try {
-      const userData=req.body;
+      const users = await UtilisateurSchema.find();
+      const userId = users.length + 1; 
+
+      var userData=req.body;
+      userData["userId"]=userId
       userData["motDePasse"]=bcrypt.hashSync(userData["motDePasse"],10);
       
       const newUtilisateur = new UtilisateurSchema(userData);
@@ -46,7 +50,7 @@ const addUtilisateur = async (req, res) => {
     try {
       const { id } = req.params;
       console.log(id)
-      const updatedUtilisateur = await Utilisateur.findOneAndUpdate({UserId:{$eq:id}}, req.body, { new: true });
+      const updatedUtilisateur = await UtilisateurSchema.findOneAndUpdate({UserId:{$eq:id}}, req.body, { new: true });
       if (!updatedUtilisateur) return res.status(404).json({ error: "Utilisateur not found" });
       res.status(200).json(updatedUtilisateur);
     } catch (error) {
@@ -59,7 +63,7 @@ const addUtilisateur = async (req, res) => {
      
       const { id } = req.params;
       console.log(id)
-      const deleted = await Utilisateur.findOneAndDelete({UserId:{$eq:id}});
+      const deleted = await UtilisateurSchema.findOneAndDelete({UserId:{$eq:id}});
       if (!deleted) return res.status(404).json({ error: "Utilisateur not found" });
       res.status(200).json({ message: " deleted successfully" });
     } catch (error) {

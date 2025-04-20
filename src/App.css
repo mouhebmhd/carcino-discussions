@@ -6,8 +6,7 @@ body {
 }
 
 .App {
-  display: flex;
-  flex-direction: column;
+
   height: 100vh;
 }
 
@@ -21,10 +20,11 @@ body {
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.navbar h2 {
-  color: #d63384;
-  margin: 0;
-  
+
+input[type="text"]
+{
+  border:1px solid #B39AE5 !important;
+  outline: none;
 }
 .navbar nav a {
   margin: 0 10px;
@@ -43,10 +43,7 @@ body {
   height: auto;
 }
 
-.main-container {
-  display: flex;
-  flex: 1;
-}
+
 
 
 .sidebar {

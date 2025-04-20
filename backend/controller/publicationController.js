@@ -21,7 +21,7 @@ const getAllPublication=async (req,res)=>{
 const getPublicationById = async (req, res) => {
     try {
       const { id } = req.params;
-      const Publication = await Publication.findOne({publicationId:id});
+      const Publication = await PublicationSchema.findOne({publicationId:id});
       if (!Publication) return res.status(404).json({ error: "publication not found" });
       res.status(200).json(Publication);
     } catch (error) {
@@ -32,8 +32,11 @@ const getPublicationById = async (req, res) => {
 // add Publication
 const addPublication = async (req, res) => {
     try {
-      const newPublication = new PublicationSchema(req.body);
-  
+      const pubs = await PublicationSchema.find();
+      const pubId = pubs.length + 1;
+      var newPublication = (req.body);
+      newPublication["publicationId"]=pubId;
+      newPublication=new PublicationSchema(newPublication)
       const savedPublication = await newPublication.save();
       res.status(200).json(savedPublication);
     } catch (error) {
@@ -43,9 +46,9 @@ const addPublication = async (req, res) => {
   // update  publication
   const updatePublication = async (req, res) => {
     try {
-      const { id } = req.params;
-      console.log(id)
-      const updatedPublication = await Publication.findOneAndUpdate({publicationIdId:{$eq:id}}, req.body, { new: true });
+      const  post  = req.body;
+      console.log(post)
+      const updatedPublication = await PublicationSchema.findOneAndUpdate({publicationId:{$eq:post.publicationId}}, req.body, { new: true });
       if (!updatedPublication) return res.status(404).json({ error: "Publication not found" });
       res.status(200).json(updatedPublication);
     } catch (error) {
@@ -58,7 +61,7 @@ const addPublication = async (req, res) => {
      
       const { id } = req.params;
       console.log(id)
-      const deleted = await Permission.findOneAndDelete({publicationId:{$eq:id}});
+      const deleted = await PublicationSchema.findOneAndDelete({publicationId:{$eq:id}});
       if (!deleted) return res.status(404).json({ error: "Publication not found" });
       res.status(200).json({ message: "Publication deleted successfully" });
     } catch (error) {

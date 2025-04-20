@@ -4,13 +4,15 @@ const {  getAllCommentaire,
     getCommentaireById,
     addCommentaire,
     updateCommentaire,
-    deleteCommentaire,} =require("../controller/commentaireController.js")
+    deleteCommentaire,getCommentairesByPostId} =require("../controller/commentaireController.js")
 
 /**************** GET ROUTES  ************/
 // get all commentaire
 router.get("/Commentaire/getAllCommentaire/",getAllCommentaire);
 //get commentaire by ID 
 router.get("/Commentaire/getCommentaireById/:id",getCommentaireById);
+//get commentaire by postId 
+router.get("/Commentaire/getCommentaireByPostId/:id",getCommentairesByPostId);
 
 /**************** DELETE ROUTES  ************/
 //delete commentaire

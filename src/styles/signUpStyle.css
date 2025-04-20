@@ -1,0 +1,14 @@
+.sectionformContainer
+{
+    height: 100vh !important;
+   display: flex;
+   justify-content: center;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.sectionformContainer div:first-child div:first-child
+{
+
+    max-height: 85vh;
+}

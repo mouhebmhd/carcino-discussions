@@ -1,0 +1,33 @@
+.mainContent
+{
+    display: grid;
+    width: 99vw;
+    height: 100vh;
+    margin: 0 !important;
+    padding: 0 !important;
+    grid-template-areas: 
+    "navbar navbar"
+    "sidebar sidebar"
+    ;
+}
+.navbar
+{
+    grid-area: navbar ;
+}
+.sidebar
+{
+    grid-area: sidebar;
+    display: grid;
+    grid-template-areas: 
+    "sidebarElement posts"
+    ;
+}
+.storyContainer
+{
+    width: 50px !important;
+    grid-area: posts;
+}
+.sidebarContainer
+{
+    grid-area: sidebarElement;
+}
