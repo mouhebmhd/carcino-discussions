@@ -84,7 +84,7 @@ function Login() {
 
                         <div className="form-outline mb-4">
                           <label className="form-label" htmlFor="email">
-                            Email address
+                            Email 
                           </label>
                           <input
                             type="email"
@@ -97,7 +97,7 @@ function Login() {
 
                         <div className="form-outline mb-4">
                           <label className="form-label" htmlFor="password">
-                            Password
+                            Mot de passe
                           </label>
                           <input
                             type="password"

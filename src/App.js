@@ -69,7 +69,7 @@ function App() {
             <Route path="/notifications" element={<NotificationManager />} />
             <Route path="/users" element={<UsersManager />} />
             <Route path="/publications" element={<PublicationsManager />} />
-            <Route path="/dashboard" element={<ModeratorDashboard />} />
+            <Route path="/Moderateur" element={<ModeratorDashboard />} />
             <Route path="/profile" element={<ProfileManager />} />
             <Route path="/profilep" element={<ProfileEditForm />} />
             <Route path="/analyse" element={<TumorAnalysisApp />} />
