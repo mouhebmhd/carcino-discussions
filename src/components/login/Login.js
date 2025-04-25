@@ -79,7 +79,7 @@ function Login() {
                         </div>
 
                         <h5 className="fw-normal mb-3 pb-3" style={{ letterSpacing: "1px" }}>
-                          Sign into your account
+                          connectez-vous à votre compte
                         </h5>
 
                         <div className="form-outline mb-4">
@@ -114,15 +114,15 @@ function Login() {
                             type="button"
                             onClick={handleLogin}
                           >
-                            Login
+                            Se connecter
                           </button>
                         </div>
 
-                        <a className="small text-muted" href="#">Forgot password?</a>
+                        <a className="small text-muted" href="#">Mot de passe oublié?</a>
                         <p className="mb-5 pb-lg-2" style={{ color: "#393f81" }}>
-                          Don't have an account?{' '}
+                          Vous n'avez pas de compte ?{' '}
                           <Link to="/SignupS" style={{ color: "#393f81" }}>
-                            Register here
+                            Inscrivez-vous ici
                           </Link>
                         </p>
                       </form>

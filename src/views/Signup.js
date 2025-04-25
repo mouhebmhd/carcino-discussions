@@ -183,13 +183,13 @@ function SignupS() {
 
       {/* Bouton */}
       <div className="d-flex justify-content-center mt-4">
-        <button type="submit" className="btn btn-primary btn-lg">Register</button>
+        <button type="submit" className="btn btn-primary btn-lg">S'inscrire</button>
       </div>
 
       <p className="mt-3 mb-5 pb-lg-2" style={{ color: "#393f81" }}>
         Déjà un compte ?{" "}
         <Link to="/Login" style={{ color: "#393f81" }}>
-          Login
+          Se connecter
         </Link>
       </p>
     </form>
