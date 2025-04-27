@@ -1,571 +1,595 @@
 import React, { useState } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { 
-  Container, Row, Col, Nav, Tab, Card, Button, Table, 
-  Modal, Form, Badge, ListGroup, Alert
-} from 'react-bootstrap';
-import { 
-  PeopleFill, LayoutTextWindowReverse, TagsFill, 
-  PersonPlusFill, TrashFill, PencilSquare, PlusCircleFill, 
-  PersonBadgeFill, ListUl, HouseFill
-} from 'react-bootstrap-icons';
 
-function AdminDashboard() {
-  // États pour les données
-  const [moderateurs, setModerateurs] = useState([
-    { id: 1, nom: 'Jean Dupont', email: 'jean.dupont@example.com', dateCreation: '01/01/2025', statut: 'Actif' },
-    { id: 2, nom: 'Marie Martin', email: 'marie.martin@example.com', dateCreation: '15/02/2025', statut: 'Actif' },
-    { id: 3, nom: 'Paul Bernard', email: 'paul.bernard@example.com', dateCreation: '10/03/2025', statut: 'Inactif' }
-  ]);
-
-  const [communautes, setCommunautes] = useState([
-    { id: 1, nom: 'Programmation', description: 'Discussions sur la programmation', membres: 120, dateCreation: '05/01/2025' },
-    { id: 2, nom: 'Design UX/UI', description: 'Partage autour du design d\'interface', membres: 85, dateCreation: '20/01/2025' },
-    { id: 3, nom: 'Intelligence Artificielle', description: 'Discussions sur l\'IA et le ML', membres: 210, dateCreation: '15/02/2025' }
-  ]);
-
-  const [permissions, setPermissions] = useState([
-    { id: 1, nom: 'Gestion des utilisateurs', description: 'Permet de gérer les utilisateurs standards', niveau: 'Administrateur' },
-    { id: 2, nom: 'Modération de contenu', description: 'Permet de modérer le contenu publié', niveau: 'Modérateur' },
-    { id: 3, nom: 'Gestion des communautés', description: 'Permet de créer et gérer des communautés', niveau: 'Administrateur' }
-  ]);
-
-  // États pour les modals
-  const [showModerateur, setShowModerateur] = useState(false);
-  const [showCommunaute, setShowCommunaute] = useState(false);
-  const [showPermission, setShowPermission] = useState(false);
-  const [modalMode, setModalMode] = useState('add'); // 'add' ou 'edit'
-  const [currentItem, setCurrentItem] = useState(null);
-
-  // Fonctions pour gérer les modérateurs
-  const handleAddModerateur = () => {
-    setModalMode('add');
-    setCurrentItem(null);
-    setShowModerateur(true);
-  };
-
-  const handleEditModerateur = (moderateur) => {
-    setModalMode('edit');
-    setCurrentItem(moderateur);
-    setShowModerateur(true);
-  };
-
-  const handleDeleteModerateur = (id) => {
-    if (window.confirm('Êtes-vous sûr de vouloir supprimer ce modérateur?')) {
-      setModerateurs(moderateurs.filter(mod => mod.id !== id));
-    }
-  };
-
-  const handleSaveModerateur = (event) => {
-    event.preventDefault();
-    const form = event.target;
-    const newModerateur = {
-      nom: form.nom.value,
-      email: form.email.value,
-      statut: form.statut.value,
-      dateCreation: new Date().toLocaleDateString('fr-FR')
-    };
-
-    if (modalMode === 'add') {
-      setModerateurs([...moderateurs, { ...newModerateur, id: moderateurs.length + 1 }]);
-    } else {
-      setModerateurs(moderateurs.map(mod => 
-        mod.id === currentItem.id ? { ...mod, ...newModerateur } : mod
-      ));
-    }
-    setShowModerateur(false);
-  };
-
-  // Fonctions pour gérer les communautés
-  const handleAddCommunaute = () => {
-    setModalMode('add');
-    setCurrentItem(null);
-    setShowCommunaute(true);
-  };
-
-  const handleEditCommunaute = (communaute) => {
-    setModalMode('edit');
-    setCurrentItem(communaute);
-    setShowCommunaute(true);
-  };
-
-  const handleDeleteCommunaute = (id) => {
-    if (window.confirm('Êtes-vous sûr de vouloir supprimer cette communauté?')) {
-      setCommunautes(communautes.filter(com => com.id !== id));
-    }
-  };
-
-  const handleSaveCommunaute = (event) => {
-    event.preventDefault();
-    const form = event.target;
-    const newCommunaute = {
-      nom: form.nom.value,
-      description: form.description.value,
-      membres: modalMode === 'add' ? 0 : currentItem.membres,
-      dateCreation: new Date().toLocaleDateString('fr-FR')
-    };
-
-    if (modalMode === 'add') {
-      setCommunautes([...communautes, { ...newCommunaute, id: communautes.length + 1 }]);
-    } else {
-      setCommunautes(communautes.map(com => 
-        com.id === currentItem.id ? { ...com, ...newCommunaute } : com
-      ));
-    }
-    setShowCommunaute(false);
-  };
-
-  // Fonctions pour gérer les permissions
-  const handleAddPermission = () => {
-    setModalMode('add');
-    setCurrentItem(null);
-    setShowPermission(true);
-  };
-
-  const handleEditPermission = (permission) => {
-    setModalMode('edit');
-    setCurrentItem(permission);
-    setShowPermission(true);
-  };
-
-  const handleDeletePermission = (id) => {
-    if (window.confirm('Êtes-vous sûr de vouloir supprimer cette permission?')) {
-      setPermissions(permissions.filter(perm => perm.id !== id));
-    }
-  };
-
-  const handleSavePermission = (event) => {
-    event.preventDefault();
-    const form = event.target;
-    const newPermission = {
-      nom: form.nom.value,
-      description: form.description.value,
-      niveau: form.niveau.value
-    };
-
-    if (modalMode === 'add') {
-      setPermissions([...permissions, { ...newPermission, id: permissions.length + 1 }]);
-    } else {
-      setPermissions(permissions.map(perm => 
-        perm.id === currentItem.id ? { ...perm, ...newPermission } : perm
-      ));
-    }
-    setShowPermission(false);
-  };
-
-  // Statistiques pour le tableau de bord
+export default function AdminDashboard() {
+  const [activeTab, setActiveTab] = useState('dashboard');
+  
   const stats = {
-    totalModerateurs: moderateurs.length,
-    moderateursActifs: moderateurs.filter(mod => mod.statut === 'Actif').length,
-    totalCommunautes: communautes.length,
-    totalMembres: communautes.reduce((total, com) => total + com.membres, 0),
-    totalPermissions: permissions.length
+    moderators: 3,
+    communities: 3,
+    totalMembers: 415
   };
-
+  
+  const recentActivities = [
+    { id: 1, type: 'community', content: 'Nouvelle communauté "Intelligence Artificielle" créée', date: '15/02/2025' },
+    { id: 2, type: 'moderator', content: 'Nouveau modérateur Paul Bernard ajouté', date: '10/03/2025' },
+    { id: 3, type: 'permission', content: 'Permission "Modération de contenu" modifiée', date: '05/03/2025' }
+  ];
+  
+  const communities = [
+    { id: 1, name: 'Intelligence Artificielle', members: 156, pendingPosts: 5, pendingUsers: 2 },
+    { id: 2, name: 'Développement Web', members: 203, pendingPosts: 2, pendingUsers: 0 },
+    { id: 3, name: 'Science des Données', members: 56, pendingPosts: 1, pendingUsers: 3 }
+  ];
+  
   return (
-    <Container fluid className="p-0">
-      {/* Barre de navigation supérieure */}
-      <nav className="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
-        <div className="container-fluid">
-          <a className="navbar-brand" href="#">Panneau d'Administration</a>
-          <div className="d-flex">
-            <span className="navbar-text me-3">
-              <PersonBadgeFill className="me-2" />
-              Connecté en tant qu'Administrateur
-            </span>
-            <Button variant="outline-light" size="sm">
-              Se déconnecter
-            </Button>
+    <div className="container-fluid">
+      <div className="row">
+        {/* Sidebar */}
+        <nav className="col-md-3 col-lg-2 bg-dark sidebar">
+          <div className="position-sticky pt-3">
+            <div className="d-flex align-items-center pb-3 mb-3 border-bottom">
+              <span className="fs-5 fw-semibold text-white">Panneau d'Administration</span>
+            </div>
+            <ul className="nav flex-column">
+              <li className="nav-item">
+                <a 
+                  className={`nav-link ${activeTab === 'dashboard' ? 'active' : 'text-white'}`}
+                  href="#"
+                  onClick={(e) => {e.preventDefault(); setActiveTab('dashboard')}}
+                >
+                  <i className="bi bi-speedometer2 me-2"></i>
+                  Tableau de bord
+                </a>
+              </li>
+              <li className="nav-item">
+                <a 
+                  className={`nav-link ${activeTab === 'moderators' ? 'active' : 'text-white'}`}
+                  href="#"
+                  onClick={(e) => {e.preventDefault(); setActiveTab('moderators')}}
+                >
+                  <i className="bi bi-people me-2"></i>
+                  Gérer les modérateurs
+                </a>
+              </li>
+              <li className="nav-item">
+                <a 
+                  className={`nav-link ${activeTab === 'communities' ? 'active' : 'text-white'}`}
+                  href="#"
+                  onClick={(e) => {e.preventDefault(); setActiveTab('communities')}}
+                >
+                  <i className="bi bi-collection me-2"></i>
+                  Gérer les communautés
+                </a>
+              </li>
+              <li className="nav-item">
+                <a 
+                  className={`nav-link ${activeTab === 'permissions' ? 'active' : 'text-white'}`}
+                  href="#"
+                  onClick={(e) => {e.preventDefault(); setActiveTab('permissions')}}
+                >
+                  <i className="bi bi-shield-lock me-2"></i>
+                  Gérer les permissions
+                </a>
+              </li>
+              <li className="nav-item">
+                <a 
+                  className={`nav-link ${activeTab === 'profile' ? 'active' : 'text-white'}`}
+                  href="#"
+                  onClick={(e) => {e.preventDefault(); setActiveTab('profile')}}
+                >
+                  <i className="bi bi-person-circle me-2"></i>
+                  Gérer son profil
+                </a>
+              </li>
+              <li className="nav-item">
+                <a 
+                  className={`nav-link ${activeTab === 'notifications' ? 'active' : 'text-white'}`}
+                  href="#"
+                  onClick={(e) => {e.preventDefault(); setActiveTab('notifications')}}
+                >
+                  <i className="bi bi-bell me-2"></i>
+                  Gérer ses notifications
+                </a>
+              </li>
+            </ul>
+            <hr className="text-white" />
+            <div className="px-3 mt-4">
+              <div className="d-flex align-items-center text-white">
+                <i className="bi bi-person-circle me-2 fs-5"></i>
+                <div>
+                  <div className="fw-bold">Admin</div>
+                  <small>Connecté</small>
+                </div>
+              </div>
+              <button className="btn btn-sm btn-outline-light w-100 mt-2">Se déconnecter</button>
+            </div>
           </div>
-        </div>
-      </nav>
-
-      <Container>
-        {/* Interface principale avec onglets */}
-        <Tab.Container id="admin-tabs" defaultActiveKey="dashboard">
-          <Row>
-            <Col md={3}>
-              <Card className="mb-4">
-                <Card.Header className="bg-light">Navigation</Card.Header>
-                <Card.Body className="p-0">
-                  <Nav variant="pills" className="flex-column">
-                    <Nav.Item>
-                      <Nav.Link eventKey="dashboard" className="d-flex align-items-center">
-                        <LayoutTextWindowReverse className="me-2" /> Tableau de bord
-                      </Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                      <Nav.Link eventKey="moderateurs" className="d-flex align-items-center">
-                        <PeopleFill className="me-2" /> Gérer les modérateurs
-                      </Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                      <Nav.Link eventKey="communautes" className="d-flex align-items-center">
-                        <HouseFill className="me-2" /> Gérer les communautés
-                      </Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                      <Nav.Link eventKey="permissions" className="d-flex align-items-center">
-                        <TagsFill className="me-2" /> Gérer les permissions
-                      </Nav.Link>
-                    </Nav.Item>
-                  </Nav>
-                </Card.Body>
-              </Card>
-            </Col>
-            <Col md={9}>
-              <Tab.Content>
-                {/* Tableau de bord */}
-                <Tab.Pane eventKey="dashboard">
-                  <Card className="mb-4">
-                    <Card.Header className="bg-light">
-                      <h4 className="mb-0">Tableau de bord</h4>
-                    </Card.Header>
-                    <Card.Body>
-                      <Row>
-                        <Col md={4}>
-                          <Card className="text-center mb-3 border-primary">
-                            <Card.Body>
-                              <h3>{stats.totalModerateurs}</h3>
-                              <p className="mb-0">Modérateurs</p>
-                            </Card.Body>
-                          </Card>
-                        </Col>
-                        <Col md={4}>
-                          <Card className="text-center mb-3 border-success">
-                            <Card.Body>
-                              <h3>{stats.totalCommunautes}</h3>
-                              <p className="mb-0">Communautés</p>
-                            </Card.Body>
-                          </Card>
-                        </Col>
-                        <Col md={4}>
-                          <Card className="text-center mb-3 border-info">
-                            <Card.Body>
-                              <h3>{stats.totalMembres}</h3>
-                              <p className="mb-0">Membres au total</p>
-                            </Card.Body>
-                          </Card>
-                        </Col>
-                      </Row>
-
-                      <h5 className="mt-4">Activité récente</h5>
-                      <ListGroup>
-                        <ListGroup.Item>Nouvelle communauté "Intelligence Artificielle" créée (15/02/2025)</ListGroup.Item>
-                        <ListGroup.Item>Nouveau modérateur Paul Bernard ajouté (10/03/2025)</ListGroup.Item>
-                        <ListGroup.Item>Permission "Modération de contenu" modifiée (05/03/2025)</ListGroup.Item>
-                      </ListGroup>
-                    </Card.Body>
-                  </Card>
-                </Tab.Pane>
-
-                {/* Gestion des modérateurs */}
-                <Tab.Pane eventKey="moderateurs">
-                  <Card className="mb-4">
-                    <Card.Header className="bg-light d-flex justify-content-between align-items-center">
-                      <h4 className="mb-0">Gérer les modérateurs</h4>
-                      <Button variant="success" size="sm" onClick={handleAddModerateur}>
-                        <PlusCircleFill className="me-1" /> Ajouter un modérateur
-                      </Button>
-                    </Card.Header>
-                    <Card.Body>
-                      <Table responsive hover>
-                        <thead>
-                          <tr>
-                            <th>#</th>
-                            <th>Nom</th>
-                            <th>Email</th>
-                            <th>Date de création</th>
-                            <th>Statut</th>
-                            <th>Actions</th>
+        </nav>
+        
+        {/* Main content */}
+        <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
+          {activeTab === 'dashboard' && (
+            <div>
+              <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 className="h2">Tableau de bord</h1>
+              </div>
+              
+              <div className="row mb-4">
+                <div className="col-md-4 mb-4">
+                  <div className="card text-white bg-primary h-100">
+                    <div className="card-body text-center">
+                      <h1 className="display-4">{stats.moderators}</h1>
+                      <p className="card-text">Modérateurs</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-md-4 mb-4">
+                  <div className="card text-white bg-success h-100">
+                    <div className="card-body text-center">
+                      <h1 className="display-4">{stats.communities}</h1>
+                      <p className="card-text">Communautés</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-md-4 mb-4">
+                  <div className="card text-white bg-info h-100">
+                    <div className="card-body text-center">
+                      <h1 className="display-4">{stats.totalMembers}</h1>
+                      <p className="card-text">Membres au total</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="card">
+                <div className="card-header">
+                  <h5 className="mb-0">Activité récente</h5>
+                </div>
+                <div className="card-body p-0">
+                  <ul className="list-group list-group-flush">
+                    {recentActivities.map(activity => (
+                      <li key={activity.id} className="list-group-item py-3">
+                        {activity.type === 'community' && <i className="bi bi-collection-fill text-success me-2"></i>}
+                        {activity.type === 'moderator' && <i className="bi bi-person-plus-fill text-primary me-2"></i>}
+                        {activity.type === 'permission' && <i className="bi bi-shield-fill-check text-warning me-2"></i>}
+                        {activity.content} <span className="text-muted">({activity.date})</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          )}
+          
+          {activeTab === 'communities' && (
+            <div>
+              <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 className="h2">Gérer les communautés</h1>
+                <button className="btn btn-primary">
+                  <i className="bi bi-plus-circle me-2"></i>
+                  Nouvelle communauté
+                </button>
+              </div>
+              
+              <div className="card mb-4">
+                <div className="card-body">
+                  <div className="table-responsive">
+                    <table className="table table-striped table-hover">
+                      <thead>
+                        <tr>
+                          <th>Nom</th>
+                          <th>Membres</th>
+                          <th>Publications en attente</th>
+                          <th>Utilisateurs en attente</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {communities.map(community => (
+                          <tr key={community.id}>
+                            <td>{community.name}</td>
+                            <td>{community.members}</td>
+                            <td>
+                              {community.pendingPosts > 0 ? (
+                                <span className="badge bg-warning text-dark">{community.pendingPosts}</span>
+                              ) : (
+                                <span className="badge bg-secondary">0</span>
+                              )}
+                            </td>
+                            <td>
+                              {community.pendingUsers > 0 ? (
+                                <span className="badge bg-warning text-dark">{community.pendingUsers}</span>
+                              ) : (
+                                <span className="badge bg-secondary">0</span>
+                              )}
+                            </td>
+                            <td>
+                              <div className="btn-group">
+                                <button className="btn btn-sm btn-outline-primary" title="Gérer les utilisateurs">
+                                  <i className="bi bi-people"></i>
+                                </button>
+                                <button className="btn btn-sm btn-outline-success" title="Gérer les publications">
+                                  <i className="bi bi-file-text"></i>
+                                </button>
+                                <button className="btn btn-sm btn-outline-secondary" title="Paramètres">
+                                  <i className="bi bi-gear"></i>
+                                </button>
+                                <button className="btn btn-sm btn-outline-danger" title="Supprimer">
+                                  <i className="bi bi-trash"></i>
+                                </button>
+                              </div>
+                            </td>
                           </tr>
-                        </thead>
-                        <tbody>
-                          {moderateurs.map((moderateur) => (
-                            <tr key={moderateur.id}>
-                              <td>{moderateur.id}</td>
-                              <td>{moderateur.nom}</td>
-                              <td>{moderateur.email}</td>
-                              <td>{moderateur.dateCreation}</td>
-                              <td>
-                                <Badge bg={moderateur.statut === 'Actif' ? 'success' : 'danger'}>
-                                  {moderateur.statut}
-                                </Badge>
-                              </td>
-                              <td>
-                                <Button 
-                                  variant="outline-primary" 
-                                  size="sm" 
-                                  className="me-2"
-                                  onClick={() => handleEditModerateur(moderateur)}
-                                >
-                                  <PencilSquare />
-                                </Button>
-                                <Button 
-                                  variant="outline-danger" 
-                                  size="sm"
-                                  onClick={() => handleDeleteModerateur(moderateur.id)}
-                                >
-                                  <TrashFill />
-                                </Button>
-                              </td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </Table>
-                    </Card.Body>
-                  </Card>
-                </Tab.Pane>
-
-                {/* Gestion des communautés */}
-                <Tab.Pane eventKey="communautes">
-                  <Card className="mb-4">
-                    <Card.Header className="bg-light d-flex justify-content-between align-items-center">
-                      <h4 className="mb-0">Gérer les communautés</h4>
-                      <Button variant="success" size="sm" onClick={handleAddCommunaute}>
-                        <PlusCircleFill className="me-1" /> Ajouter une communauté
-                      </Button>
-                    </Card.Header>
-                    <Card.Body>
-                      <Table responsive hover>
-                        <thead>
-                          <tr>
-                            <th>#</th>
-                            <th>Nom</th>
-                            <th>Description</th>
-                            <th>Membres</th>
-                            <th>Date de création</th>
-                            <th>Actions</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {communautes.map((communaute) => (
-                            <tr key={communaute.id}>
-                              <td>{communaute.id}</td>
-                              <td>{communaute.nom}</td>
-                              <td>{communaute.description}</td>
-                              <td>{communaute.membres}</td>
-                              <td>{communaute.dateCreation}</td>
-                              <td>
-                                <Button 
-                                  variant="outline-primary" 
-                                  size="sm" 
-                                  className="me-2"
-                                  onClick={() => handleEditCommunaute(communaute)}
-                                >
-                                  <PencilSquare />
-                                </Button>
-                                <Button 
-                                  variant="outline-danger" 
-                                  size="sm"
-                                  onClick={() => handleDeleteCommunaute(communaute.id)}
-                                >
-                                  <TrashFill />
-                                </Button>
-                              </td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </Table>
-                    </Card.Body>
-                  </Card>
-                </Tab.Pane>
-
-                {/* Gestion des permissions */}
-                <Tab.Pane eventKey="permissions">
-                  <Card className="mb-4">
-                    <Card.Header className="bg-light d-flex justify-content-between align-items-center">
-                      <h4 className="mb-0">Gérer les permissions</h4>
-                      <Button variant="success" size="sm" onClick={handleAddPermission}>
-                        <PlusCircleFill className="me-1" /> Ajouter une permission
-                      </Button>
-                    </Card.Header>
-                    <Card.Body>
-                      <Table responsive hover>
-                        <thead>
-                          <tr>
-                            <th>#</th>
-                            <th>Nom</th>
-                            <th>Description</th>
-                            <th>Niveau</th>
-                            <th>Actions</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {permissions.map((permission) => (
-                            <tr key={permission.id}>
-                              <td>{permission.id}</td>
-                              <td>{permission.nom}</td>
-                              <td>{permission.description}</td>
-                              <td>
-                                <Badge bg={permission.niveau === 'Administrateur' ? 'danger' : 'info'}>
-                                  {permission.niveau}
-                                </Badge>
-                              </td>
-                              <td>
-                                <Button 
-                                  variant="outline-primary" 
-                                  size="sm" 
-                                  className="me-2"
-                                  onClick={() => handleEditPermission(permission)}
-                                >
-                                  <PencilSquare />
-                                </Button>
-                                <Button 
-                                  variant="outline-danger" 
-                                  size="sm"
-                                  onClick={() => handleDeletePermission(permission.id)}
-                                >
-                                  <TrashFill />
-                                </Button>
-                              </td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </Table>
-                    </Card.Body>
-                  </Card>
-                </Tab.Pane>
-              </Tab.Content>
-            </Col>
-          </Row>
-        </Tab.Container>
-      </Container>
-
-      {/* Modal pour ajouter/modifier un modérateur */}
-      <Modal show={showModerateur} onHide={() => setShowModerateur(false)}>
-        <Modal.Header closeButton>
-          <Modal.Title>
-            {modalMode === 'add' ? 'Ajouter un nouveau modérateur' : 'Modifier le modérateur'}
-          </Modal.Title>
-        </Modal.Header>
-        <Form onSubmit={handleSaveModerateur}>
-          <Modal.Body>
-            <Form.Group className="mb-3">
-              <Form.Label>Nom</Form.Label>
-              <Form.Control 
-                type="text" 
-                name="nom" 
-                required 
-                defaultValue={currentItem?.nom || ''}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Email</Form.Label>
-              <Form.Control 
-                type="email" 
-                name="email" 
-                required 
-                defaultValue={currentItem?.email || ''}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Statut</Form.Label>
-              <Form.Select name="statut" defaultValue={currentItem?.statut || 'Actif'}>
-                <option value="Actif">Actif</option>
-                <option value="Inactif">Inactif</option>
-              </Form.Select>
-            </Form.Group>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={() => setShowModerateur(false)}>
-              Annuler
-            </Button>
-            <Button variant="primary" type="submit">
-              {modalMode === 'add' ? 'Ajouter' : 'Enregistrer les modifications'}
-            </Button>
-          </Modal.Footer>
-        </Form>
-      </Modal>
-
-      {/* Modal pour ajouter/modifier une communauté */}
-      <Modal show={showCommunaute} onHide={() => setShowCommunaute(false)}>
-        <Modal.Header closeButton>
-          <Modal.Title>
-            {modalMode === 'add' ? 'Ajouter une nouvelle communauté' : 'Modifier la communauté'}
-          </Modal.Title>
-        </Modal.Header>
-        <Form onSubmit={handleSaveCommunaute}>
-          <Modal.Body>
-            <Form.Group className="mb-3">
-              <Form.Label>Nom</Form.Label>
-              <Form.Control 
-                type="text" 
-                name="nom" 
-                required 
-                defaultValue={currentItem?.nom || ''}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Description</Form.Label>
-              <Form.Control 
-                as="textarea" 
-                rows={3} 
-                name="description" 
-                required 
-                defaultValue={currentItem?.description || ''}
-              />
-            </Form.Group>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={() => setShowCommunaute(false)}>
-              Annuler
-            </Button>
-            <Button variant="primary" type="submit">
-              {modalMode === 'add' ? 'Ajouter' : 'Enregistrer les modifications'}
-            </Button>
-          </Modal.Footer>
-        </Form>
-      </Modal>
-
-      {/* Modal pour ajouter/modifier une permission */}
-      <Modal show={showPermission} onHide={() => setShowPermission(false)}>
-        <Modal.Header closeButton>
-          <Modal.Title>
-            {modalMode === 'add' ? 'Ajouter une nouvelle permission' : 'Modifier la permission'}
-          </Modal.Title>
-        </Modal.Header>
-        <Form onSubmit={handleSavePermission}>
-          <Modal.Body>
-            <Form.Group className="mb-3">
-              <Form.Label>Nom</Form.Label>
-              <Form.Control 
-                type="text" 
-                name="nom" 
-                required 
-                defaultValue={currentItem?.nom || ''}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Description</Form.Label>
-              <Form.Control 
-                as="textarea" 
-                rows={3} 
-                name="description" 
-                required 
-                defaultValue={currentItem?.description || ''}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Niveau requis</Form.Label>
-              <Form.Select name="niveau" defaultValue={currentItem?.niveau || 'Modérateur'}>
-                <option value="Modérateur">Modérateur</option>
-                <option value="Administrateur">Administrateur</option>
-              </Form.Select>
-            </Form.Group>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={() => setShowPermission(false)}>
-              Annuler
-            </Button>
-            <Button variant="primary" type="submit">
-              {modalMode === 'add' ? 'Ajouter' : 'Enregistrer les modifications'}
-            </Button>
-          </Modal.Footer>
-        </Form>
-      </Modal>
-    </Container>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="row">
+                <div className="col-md-6 mb-4">
+                  <div className="card h-100">
+                    <div className="card-header">
+                      <h5 className="mb-0">Gérer les publications</h5>
+                    </div>
+                    <div className="card-body">
+                      <div className="list-group mb-3">
+                        <a href="#" className="list-group-item list-group-item-action">
+                          <i className="bi bi-check-circle me-2"></i>
+                          Approuver une publication
+                        </a>
+                        <a href="#" className="list-group-item list-group-item-action">
+                          <i className="bi bi-list-ul me-2"></i>
+                          Consulter la liste des publications
+                        </a>
+                        <a href="#" className="list-group-item list-group-item-action">
+                          <i className="bi bi-flag me-2"></i>
+                          Signaler une publication
+                        </a>
+                        <a href="#" className="list-group-item list-group-item-action">
+                          <i className="bi bi-trash me-2"></i>
+                          Supprimer une publication
+                        </a>
+                      </div>
+                      <button className="btn btn-primary">Voir toutes les publications</button>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-md-6 mb-4">
+                  <div className="card h-100">
+                    <div className="card-header">
+                      <h5 className="mb-0">Gérer les utilisateurs</h5>
+                    </div>
+                    <div className="card-body">
+                      <div className="list-group mb-3">
+                        <a href="#" className="list-group-item list-group-item-action">
+                          <i className="bi bi-person-check me-2"></i>
+                          Approuver la demande d'un utilisateur
+                        </a>
+                        <a href="#" className="list-group-item list-group-item-action">
+                          <i className="bi bi-people me-2"></i>
+                          Consulter la liste des utilisateurs
+                        </a>
+                        <a href="#" className="list-group-item list-group-item-action">
+                          <i className="bi bi-exclamation-triangle me-2"></i>
+                          Avertir un utilisateur
+                        </a>
+                        <a href="#" className="list-group-item list-group-item-action">
+                          <i className="bi bi-person-x me-2"></i>
+                          Supprimer un utilisateur
+                        </a>
+                      </div>
+                      <button className="btn btn-primary">Voir tous les utilisateurs</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+          
+          {activeTab === 'profile' && (
+            <div>
+              <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 className="h2">Gérer son profil</h1>
+              </div>
+              
+              <div className="card">
+                <div className="card-body">
+                  <div className="row">
+                    <div className="col-md-3 border-end">
+                      <div className="d-flex flex-column align-items-center text-center p-3">
+                        <div className="rounded-circle bg-secondary text-white d-flex align-items-center justify-content-center" style={{width: '150px', height: '150px', fontSize: '48px'}}>
+                          <i className="bi bi-person"></i>
+                        </div>
+                        <span className="font-weight-bold mt-3">Paul Bernard</span>
+                        <span className="text-muted">paul.bernard@example.com</span>
+                      </div>
+                    </div>
+                    <div className="col-md-9">
+                      <form>
+                        <div className="row mb-3">
+                          <div className="col-md-6">
+                            <label htmlFor="firstName" className="form-label">Prénom</label>
+                            <input type="text" className="form-control" id="firstName" defaultValue="Paul" />
+                          </div>
+                          <div className="col-md-6">
+                            <label htmlFor="lastName" className="form-label">Nom</label>
+                            <input type="text" className="form-control" id="lastName" defaultValue="Bernard" />
+                          </div>
+                        </div>
+                        <div className="mb-3">
+                          <label htmlFor="email" className="form-label">Email</label>
+                          <input type="email" className="form-control" id="email" defaultValue="paul.bernard@example.com" />
+                        </div>
+                        <div className="row mb-3">
+                          <div className="col-md-6">
+                            <label htmlFor="currentPassword" className="form-label">Mot de passe actuel</label>
+                            <input type="password" className="form-control" id="currentPassword" />
+                          </div>
+                          <div className="col-md-6">
+                            <label htmlFor="newPassword" className="form-label">Nouveau mot de passe</label>
+                            <input type="password" className="form-control" id="newPassword" />
+                          </div>
+                        </div>
+                        <div className="mb-3">
+                          <label htmlFor="avatar" className="form-label">Photo de profil</label>
+                          <input type="file" className="form-control" id="avatar" />
+                        </div>
+                        <button type="submit" className="btn btn-primary">Enregistrer les modifications</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+          
+          {activeTab === 'notifications' && (
+            <div>
+              <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 className="h2">Gérer ses notifications</h1>
+              </div>
+              
+              <div className="row">
+                <div className="col-md-5 mb-4">
+                  <div className="card h-100">
+                    <div className="card-header">
+                      <h5 className="mb-0">Préférences de notification</h5>
+                    </div>
+                    <div className="card-body">
+                      <form>
+                        <div className="form-check form-switch mb-3">
+                          <input className="form-check-input" type="checkbox" id="newUserNotification" defaultChecked />
+                          <label className="form-check-label" htmlFor="newUserNotification">Nouvelles demandes d'utilisateurs</label>
+                        </div>
+                        <div className="form-check form-switch mb-3">
+                          <input className="form-check-input" type="checkbox" id="newPostNotification" defaultChecked />
+                          <label className="form-check-label" htmlFor="newPostNotification">Nouvelles publications</label>
+                        </div>
+                        <div className="form-check form-switch mb-3">
+                          <input className="form-check-input" type="checkbox" id="reportNotification" defaultChecked />
+                          <label className="form-check-label" htmlFor="reportNotification">Signalements</label>
+                        </div>
+                        <div className="form-check form-switch mb-3">
+                          <input className="form-check-input" type="checkbox" id="emailNotification" defaultChecked />
+                          <label className="form-check-label" htmlFor="emailNotification">Recevoir des notifications par email</label>
+                        </div>
+                        <button type="submit" className="btn btn-primary">Enregistrer les préférences</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-md-7 mb-4">
+                  <div className="card h-100">
+                    <div className="card-header d-flex justify-content-between align-items-center">
+                      <h5 className="mb-0">Notifications récentes</h5>
+                      <button className="btn btn-sm btn-outline-primary">Marquer tout comme lu</button>
+                    </div>
+                    <div className="card-body p-0">
+                      <div className="list-group list-group-flush">
+                        <div className="list-group-item list-group-item-action">
+                          <div className="d-flex w-100 justify-content-between">
+                            <h6 className="mb-1">
+                              <i className="bi bi-person-plus text-success me-2"></i>
+                              Nouvelle demande d'adhésion
+                            </h6>
+                            <small className="text-muted">Il y a 2 heures</small>
+                          </div>
+                          <p className="mb-1">à la communauté "Intelligence Artificielle"</p>
+                          <div className="btn-group btn-group-sm mt-2">
+                            <button className="btn btn-success">Approuver</button>
+                            <button className="btn btn-danger">Refuser</button>
+                          </div>
+                        </div>
+                        <div className="list-group-item list-group-item-action">
+                          <div className="d-flex w-100 justify-content-between">
+                            <h6 className="mb-1">
+                              <i className="bi bi-file-earmark-text text-primary me-2"></i>
+                              Nouvelle publication
+                            </h6>
+                            <small className="text-muted">Il y a 3 heures</small>
+                          </div>
+                          <p className="mb-1">dans la communauté "Développement Web"</p>
+                          <div className="btn-group btn-group-sm mt-2">
+                            <button className="btn btn-outline-primary">Voir</button>
+                            <button className="btn btn-success">Approuver</button>
+                          </div>
+                        </div>
+                        <div className="list-group-item list-group-item-action">
+                          <div className="d-flex w-100 justify-content-between">
+                            <h6 className="mb-1">
+                              <i className="bi bi-exclamation-triangle text-warning me-2"></i>
+                              Publication signalée
+                            </h6>
+                            <small className="text-muted">Il y a 5 heures</small>
+                          </div>
+                          <p className="mb-1">dans la communauté "Science des Données"</p>
+                          <div className="btn-group btn-group-sm mt-2">
+                            <button className="btn btn-outline-primary">Examiner</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+          
+          {activeTab === 'moderators' && (
+            <div>
+              <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 className="h2">Gérer les modérateurs</h1>
+                <button className="btn btn-primary">
+                  <i className="bi bi-person-plus me-2"></i>
+                  Ajouter un modérateur
+                </button>
+              </div>
+              
+              <div className="card">
+                <div className="card-body">
+                  <div className="table-responsive">
+                    <table className="table table-striped table-hover">
+                      <thead>
+                        <tr>
+                          <th>Nom</th>
+                          <th>Email</th>
+                          <th>Communautés gérées</th>
+                          <th>Date d'ajout</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>Paul Bernard</td>
+                          <td>paul.bernard@example.com</td>
+                          <td>Intelligence Artificielle</td>
+                          <td>10/03/2025</td>
+                          <td>
+                            <div className="btn-group">
+                              <button className="btn btn-sm btn-outline-primary">
+                                <i className="bi bi-pencil"></i>
+                              </button>
+                              <button className="btn btn-sm btn-outline-danger">
+                                <i className="bi bi-trash"></i>
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Sophie Martin</td>
+                          <td>sophie.martin@example.com</td>
+                          <td>Développement Web</td>
+                          <td>05/01/2025</td>
+                          <td>
+                            <div className="btn-group">
+                              <button className="btn btn-sm btn-outline-primary">
+                                <i className="bi bi-pencil"></i>
+                              </button>
+                              <button className="btn btn-sm btn-outline-danger">
+                                <i className="bi bi-trash"></i>
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Thomas Dubois</td>
+                          <td>thomas.dubois@example.com</td>
+                          <td>Science des Données</td>
+                          <td>15/12/2024</td>
+                          <td>
+                            <div className="btn-group">
+                              <button className="btn btn-sm btn-outline-primary">
+                                <i className="bi bi-pencil"></i>
+                              </button>
+                              <button className="btn btn-sm btn-outline-danger">
+                                <i className="bi bi-trash"></i>
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+          
+          {activeTab === 'permissions' && (
+            <div>
+              <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 className="h2">Gérer les permissions</h1>
+              </div>
+              
+              <div className="card">
+                <div className="card-body">
+                  <div className="table-responsive">
+                    <table className="table table-striped table-hover">
+                      <thead>
+                        <tr>
+                          <th>Permission</th>
+                          <th>Description</th>
+                          <th>Dernière modification</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>Modération de contenu</td>
+                          <td>Permet d'approuver ou de refuser les publications des utilisateurs</td>
+                          <td>05/03/2025</td>
+                          <td>
+                            <button className="btn btn-sm btn-outline-primary">
+                              <i className="bi bi-pencil me-1"></i> Modifier
+                            </button>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Gestion des utilisateurs</td>
+                          <td>Permet d'approuver, d'avertir ou de supprimer des utilisateurs</td>
+                          <td>15/02/2025</td>
+                          <td>
+                            <button className="btn btn-sm btn-outline-primary">
+                              <i className="bi bi-pencil me-1"></i> Modifier
+                            </button>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Administration complète</td>
+                          <td>Donne accès à toutes les fonctionnalités d'administration</td>
+                          <td>10/01/2025</td>
+                          <td>
+                            <button className="btn btn-sm btn-outline-primary">
+                              <i className="bi bi-pencil me-1"></i> Modifier
+                            </button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+          
+          <footer className="pt-5 d-flex justify-content-between">
+            <span>Copyright © 2025 Panel d'Administration</span>
+            <ul className="nav">
+              <li className="nav-item">
+                <a className="nav-link" href="#">Aide</a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="#">Conditions</a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="#">Confidentialité</a>
+              </li>
+            </ul>
+          </footer>
+        </main>
+      </div>
+    </div>
   );
 }
-
-export default AdminDashboard;
