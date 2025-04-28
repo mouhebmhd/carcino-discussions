@@ -11,6 +11,7 @@ import Feeds from "./views/Feeds.js";
 import Community from "./views/Community.js"
 import Notifications from "./views/Notifications.js"
 import Users from "./views/users.js"
+import Moderators from "./views/moderators.js"
 function App() {
   const isLoggedOn = JSON.parse(localStorage.getItem("user")) !== undefined;
 
@@ -29,6 +30,7 @@ function App() {
         <Route exact path="/feeds" element={<Feeds />} />
         <Route exact path="/notifications" element={<Notifications />} />
         <Route exact path="/users" element={<Users />} />
+        <Route exact path="/moderators" element={<Moderators />} />
 
         {/* 
           <Route path="/communities" element={}></Route>

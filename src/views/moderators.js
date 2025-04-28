@@ -3,7 +3,7 @@ import Navbar from '../components/NavBar';
 import axios from "axios";
 import { Modal, Button } from 'react-bootstrap'; 
 
-export default function Utilisateurs() {
+export default function Moderators() {
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
   const [users, setUsers] = useState([]);
@@ -153,7 +153,7 @@ export default function Utilisateurs() {
               </thead>
               <tbody>
                 {users.map((user, index) => (
-                  user.role=="membre" && <tr key={user._id || index}>
+                  user.role=="moderateur" && <tr key={user._id || index}>
                   <td>{index + 1}</td>
                   <td>{user.prenom}</td>
                   <td>{user.nom}</td>
