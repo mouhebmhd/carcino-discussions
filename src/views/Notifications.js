@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Bell, Check } from 'lucide-react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import NavBar from '../components/NavBar';
 
 const NotificationManager = () => {
   const [notifications, setNotifications] = useState([]);
@@ -133,18 +134,14 @@ const NotificationManager = () => {
   };
 
   return (
-    <div className="container mt-5">
-      <div className="d-flex justify-content-between align-items-center mb-4">
-        <h3 style={roseStyle.heading}>Notifications</h3>
-        <button 
-          className="btn btn-outline-pink rounded-pill" 
-          onClick={markAllAsRead}
-          disabled={notifications.length === 0 || notifications.every(notif => notif.read)}
-          style={roseStyle.outlineButton}
-        >
-          <Check className="me-2" size={18} /> Marquer tout comme lu
-        </button>
-      </div>
+    <>
+    <NavBar className="mb-5 d-block"></NavBar>
+    <div className="container mt-5 d-block">
+    <div className="text-center ">
+          <h6 className="section-title bg-white specialText px-3">Notifications</h6>
+          <h1 className="mb-5">Vos Notifications</h1>
+          
+        </div>
 
       {loading ? (
         <div className="d-flex justify-content-center my-5">
@@ -187,6 +184,7 @@ const NotificationManager = () => {
         </div>
       )}
     </div>
+    </>
   );
 };
 

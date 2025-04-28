@@ -12,7 +12,7 @@ function NavBar() {
   const isLoggedOn = JSON.parse(localStorage.getItem("user")) != undefined;
 
   return (
-    <nav className="navbar fixed-top navbar-expand-lg navbar-light bg-white">
+    <nav className="navbar  navbar-expand-lg navbar-light bg-white">
       <div className="container-fluid px-5">
         <Link className={`navbar-brand ${styles.navbarBrand}`} to="/">
           CarsinoDisc
