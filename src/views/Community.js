@@ -7,13 +7,33 @@ import { MdDelete, MdEdit } from "react-icons/md";
 import { Link } from "react-router-dom";
 import UpdateCommunity from "../components/updateCommunity";
 import AddCommunity from "../components/addCommunity";
+import { RiUserFollowFill } from "react-icons/ri";
+import { RiUserUnfollowFill } from "react-icons/ri";
 
 export default function Community() {
   const user = JSON.parse(localStorage.getItem("user"));
   const [communities, setCommunities] = useState([]);
+  const [subscribtions, setSubscribtions] = useState([]);
   const [updatedCommunity, setUpdatedCommunity] = useState(null);
   const [showAddModal, setShowAddModal] = useState(false);
+  const loadSubscribtions = () => {
+    axios.get("http://localhost:3030/getAllAbonemment/")
+      .then((response) => {
+        const filtered = response.data.filter((sub, index) => {
+          return sub.userId == user._id;
+        });
+        console.log(filtered);
+        const communityIds = filtered.map((sub) => sub.communityId);
 
+        console.log(communityIds);
+        setSubscribtions(communityIds);
+      })
+      .catch((error) => {
+        console.log(error);
+        setSubscribtions([]);
+      });
+  };
+  
   const loadData = () => {
     axios
       .get("http://localhost:3030/communitiy/getAllCommunities/")
@@ -23,6 +43,7 @@ export default function Community() {
 
   useEffect(() => {
     loadData();
+    loadSubscribtions()
   }, [user._id]);
 
   const deleteCommunity = (id) =>
@@ -31,7 +52,36 @@ export default function Community() {
       .then(() => loadData())
       .catch((err) => console.error(err));
 
-  const followCommunity = (id) => console.log("subscribe to", id);
+  const followCommunity = (id) =>{
+     console.log("subscribe to", id)
+     const data=
+     {
+      userId:user._id,
+      communityId:id,
+      dateDebutAbonnement : new Date ()
+     }
+     axios.post("http://localhost:3030/Abonnement/postAbonnement/",data)
+     .then(response=>{
+      console.log(response.data)
+      loadData()
+      loadSubscribtions()
+     })
+     .catch(error=>{
+      console.log(error)
+     })
+    };
+    const unfollowCommunity = (communityId,userId) =>{
+      const data= {communityId,userId}
+      axios.delete("http://localhost:3030/Abonnement/deleteAbonnementUserCommunity/"+userId+"/"+communityId)
+      .then(response=>{
+       console.log(response.data)
+       loadData()
+       loadSubscribtions()
+      })
+      .catch(error=>{
+       console.log(error)
+      }) 
+     };
   const updateCommunity = (c) => setUpdatedCommunity(c);
 
   return (
@@ -70,6 +120,8 @@ export default function Community() {
                 className="card-img-top"
                 style={{ height: "12rem", objectFit: "cover" }}
               />
+
+              
               <div className="card-body">
                 <h5 className="card-title">{c.nomCommunaute}</h5>
                 <p className="card-text small text-muted">
@@ -88,12 +140,22 @@ export default function Community() {
                   >
                     <MdEdit /> Modifier
                   </button>
-                  <button
+                  {subscribtions.includes(c._id)==true && <button
+                    className="btn btn-dark"
+                    onClick={() => unfollowCommunity(c._id,user._id)}
+                  >
+                    <RiUserUnfollowFill  /> Unsubscribe
+                  </button>}
+                  {subscribtions.includes(c._id)==false && <button
                     className="btn btn-primary"
                     onClick={() => followCommunity(c._id)}
                   >
-                    <GiShadowFollower /> Follow
-                  </button>
+                    
+                    <RiUserFollowFill  /> Subscribe
+                  </button>}
+
+
+                  
                 </div>
               </div>
             </div>

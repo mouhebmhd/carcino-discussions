@@ -15,6 +15,24 @@ const getAllAbonnement=async (req,res)=>{
     }
 
 }
+const deleteAbonnementUserCommunity = async (req, res) => {
+  const { userId, communityId } = req.params;  // Corrected: directly get from req.params
+  console.log({ userId, communityId });
+  
+  try {
+    // Corrected: Make sure to use userId and communityId from req.params
+    const abonnement = await Abonnement.findOneAndDelete({ userId, communityId });
+
+    if (abonnement) {
+      res.status(200).json({ message: "Subscription deleted successfully" });
+    } else {
+      res.status(404).json({ message: "Subscription not found" });
+    }
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
 // get abonnement by id 
 const getAbonnementById = async (req, res) => {
     try {
@@ -71,4 +89,5 @@ const addAbonnement = async (req, res) => {
     addAbonnement,
     updateAbonnement,
     deleteAbonnement,
+    deleteAbonnementUserCommunity
   };
