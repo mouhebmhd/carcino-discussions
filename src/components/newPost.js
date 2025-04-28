@@ -15,7 +15,7 @@ export default function NewPost(props) {
         .then(response=>{
             setCommunities(response.data)
             console.log(response.data)
-            navigate("/Home")
+            navigate("/")
         })
         .catch(error=>{
             console.log(error)
@@ -54,26 +54,26 @@ export default function NewPost(props) {
           </button>
      </div>
 
-<div className="modal modal-lg fade"  data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1"  id="publicationModal" tabindex="-1" aria-labelledby="publicationModalLabel" >
-  <div class="modal-dialog">
+<div className="modal modal-lg fade"  data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1"  id="publicationModal"   aria-labelledby="publicationModalLabel" >
+  <div className="modal-dialog">
     <form id="publicationForm">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="publicationModalLabel">Add New Publication</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <div className="modal-content">
+        <div className="modal-header">
+          <h5 className="modal-title" id="publicationModalLabel">Add New Publication</h5>
+          <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
+        <div className="modal-body">
           
         
           
-          <div class="mb-3">
-            <label for="titrePublication" class="form-label">Title</label>
-            <input type="text" class="form-control" id="titrePublication" name="titrePublication" required 
+          <div className="mb-3">
+            <label htmlFor="titrePublication" className="form-label">Title</label>
+            <input type="text" className="form-control" id="titrePublication" name="titrePublication" required 
             onChange={(event)=>{setNewPostData("titrePublication",event.target.value)}}/>
           </div>
-          <div class="mb-3">
-            <label for="contenuPublication" class="form-label">Content</label>
-            <textarea class="form-control" id="contenuPublication" name="contenuPublication" rows="3" required
+          <div className="mb-3">
+            <label htmlFor="contenuPublication" className="form-label">Content</label>
+            <textarea className="form-control" id="contenuPublication" name="contenuPublication" rows="3" required
             onChange={(event)=>{setNewPostData("contenuPublication",event.target.value)}}
             ></textarea>
           </div>
@@ -103,9 +103,9 @@ export default function NewPost(props) {
 
           
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-success" onClick={addNewPost}>Save</button>
-          <button type="button" ref={item} class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <div className="modal-footer">
+          <button type="button" className="btn btn-success" onClick={addNewPost}>Save</button>
+          <button type="button" ref={item} className="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
         </div>
       </div>
     </form>

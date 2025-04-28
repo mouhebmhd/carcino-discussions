@@ -36,11 +36,8 @@ function SignupS() {
   };
 
   return (
-    
-      <section className="sectionformContainer m-0 p-0" style={{ backgroundColor: "#9A616D" ,height:"fit-content"}}>
-        <div className="container ">
-          <div className="row d-flex justify-content-center align-items-center ">
-            <div className="col col-xl-10 formContainer" style={{ height: "fit-content" }}>
+              <div className="row d-flex justify-content-center align-items-center m-0 p-0 signupContainer" >
+            <div className="col col-xl-10 formContainer" >
               <div className="card" style={{ borderRadius: "1rem" }}>
                 <div className="row g-0">
                   <div className="col-md-7 col-lg-5 d-none d-md-block d-flex justify-content-center align-items-center h-100">
@@ -188,7 +185,7 @@ function SignupS() {
 
       <p className="mt-3 mb-5 pb-lg-2" style={{ color: "#393f81" }}>
         Déjà un compte ?{" "}
-        <Link to="/Login" style={{ color: "#393f81" }}>
+        <Link to="/login" style={{ color: "#393f81" }}>
           Se connecter
         </Link>
       </p>
@@ -201,8 +198,7 @@ function SignupS() {
               </div>
             </div>
           </div>
-        </div>
-      </section>
+  
  
   );
 }

@@ -1,13 +1,13 @@
 import React from 'react';
-import NavBar from './NavBar';
-import Footer from './Footer';
+import NavBar from '../components/NavBar';
+import Footer from '../components/LandingPage/Footer';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import AboutUs from './AboutUs';
-import Team from './Team';
-import ContactForm from './Contact';
-import Services from './services';
-import styles from "./style.module.css"
-const PersonalLandingPage = () => {
+import AboutUs from '../components/LandingPage/AboutUs';
+import Team from '../components/LandingPage/Team';
+import ContactForm from '../components/LandingPage/Contact';
+import Services from '../components/LandingPage/services';
+import styles from "../components/LandingPage/style.module.css"
+const LandingPage = () => {
   return (
     <div className="m-0 p-0" id='home'>
       <main className="m-0 p-0">
@@ -45,4 +45,4 @@ const PersonalLandingPage = () => {
   );
 };
 
-export default PersonalLandingPage;
+export default LandingPage;

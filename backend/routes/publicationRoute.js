@@ -16,7 +16,7 @@ router.get("/Publication/getPublicationById/:id",getPublicationById);
 //delete publication
 router.delete("/Publication/deletePublication/:id",deletePublication);
 /**************** UPDATE ROUTES  ************/
-router.put("/Publication/updatePublication/",updatePublication)
+router.put("/Publication/updatePublication/:id",updatePublication)
 
 /**************** POST ROUTES  ************/
 router.post("/Publication/postPublication/",addPublication)

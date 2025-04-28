@@ -2,10 +2,12 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
+import "./login.css"
 import loginImage from "../../images/undraw_secure-login_m11a.png"
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
@@ -20,6 +22,7 @@ function Login() {
       if(response.data.message=="Login error")
       {
         console.log("login error")
+        setErrorMessage("Invalid Credentials ! Please Check your email and your password ! ")
       }
       else 
       {
@@ -37,25 +40,15 @@ function Login() {
 
    useEffect(() => {
     if (user) {
-      switch (user.role) {
-        case "moderateur":
-          navigate("/moderateur-dashboard");
-          break;
-        case "admin":
-          navigate("/admin-dashboard");
-          break;
-        default:
-          navigate("/home");
-      }
+  
+      navigate("/home");
+  
     }
-  }, [user, navigate]);
+  }, [user]);
 
   return (
-    <div>
-      <section className="vh-100 m-0 p-0" style={{ backgroundColor: "#9A616D" }}>
-        <div className="container py-5 h-100">
-          <div className="row d-flex justify-content-center align-items-center h-100">
-            <div className="col col-xl-10">
+          <div className="row m-0 p-0 d-flex justify-content-center align-items-center h-100 formLoginContainer">
+            <div className="col m-0 p-0 col-xl-10">
               <div className="card" style={{ borderRadius: "1rem" }}>
                 <div className="row g-0">
                   <div className="col-md-7 col-lg-5 d-none d-md-block d-flex justify-content-center align-items-center h-100">
@@ -81,7 +74,7 @@ function Login() {
                         <h5 className="fw-normal mb-3 pb-3" style={{ letterSpacing: "1px" }}>
                           connectez-vous à votre compte
                         </h5>
-
+                        {errorMessage!="" && <p className="alert alert-danger">{errorMessage}</p>}
                         <div className="form-outline mb-4">
                           <label className="form-label" htmlFor="email">
                             Email 
@@ -121,7 +114,7 @@ function Login() {
                         <a className="small text-muted" href="#">Mot de passe oublié?</a>
                         <p className="mb-5 pb-lg-2" style={{ color: "#393f81" }}>
                           Vous n'avez pas de compte ?{' '}
-                          <Link to="/SignupS" style={{ color: "#393f81" }}>
+                          <Link to="/signup" style={{ color: "#393f81" }}>
                             Inscrivez-vous ici
                           </Link>
                         </p>
@@ -132,9 +125,8 @@ function Login() {
               </div>
             </div>
           </div>
-        </div>
-      </section>
-    </div>
+        
+   
   );
 }
 

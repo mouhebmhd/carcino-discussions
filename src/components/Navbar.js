@@ -1,64 +1,118 @@
-import React from "react";
-import { Navbar, Nav, Form, FormControl } from "react-bootstrap";
-import { House, People, Globe, CameraVideo } from "react-bootstrap-icons";
-import { Link } from "react-router-dom";
-import { FaUsers } from "react-icons/fa";
-import { FaUsersCog } from "react-icons/fa";
-import { FaBell } from "react-icons/fa";
-import { CgProfile } from "react-icons/cg";
-import { useEffect,useState } from "react";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import styles from "../components/LandingPage/style.module.css";
+import { MdDynamicFeed } from "react-icons/md";
+import { 
+  FaHome, FaInfoCircle, FaTools, FaPhone, FaChartLine, 
+  FaUsers, FaNetworkWired, FaUserFriends, FaUserShield, 
+  FaBell, FaUserCircle, FaSignInAlt 
+} from 'react-icons/fa';
 
-function NavbarN() {
-  const role=localStorage.role;
+function NavBar() {
+  const isLoggedOn = JSON.parse(localStorage.getItem("user")) != undefined;
+
   return (
-    <Navbar bg="light" expand="lg" className="px-3">
-      <Navbar.Brand href="#" className="d-flex align-items-center">
-        <img src="/logoo.png" alt="Tradstor Logo" width="40" height="40" className="me-2" />
-        <span className="fw-bold text-danger">Carcino-disc</span>
-      </Navbar.Brand>
-      <Navbar.Toggle aria-controls="navbar-nav" />
-      <Navbar.Collapse id="navbar-nav" className="justify-content-center">
-      <Nav className="mx-auto">
-  <Nav.Link as={Link} to="/Home" className="d-flex flex-column align-items-center">
-    <House className="fs-4" />
-    Home
-  </Nav.Link>
-  <Nav.Link as={Link} to="/community" className="d-flex flex-column align-items-center">
-    <People className="fs-4"/>
-    Communautés 
-  </Nav.Link>
-  <Nav.Link as={Link} to="/network" className="d-flex flex-column align-items-center">
-    <Globe className="fs-4" />
-    Network
-  </Nav.Link>
-  {role!="membre" &&
-  <Nav.Link as={Link} to="/utilisateurs" className="d-flex flex-column align-items-center">
-   <FaUsers className="fs-4"></FaUsers>
-    Utilisateurs
-  </Nav.Link>
-  }
-  {role=="Admin" && 
-  <Nav.Link as={Link} to="/moderateurs" className="d-flex flex-column align-items-center">
-   <FaUsersCog className="fs-4"></FaUsersCog>
-    Modérateurs
-  </Nav.Link>}
-  <Nav.Link as={Link} to="/notifications" className="d-flex flex-column align-items-center">
-  <FaBell className="fs-4"></FaBell>
-    Notifications
-  </Nav.Link>
-  <Nav.Link as={Link} to="/profile" className="d-flex flex-column align-items-center">
-  <CgProfile className="fs-4"></CgProfile>
-    Mon Profil
-  </Nav.Link>
-  
-  
-</Nav>
-      </Navbar.Collapse>
-      <Form className="d-flex">
-        <FormControl type="search" placeholder="Search" className="me-2" />
-      </Form>
-    </Navbar>
+    <nav className="navbar fixed-top navbar-expand-lg navbar-light bg-white">
+      <div className="container-fluid px-5">
+        <Link className={`navbar-brand ${styles.navbarBrand}`} to="/">
+          CarsinoDisc
+        </Link>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav ms-auto">
+
+            {/* Home */}
+            <li className="nav-item">
+              <Link className={`nav-link ${styles.navLink}`} to="/home">
+                <FaHome className="mx-2 h4" /> Home
+              </Link>
+            </li>
+
+            {/* Public Links */}
+            {!isLoggedOn && (
+              <>
+                <li className="nav-item">
+                  <Link className={`nav-link ${styles.navLink}`} to="/about">
+                    <FaInfoCircle className="mx-2 h4" /> About
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className={`nav-link ${styles.navLink}`} to="/services">
+                    <FaTools className="mx-2 h4" /> Services
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className={`nav-link ${styles.navLink}`} to="/contact">
+                    <FaPhone className="mx-2 h4" /> Contact
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className={`nav-link ${styles.navLink}`} to="/stats">
+                    <FaChartLine className="mx-2 h4" /> Stats
+                  </Link>
+                </li>
+              </>
+            )}
+            {isLoggedOn && (
+              <>
+                <li className="nav-item">
+                  <Link className={`nav-link ${styles.navLink}`} to="/feed">
+                    <MdDynamicFeed className="mx-2 h4" /> Fil d'actualité
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className={`nav-link ${styles.navLink}`} to="/communities">
+                    <FaUsers className="mx-2 h4" /> Communautés
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className={`nav-link ${styles.navLink}`} to="/network">
+                    <FaNetworkWired className="mx-2 h4" /> Network
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className={`nav-link ${styles.navLink}`} to="/users">
+                    <FaUserFriends className="mx-2 h4" /> Utilisateurs
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className={`nav-link ${styles.navLink}`} to="/moderators">
+                    <FaUserShield className="mx-2 h4" /> Modérateurs
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className={`nav-link ${styles.navLink}`} to="/notifications">
+                    <FaBell className="mx-2 h4" /> Notifications
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className={`nav-link ${styles.navLink}`} to="/myProfile">
+                    <FaUserCircle className="mx-2 h4" /> Mon Profil
+                  </Link>
+                </li>
+               
+              </>
+            )}
+                <li className="nav-item">
+                  <Link className={`nav-link ${styles.navLink}`} to="/login">
+                    <FaSignInAlt className="mx-2 h4" /> Sign In
+                  </Link>
+                </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
   );
 }
 
-export default NavbarN;
+export default NavBar;

@@ -1,14 +1,13 @@
-.sectionformContainer
+.signupContainer
 {
     height: 100vh !important;
    display: flex;
    justify-content: center;
     margin: 0 !important;
     padding: 0 !important;
+    background-color: #9A616D;
 }
-
-.sectionformContainer div:first-child div:first-child
+.signupContainer .card
 {
-
-    max-height: 85vh;
+    height: 85vh;
 }

@@ -1,135 +1,113 @@
-import React from "react";
-import SidebarS from "../components/Sidebar";
-import NavbarN from "../components/Navbar";
-import SuggestionsS from "../components/Suggestions";
-import NewsN from "../components/News";
-import axios from "axios"
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import Navbar from "../components/NavBar";
+import { GiShadowFollower } from "react-icons/gi";
+import axios from "axios";
+import "../styles/communityStyle.css";
+import { MdDelete, MdEdit } from "react-icons/md";
+import { Link } from "react-router-dom";
+import UpdateCommunity from "../components/updateCommunity";
+import AddCommunity from "../components/addCommunity";
 
-function Community() {
-  const [communities,setCommunties]=useState([]);
-  useEffect(()=>{
-    axios.get("http://localhost:3030/communitiy/getAllCommunities/")
-    .then(response=>{
-      console.log(response.data)
-      setCommunties(response.data)
-    })
-    .catch(error=>{
-      console.log(error)
-    })
-  })
+export default function Community() {
+  const user = JSON.parse(localStorage.getItem("user"));
+  const [communities, setCommunities] = useState([]);
+  const [updatedCommunity, setUpdatedCommunity] = useState(null);
+  const [showAddModal, setShowAddModal] = useState(false);
+
+  const loadData = () => {
+    axios
+      .get("http://localhost:3030/communitiy/getAllCommunities/")
+      .then((res) => setCommunities(res.data))
+      .catch((err) => console.error(err));
+  };
+
+  useEffect(() => {
+    loadData();
+  }, [user._id]);
+
+  const deleteCommunity = (id) =>
+    axios
+      .delete(`http://localhost:3030/community/deleteCommunity/${id}`)
+      .then(() => loadData())
+      .catch((err) => console.error(err));
+
+  const followCommunity = (id) => console.log("subscribe to", id);
+  const updateCommunity = (c) => setUpdatedCommunity(c);
+
   return (
-    <div className="community-page">
-      <NavbarN />
-      <div className="container-fluid">
-        <div className="row">
-          {/* Sidebar column */}
-          <div className="col-md-2 bg-light sidebar">
-            <SidebarS />
-          </div>
+    <>
+      <Navbar />
+      <div className="row p-5 d-flex flex-column">
+        <div className="text-center mt-5">
+          <h6 className="section-title bg-white specialText px-3">Communautés</h6>
+          <h1 className="mb-5">Gérer les Communautés</h1>
           
-          {/* Main content column */}
-          <div className="col-md-7 p-4 main-content">
-            {/* Groups */}
-            <div className="groups-container">
-              {
-                communities.map((community,index)=>{
-                  return <div className="card mb-4 border-0 shadow-sm">
-                <div className="card-body d-flex">
-                  <div className="me-3">
-                    <img 
-                      src="avat.jpg" 
-                      alt="Long Term Investing" 
-                      className="rounded-circle" 
-                      width="100" 
-                      height="100" 
-                    />
-                    <div className="text-center mt-2">
-                      <small className="text-muted">{community.nombreMembre} Members</small>
-                    </div>
-                  </div>
-                  <div className="flex-grow-1">
-                    <div className="d-flex justify-content-between align-items-start">
-                      <h4 className="mb-2">{community.nomCommunaute}</h4>
-                      <button className="btn btn-outline-danger rounded-pill px-4">Follow</button>
-                    </div>
-                    <p className="text-muted">{community.descriptionCommunaute}</p>
-                  </div>
+        </div>
+
+     
+        
+          <AddCommunity
+            onAddSuccess={() => {
+              setShowAddModal(false);
+              loadData();
+            }}
+            onClose={() => setShowAddModal(false)}
+          />
+       
+          
+        
+
+        {/* Groups */}
+        <div className=" container-fluid d-flex flex-wrap justify-content-center mt-3">
+          {communities.map((c) => (
+            <div
+              className="card communityCard col-lg-3 col-md-4 col-sm-6 mx-2"
+              key={c._id}
+              style={{ maxWidth: "26rem" }}
+            >
+              <img
+                src={"https://placehold.co/600x400"}
+                className="card-img-top"
+                style={{ height: "12rem", objectFit: "cover" }}
+              />
+              <div className="card-body">
+                <h5 className="card-title">{c.nomCommunaute}</h5>
+                <p className="card-text small text-muted">
+                  {c.descriptionCommunaute}
+                </p>
+                <div className="d-flex flex-wrap justify-content-center gap-2">
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => deleteCommunity(c._id)}
+                  >
+                    <MdDelete /> Supprimer
+                  </button>
+                  <button
+                    className="btn btn-warning"
+                    onClick={() => updateCommunity(c)}
+                  >
+                    <MdEdit /> Modifier
+                  </button>
+                  <button
+                    className="btn btn-primary"
+                    onClick={() => followCommunity(c._id)}
+                  >
+                    <GiShadowFollower /> Follow
+                  </button>
                 </div>
               </div>
-                })
-              }
-              
-              
-        
             </div>
-          </div>
-          
-          {/* Right sidebar column */}
-          <div className="col-md-3 bg-light p-3 right-sidebar">
-            <SuggestionsS />
-            <NewsN />
-          </div>
+          ))}
         </div>
+
+        {updatedCommunity && (
+          <UpdateCommunity
+            community={updatedCommunity}
+            setUpdatedCommunity={setUpdatedCommunity}
+            onUpdateCommunity={loadData}
+          />
+        )}
       </div>
-      
-      {/* Add custom CSS to fix the layout and remove scrollbars */}
-      <style jsx>{`
-        .community-page {
-          display: flex;
-          flex-direction: column;
-          height: 100vh;
-        }
-        
-        .container-fluid {
-          flex: 1;
-          display: flex;
-          overflow: hidden;
-        }
-        
-        .row {
-          flex: 1;
-          width: 100%;
-          margin: 0;
-          display: flex;
-        }
-        
-        .sidebar {
-          height: calc(100vh - 56px);
-          overflow: hidden;
-          position: sticky;
-          top: 56px;
-        }
-        
-        .main-content {
-          flex: 1;
-          overflow-y: auto;
-          height: calc(100vh - 56px);
-          padding-bottom: 20px;
-        }
-        
-        .right-sidebar {
-          height: calc(100vh - 56px);
-          overflow: hidden;
-          position: sticky;
-          top: 56px;
-        }
-        
-        /* Hide scrollbars for Chrome, Safari and Opera */
-        .sidebar::-webkit-scrollbar,
-        .right-sidebar::-webkit-scrollbar {
-          display: none;
-        }
-        
-        /* Hide scrollbars for IE, Edge and Firefox */
-        .sidebar,
-        .right-sidebar {
-          -ms-overflow-style: none;  /* IE and Edge */
-          scrollbar-width: none;  /* Firefox */
-        }
-      `}</style>
-    </div>
+    </>
   );
 }
-
-export default Community;

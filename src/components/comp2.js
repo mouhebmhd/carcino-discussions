@@ -8,7 +8,7 @@ function NumberSection()
         <p>Carcino-Disc is a growing family of millions of diverse people sharing the things they care about most.</p>
         <p className="date">As of December, 2024</p>
         <div className="stats">
-            <div class="stat-box">
+            <div className="stat-box">
                 <h3>101M+</h3>
                 <p>Daily active uniques</p>
             </div>

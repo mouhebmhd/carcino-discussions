@@ -55,7 +55,7 @@ const addCommunity = async (req, res) => {
     try {
       const { id } = req.params;
       console.log(id)
-      const updatedCommunity = await communauteSchema.findOneAndUpdate({communauteId:{$eq:id}}, req.body, { new: true });
+      const updatedCommunity = await communauteSchema.findByIdAndUpdate({_id:id}, req.body, { new: true });
       if (!updatedCommunity) return res.status(404).json({ error: "Community not found" });
       res.status(200).json(updatedCommunity);
     } catch (error) {
@@ -68,7 +68,7 @@ const addCommunity = async (req, res) => {
      
       const { id } = req.params;
       console.log(id)
-      const deleted = await communauteSchema.findOneAndDelete({communauteId:{$eq:id}});
+      const deleted = await communauteSchema.findByIdAndDelete({_id:id});
       if (!deleted) return res.status(404).json({ error: "Community not found" });
       res.status(200).json({ message: "Community deleted successfully" });
     } catch (error) {

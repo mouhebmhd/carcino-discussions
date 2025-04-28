@@ -48,7 +48,7 @@ const addPublication = async (req, res) => {
     try {
       const  post  = req.body;
       console.log(post)
-      const updatedPublication = await PublicationSchema.findOneAndUpdate({publicationId:{$eq:post.publicationId}}, req.body, { new: true });
+      const updatedPublication = await PublicationSchema.findByIdAndUpdate({_id:req.params.id}, req.body, { new: true });
       if (!updatedPublication) return res.status(404).json({ error: "Publication not found" });
       res.status(200).json(updatedPublication);
     } catch (error) {
@@ -61,7 +61,7 @@ const addPublication = async (req, res) => {
      
       const { id } = req.params;
       console.log(id)
-      const deleted = await PublicationSchema.findOneAndDelete({publicationId:{$eq:id}});
+      const deleted = await PublicationSchema.findByIdAndDelete({_id:req.params.id});
       if (!deleted) return res.status(404).json({ error: "Publication not found" });
       res.status(200).json({ message: "Publication deleted successfully" });
     } catch (error) {
