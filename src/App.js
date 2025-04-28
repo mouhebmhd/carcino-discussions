@@ -10,6 +10,7 @@ import Signup from "./views/Signup.js";
 import Feeds from "./views/Feeds.js";
 import Community from "./views/Community.js"
 import Notifications from "./views/Notifications.js"
+import Users from "./views/users.js"
 function App() {
   const isLoggedOn = JSON.parse(localStorage.getItem("user")) !== undefined;
 
@@ -27,6 +28,7 @@ function App() {
         <Route exact path="/communities" element={<Community />} />
         <Route exact path="/feeds" element={<Feeds />} />
         <Route exact path="/notifications" element={<Notifications />} />
+        <Route exact path="/users" element={<Users />} />
 
         {/* 
           <Route path="/communities" element={}></Route>

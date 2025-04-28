@@ -6,6 +6,7 @@ const UtilisateurSchema = new mongoose.Schema({
   prenom: { type: String },
   dateNaissance: { type: String },
   age: { type: String },
+  accountStatus: { type: String },
   email: { type: String },
   motDePasse: { type: String },
   numeroTelephone: { type: String },

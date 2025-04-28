@@ -50,7 +50,7 @@ const addUtilisateur = async (req, res) => {
     try {
       const { id } = req.params;
       console.log(req.body)
-      const updatedUtilisateur = await UtilisateurSchema.findOneAndUpdate({userId:{$eq:id}}, req.body, { new: true });
+      const updatedUtilisateur = await UtilisateurSchema.findOneAndUpdate({_id:{$eq:id}}, req.body, { new: true });
       if (!updatedUtilisateur) return res.status(404).json({ error: "Utilisateur not found" });
       res.status(200).json(updatedUtilisateur);
     } catch (error) {
