@@ -17,6 +17,7 @@ import SeeProfile  from "./views/SeeProfile.js";
 import UpdateUser from "./views/updateProfile.js";
 import Publications from "./views/publications.js";
 import FeedDisplay from "./views/FeedDisplay.js";
+import Dashboard from "./views/Dashboard.js";
 
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
         <Route exact path="/myProfile/:id" element={<UpdateUser />} />
         <Route exact path="/publications" element={<Publications />} />
         <Route exact path="/feedDisplay" element={<FeedDisplay />} />
+        <Route exact path="/dashboard" element={<Dashboard />} />
         
         
         {/* 

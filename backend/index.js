@@ -42,13 +42,15 @@ server.use("/",InteractionRoute)
 const PermissionRoute=require("./routes/PermissionRoute");
 server.use("/",PermissionRoute)
 
-/* PieceJointe ROUTE */
-const PieceJointeRoute=require("./routes/PieceJointeRoute");
-server.use("/",PieceJointeRoute)
+
 
 /* Publication ROUTE */
 const PublicationRoute=require("./routes/PublicationRoute");
 server.use("/",PublicationRoute)
+
+/* Stats ROUTE */
+const statsRoute=require("./routes/statisitcsRouter");
+server.use("/",statsRoute)
 
 
 server.listen(port,()=>{
