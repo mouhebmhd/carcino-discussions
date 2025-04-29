@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import NavbarN from './Navbar';
+import NavBar from './NavBar';
 import '../styles/Post.css';
 import likebefore from '../images/love.png';
 import cross from '../images/close.png';
@@ -40,7 +40,7 @@ const Post = () => {
 
     return (
         <>
-            <NavbarN />
+            <NavBar />
             <div className="post">
                 <div className='single_post'>
                     <div className="single_post_username">

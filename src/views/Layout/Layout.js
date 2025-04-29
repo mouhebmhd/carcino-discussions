@@ -2,14 +2,14 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 
 import { Container, Row, Col } from "react-bootstrap";
-import NavbarN from "../../components/Navbar";
+import NavBar from "../../components/NavBar";
 import SuggestionsS from "../../components/Suggestions";
 import SidebarS from "../../components/Sidebar";
 
 function Layout() {
   return (
     <div>
-      <NavbarN />
+      <NavBar />
       <Container fluid>
         <Row>
           <Col md={2} className="bg-light vh-100">

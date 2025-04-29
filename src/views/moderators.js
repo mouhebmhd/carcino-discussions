@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Navbar from '../components/NavBar';
+import NavBar from '../components/NavBar';
 import axios from "axios";
 import { Modal, Button } from 'react-bootstrap'; 
 import { useNavigate } from 'react-router-dom';
@@ -127,7 +127,7 @@ export default function Moderators() {
 
   return (
     <>
-      <Navbar color="var(--mainColor)" />
+      <NavBar color="var(--mainColor)" />
       <div className="container-xxl py-5 category">
          
            

@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "../components/NavBar";
-import { GiShadowFollower } from "react-icons/gi";
+import NavBar from "../components/NavBar";
 import axios from "axios";
 import "../styles/communityStyle.css";
 import { MdDelete, MdEdit } from "react-icons/md";
-import { Link } from "react-router-dom";
 import UpdateCommunity from "../components/updateCommunity";
 import AddCommunity from "../components/addCommunity";
 import { RiUserFollowFill } from "react-icons/ri";
@@ -86,7 +84,7 @@ export default function Community() {
 
   return (
     <>
-      <Navbar />
+      <NavBar />
       <div className="row p-5 d-flex flex-column">
         <div className="text-center ">
           <h6 className="section-title bg-white specialText px-3">Communautés</h6>

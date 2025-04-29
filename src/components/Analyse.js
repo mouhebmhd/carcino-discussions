@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Button, Card } from 'react-bootstrap';
 import { Upload } from 'lucide-react';
-import NavbarN from "../components/Navbar.js";
+import NavBar from "../components/NavBar";
 
 const TumorAnalysisApp = () => {
   const [isDragging, setIsDragging] = useState(false);
@@ -34,7 +34,7 @@ const TumorAnalysisApp = () => {
   return (
     
     <Container className="py-5">
-        <NavbarN />
+        <NavBar />
       <h1 className="text-center mb-4" style={{ color: '#d63384' }}>Analyse d'Image de Tumeur</h1>
       
       <p className="text-center mb-5" style={{ color: '#333' }}>

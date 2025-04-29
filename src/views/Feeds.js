@@ -6,7 +6,7 @@ import { FaHeartCrack } from "react-icons/fa6";
 import { RiExpandDiagonalLine } from "react-icons/ri";
 import axios from 'axios';
 
-import Navbar from '../components/NavBar.js';
+import NavBar from '../components/NavBar.js';
 import SidebarS from '../components/Sidebar.js';
 import NewPost from '../components/newPost.js';
 import UpdatePost from '../components/updatePost.js';
@@ -96,7 +96,7 @@ export default function Feed() {
   return (
     <>
       <div className="community-page">
-        <Navbar />
+        <NavBar />
         <div className="container-fluid">
           <div className="row">
             {/* Sidebar column */}

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Navbar from '../components/NavBar'
+import NavBar from '../components/NavBar'
 import '../styles/networkStyle.css'
 import { RiUserFollowFill } from 'react-icons/ri'
 import axios from 'axios'
@@ -68,7 +68,7 @@ function Network() {
 
   return (
     <div className="community-page">
-      <Navbar />
+      <NavBar />
       <div className="container-fluid ">
         <div className="row usersNetwork p-3 d-flex justify-content-center row-gap-2">
           {users.map((user, index) => {

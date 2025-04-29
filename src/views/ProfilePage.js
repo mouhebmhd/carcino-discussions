@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Modal, Form, Button, Container, Row, Col } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
-import NavbarN from "../components/Navbar.js";
+import NavBar from "../components/NavBar.js";
 import { useNavigate } from 'react-router-dom'; // ✅ import navigation
 import PersonalProfile from '../components/PersonalProfile.js';
 const ProfilePage = () => {
@@ -32,7 +32,7 @@ const ProfilePage = () => {
 
   return (
     <div>
-      <NavbarN />
+      <NavBar />
       <div className='profile'>
         <div className='profile-data'>
           <div className='profile-data_up'>

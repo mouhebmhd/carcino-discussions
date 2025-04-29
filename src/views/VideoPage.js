@@ -3,7 +3,7 @@ import Header from "../components/Header";
 import SidebarS from "../components/Sidebar";
 import Post from "../components/Post";
 import "../styles/VideoPage.css";
-import NavbarN from "../components/Navbar";
+import NavBar from "../components/NavBar";
 import SuggestionsS from "../components/Suggestions";
 import NewsN from "../components/News";
 
@@ -12,7 +12,7 @@ const VideoPage = () => {
   return (
     <div className="video-page">
       
-      <NavbarN />
+      <NavBar />
 
       <div className="content">
         <SidebarS />
