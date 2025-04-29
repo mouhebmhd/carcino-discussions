@@ -11,6 +11,7 @@ const UtilisateurSchema = new mongoose.Schema({
   motDePasse: { type: String },
   aboutMe: { type: String },
   numeroTelephone: { type: String },
+  userAvatar: { type: String },
   role: { type: String, enum: ["membre", "moderateur", "administrateur"], default: "membre" }
 });
 

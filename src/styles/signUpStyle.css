@@ -11,3 +11,9 @@
 {
     height: 85vh;
 }
+.signupContainer .avatarContainer
+{
+    width: 100px !important;
+    height: 100px !important;
+    border-radius: 50%;
+}

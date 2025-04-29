@@ -7,19 +7,7 @@ import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 
 export default function SeeProfile() {
-    const maleAvatars = [
-        "https://i.pinimg.com/736x/fb/c7/c0/fbc7c0f44564099388f9c5ffcc338944.jpg",
-        "https://i.pinimg.com/736x/e2/d4/a1/e2d4a1924b2e3e0044ee09cb5f94e33d.jpg",
-        "https://i.pinimg.com/736x/0d/11/e2/0d11e2178446a6ad28a533c7f0937cf9.jpg",
-        "https://i.pinimg.com/736x/7c/d8/14/7cd81479ea9c9d507249c73debd074fa.jpg",
-        "https://i.pinimg.com/736x/3c/2e/d4/3c2ed4b9d2d1f3fdd590c3a5bc5e8c90.jpg",
-    ]
-    const femaleAvatars = [
-        "https://i.pinimg.com/736x/70/a2/36/70a236f90d2803f9da32d0558be75ba1.jpg",
-        "https://i.pinimg.com/736x/cb/4c/fc/cb4cfc69fd8068fc86d9e3a02a575db7.jpg",
-        "https://i.pinimg.com/736x/b4/7e/e3/b47ee3eb1a014e8019d2b9622aacdb12.jpg",
-        "https://i.pinimg.com/736x/b7/37/54/b737548c1276a8816bca07a448966c2a.jpg"
-    ]
+    
     
     const userId = useParams().id
     const [user, setUser] = useState({ userAvatar: '' }) // Initialize with empty avatar
@@ -51,15 +39,9 @@ export default function SeeProfile() {
         axios.get(baseUrl + "/Utilisateur/getUtilisateurById/" + userId)
             .then((response) => {
                 const userData = response.data;
-                // Create a new object with the avatar property
-                const userWithAvatar = {
-                    ...userData,
-                    userAvatar: userData.gender === "homme" 
-                        ? maleAvatars[Math.floor(Math.random() * maleAvatars.length)]
-                        : femaleAvatars[Math.floor(Math.random() * femaleAvatars.length)]
-                };
-                console.log("User with avatar:", userWithAvatar);
-                setUser(userWithAvatar);
+                
+                console.log("User with avatar:", userData);
+                setUser(userData);
             })
             .catch((error) => {
                 console.log(error);
