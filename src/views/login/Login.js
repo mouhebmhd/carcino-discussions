@@ -24,9 +24,15 @@ function Login() {
         console.log("login error")
         setErrorMessage("Invalid Credentials ! Please Check your email and your password ! ")
       }
+      else if(response.data.message=="Login Error ! Your Account is Blocked")
+        {
+          console.log("Login Error ! Your Account is Blocked")
+          setErrorMessage("Login Error ! Your Account is Blocked ! ")
+        }
       else 
       {
-        
+        console.log("Login Success ! ")
+
         setUser(response.data.userData);
         localStorage.setItem("user", JSON.stringify(response.data.userData));
       }
@@ -34,7 +40,16 @@ function Login() {
       
     } catch (error) {
       console.error("Login failed:", error);
-      console.log("Login failed. Please check your credentials.");
+      if(error.response.data.message=="Login error")
+        {
+          console.log("login error")
+          setErrorMessage("Invalid Credentials ! Please Check your email and your password ! ")
+        }
+        else if(error.response.data.message=="Login Error ! Your Account is Blocked")
+          {
+            console.log("Login Error ! Your Account is Blocked")
+            setErrorMessage("Login Error ! Your Account is Blocked ! ")
+          }
     }
   };
 
@@ -74,7 +89,8 @@ function Login() {
                         <h5 className="fw-normal mb-3 pb-3" style={{ letterSpacing: "1px" }}>
                           connectez-vous à votre compte
                         </h5>
-                        {errorMessage!="" && <p className="alert alert-danger">{errorMessage}</p>}
+                        {errorMessage && <p className="alert alert-danger">{errorMessage}</p>}
+
                         <div className="form-outline mb-4">
                           <label className="form-label" htmlFor="email">
                             Email 

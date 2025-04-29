@@ -84,6 +84,10 @@ const addUtilisateur = async (req, res) => {
         return res.status(401).json({ error: "Invalid credentials" });
       }
       const isPasswordValid=await bcrypt.compare(password,Utilisateur.motDePasse);
+      if(Utilisateur.accountStatus!="active")
+        {
+          res.status(500).json({ message: "Login Error ! Your Account is Blocked",  Utilisateur });
+        }
       if(isPasswordValid)
       {
         const generatedToken=jsonwebToken.sign({Utilisateur},secretKey,{expiresIn:"24h"})
