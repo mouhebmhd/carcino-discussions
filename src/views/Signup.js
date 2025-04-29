@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import "../styles/signUpStyle.css";
-import signUpImage from "../images/undraw_account_g3rf.png";
+import signUpImage from "../images/undraw_sign-up_qamz.png";
 import { useNavigate } from "react-router-dom";
 function SignupS() {
   const navigate=useNavigate()
