@@ -1,185 +1,114 @@
-import React from 'react'
-import SuggestionsS from '../components/Suggestions'
-import NewsN from '../components/News'
-import NavbarN from '../components/Navbar'
-import SidebarS from '../components/Sidebar'
-import { BiSearch } from "react-icons/bi";
+import React, { useEffect, useState } from 'react'
+import Navbar from '../components/NavBar'
+import '../styles/networkStyle.css'
+import { RiUserFollowFill } from 'react-icons/ri'
+import axios from 'axios'
+import { SiWpexplorer } from "react-icons/si";
+import { useNavigate } from 'react-router-dom'
 
 function Network() {
+  const API_URL = "http://localhost:3030";
+  const user = JSON.parse(localStorage.getItem("user"));
+  const role = user.role;
+  const navigate=useNavigate()
+  const [success, setSuccess] = useState("")
+  const [error, setError] = useState("")
+  const [users, setUsers] = useState([])
+  const [targetUser, setTargetUser] = useState({})
+  const visitProfile=(user)=>{
+    navigate("/profile/seeUserProfile/"+user._id)
+  }
+  const loadUsers = async () => {
+    try {
+      const response = await axios.get(`${API_URL}/Utilisateur/getAllUtilisateur/`);
+      
+      // Fetch tags for each user asynchronously
+      const data = await Promise.all(response.data.map(async (user) => {
+        const tagsResponse = await axios.get(`http://localhost:3030/Publication/getPublicationByUserId/${user._id}`);
+        return { ...user, tags: (tagsResponse.data).map((post,index)=>{return post.communityTag}) };  // Add tags to user
+      }));
+      console.log(data)
+      setUsers(data);  
+      setSuccess(false);
+      setError(false);
+  
+    } catch (error) {
+      console.log(error);
+      setError(true);
+    }
+  };
+  
+  useEffect(() => {
+    loadUsers()
+  }, [user._id])
   return (
     <div className="community-page">
-      <NavbarN />
-      <div className="container-fluid">
-        <div className="row">
-          {/* Sidebar column */}
-          <div className="col-md-2 bg-light sidebar">
-            <SidebarS />
-          </div>
-          
-          {/* Main content column */}
-          <div className="col-md-7 p-3 main-content">
-            {/* Search bar */}
-            <div className="container mb-4">
-              <div className="row">
-                <div className="col-12">
-                  <form className="d-flex">
-                    <div className="input-group">
-                      <input className="form-control form-control-lg" type="search" placeholder="Search" aria-label="Search" />
-                      <button className="btn btn-primary px-4" type="submit">
-                        <BiSearch size={24} color="#ffffff" />
-                      </button>
-                    </div>
-                  </form>
+      <Navbar />
+      <div className="container-fluid ">
+        <div className="row usersNetwork p-3 d-flex justify-content-center row-gap-2">
+          {users.map((user, index) => {
+            return (
+              <div
+              key={index}
+                className="card communityCard col-lg-3 col-md-4 col-sm-6 mx-2"
+                style={{ maxWidth: "26rem" }}
+              >
+                <div className="avatarContainer  p-2 d-flex justify-content-center align-content-center">
+                  {user.gender === "homme" && (
+                    <div
+                      className="avatar avatarMale"
+                      style={{
+                        height: "100px",
+                        width: "100px",
+                        borderRadius: "50%",
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                      }}
+                    ></div>
+                  )}
+                  {user.gender === "femme" && (
+                    <div
+                      className="avatar avatarFemale"
+                      style={{
+                        height: "100px",
+                        width: "100px",
+                        borderRadius: "50%",
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                      }}
+                    ></div>
+                  )}
                 </div>
-              </div>
-            </div>
 
-            <div>
-              <h3>People You Want To Connect</h3>
-            </div>
-            
-            {/* Groups */}
-            <div className="groups-container">
-              {/* Long Term Investing */}
-              <div className="card mb-4 border-0 shadow-sm">
-                <div className="card-body d-flex">
-                  <div className="me-3">
-                    <img 
-                      src="avat.jpg" 
-                      alt="Long Term Investing" 
-                      className="rounded-circle" 
-                      width="100" 
-                      height="100" 
-                    />
-                    <div className="text-center mt-2">
-                      <small className="text-muted">220 Followers</small>
-                    </div>
-                  </div>
-                  <div className="flex-grow-1">
-                    <div className="d-flex justify-content-between align-items-start">
-                      <h4 className="mb-2">Long Term Investing</h4>
-                      <button className="btn btn-outline-danger rounded-pill px-4">Follow</button>
-                    </div>
-                    <p className="text-muted">All Post For Educational Purposes Only.</p>
+
+
+                <div className="card-body">
+                  <h5 className="card-title text-capitalize text-center">{user.nom + " " + user.prenom}</h5>
+                  <p className="card-text small text-muted">
+                    {user.aboutMe}
+                  </p>
+                  <p className="card-text small text-muted text-center">
+                    {user.tags.map((tag,index)=>{return <span className='alert alert-primary p-2 mx-1 rounded-pill'>{tag}</span>})}
+                  </p>
+                  <div className="d-flex flex-wrap justify-content-center gap-2">
+                    <button
+                      className="btn btn-primary"
+                      onClick={() => visitProfile(user)}
+                    >
+                      <SiWpexplorer  className='fs-4 mx-2'/> Explore Profile
+                    </button>
                   </div>
                 </div>
               </div>
-              
-              {/* Short Term Investing */}
-              <div className="card mb-4 border-0 shadow-sm">
-                <div className="card-body d-flex">
-                  <div className="me-3">
-                    <img 
-                      src="avat2.jpg" 
-                      alt="Short Term Investing" 
-                      className="rounded-circle" 
-                      width="100" 
-                      height="100" 
-                    />
-                    <div className="text-center mt-2">
-                      <small className="text-muted">423 Followers</small>
-                    </div>
-                  </div>
-                  <div className="flex-grow-1">
-                    <div className="d-flex justify-content-between align-items-start">
-                      <h4 className="mb-2">Short Term Investing</h4>
-                      <button className="btn btn-outline-danger rounded-pill px-4">Follow</button>
-                    </div>
-                    <p className="text-muted">All Post For Educational Purposes Only.</p>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Ideas For Wealth Generation */}
-              <div className="card mb-4 border-0 shadow-sm">
-                <div className="card-body d-flex">
-                  <div className="me-3">
-                    <img 
-                      src="avat3.jpg" 
-                      alt="Ideas For Wealth Generation" 
-                      className="rounded-circle" 
-                      width="100" 
-                      height="100" 
-                    />
-                    <div className="text-center mt-2">
-                      <small className="text-muted">315 Followers</small>
-                    </div>
-                  </div>
-                  <div className="flex-grow-1">
-                    <div className="d-flex justify-content-between align-items-start">
-                      <h4 className="mb-2">Ideas For Wealth Generation</h4>
-                      <button className="btn btn-outline-danger rounded-pill px-4">Follow</button>
-                    </div>
-                    <p className="text-muted">All Post For Educational Purposes Only.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          {/* Right sidebar column */}
-          <div className="col-md-3 bg-light p-3 right-sidebar">
-            <SuggestionsS />
-            <NewsN />
-          </div>
+            )
+          })}
+
+
+
         </div>
       </div>
-      
-      {/* Add custom CSS to fix the layout and remove scrollbars */}
-      <style jsx>{`
-        .community-page {
-          display: flex;
-          flex-direction: column;
-          height: 100vh;
-        }
-        
-        .container-fluid {
-          flex: 1;
-          display: flex;
-          overflow: hidden;
-        }
-        
-        .row {
-          flex: 1;
-          width: 100%;
-          margin: 0;
-          display: flex;
-        }
-        
-        .sidebar {
-          height: calc(100vh - 56px);
-          overflow: hidden;
-          position: sticky;
-          top: 56px;
-        }
-        
-        .main-content {
-          flex: 1;
-          overflow-y: auto;
-          height: calc(100vh - 56px);
-          padding-bottom: 20px;
-        }
-        
-        .right-sidebar {
-          height: calc(100vh - 56px);
-          overflow: hidden;
-          position: sticky;
-          top: 56px;
-        }
-        
-        /* Hide scrollbars for Chrome, Safari and Opera */
-        .sidebar::-webkit-scrollbar,
-        .right-sidebar::-webkit-scrollbar {
-          display: none;
-        }
-        
-        /* Hide scrollbars for IE, Edge and Firefox */
-        .sidebar,
-        .right-sidebar {
-          -ms-overflow-style: none;  /* IE and Edge */
-          scrollbar-width: none;  /* Firefox */
-        }
-      `}</style>
+
+
     </div>
   )
 }

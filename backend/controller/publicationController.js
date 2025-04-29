@@ -29,6 +29,18 @@ const getPublicationById = async (req, res) => {
     }
 
   }
+// get publication by id 
+const getPublicationByUserId = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const Publication = await PublicationSchema.find({publisherId:id});
+    if (!Publication) return res.status(404).json({ error: "publications not found" });
+    res.status(200).json(Publication);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+
+}
 // add Publication
 const addPublication = async (req, res) => {
     try {
@@ -77,4 +89,5 @@ const addPublication = async (req, res) => {
     addPublication,
     updatePublication,
     deletePublication,
+    getPublicationByUserId
   };

@@ -35,6 +35,7 @@ const addUtilisateur = async (req, res) => {
 
       var userData=req.body;
       userData["userId"]=userId
+      userData["aboutMe"]="this description is automatically generated . You can Update it as you want ! "
       userData["motDePasse"]=bcrypt.hashSync(userData["motDePasse"],10);
       
       const newUtilisateur = new UtilisateurSchema(userData);

@@ -9,6 +9,7 @@ const UtilisateurSchema = new mongoose.Schema({
   accountStatus: { type: String },
   email: { type: String },
   motDePasse: { type: String },
+  aboutMe: { type: String },
   numeroTelephone: { type: String },
   role: { type: String, enum: ["membre", "moderateur", "administrateur"], default: "membre" }
 });

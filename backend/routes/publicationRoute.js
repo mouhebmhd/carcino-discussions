@@ -4,13 +4,15 @@ const { getAllPublication,
     getPublicationById,
     addPublication,
     updatePublication,
-    deletePublication,} =require("../controller/publicationController.js")
+    deletePublication,getPublicationByUserId} =require("../controller/publicationController.js")
 
 /**************** GET ROUTES  ************/
 // get all publication
 router.get("/Publication/getAllPublication/",getAllPublication);
 //get publication by ID 
 router.get("/Publication/getPublicationById/:id",getPublicationById);
+//get publication by user ID 
+router.get("/Publication/getPublicationByUserId/:id",getPublicationByUserId);
 
 /**************** DELETE ROUTES  ************/
 //delete publication
