@@ -65,7 +65,7 @@ export default function UpdateUser() {
                     <div className="row align-items-center flex-row-reverse">
                         <div className="col-lg-6">
                             <div className="about-text go-to">
-                                <h3 className="dark-color">Gère mon profil</h3>
+                                <h3 className="dark-color">Gèrer Mon Profil</h3>
                                 <p>I'm <mark>{user.nom + " " + user.prenom}.</mark></p>
                                 <div className="row about-list">
                                     <div className="col-md-6">

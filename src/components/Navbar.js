@@ -92,7 +92,7 @@ function NavBar() {
   className={({ isActive }) =>
     `nav-link ${styles.navLink} ${isActive ? styles.activeLink : ''}`
   }
- to="/feed">
+ to="/feedDisplay">
                     <MdDynamicFeed className="mx-2 " /> Fil d'actualité
                   </NavLink >
                 </li>

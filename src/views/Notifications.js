@@ -9,7 +9,7 @@ const NotificationManager = () => {
   const userId = '661fa7dc3b62d0c8fe1cf1d1'; // 🔁 بدّل بـ userId الحقيقي من الـ Auth
 
   // Define rose/pink theme color for consistency
-  const roseColor = '#e83e8c'; // Bootstrap pink color
+  const roseColor = '#833F92'; // Bootstrap pink color
 
   // 🟢 Get Notifications
   useEffect(() => {

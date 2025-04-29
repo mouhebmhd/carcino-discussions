@@ -67,7 +67,7 @@ input[type="text"]
 
 .sidebar ul li svg {
   margin-right: 10px;
-  color: #d63384;
+  color: #833F92;
 }
 #services .services-top {
   padding: 70px 0 50px;
@@ -140,7 +140,7 @@ input[type="text"]
   color: gray;
 }
 .group button {
-  background-color: #d63384;
+  background-color: #833F92;
   color: white;
   border: none;
   padding: 5px 10px;
@@ -149,7 +149,7 @@ input[type="text"]
 }
 
 .group button:hover {
-  background-color: #b0296e;
+  background-color: #833F92;
 }
 
 

@@ -16,6 +16,7 @@ import Network  from "./views/Network.js";
 import SeeProfile  from "./views/SeeProfile.js";
 import UpdateUser from "./views/updateProfile.js";
 import Publications from "./views/publications.js";
+import FeedDisplay from "./views/FeedDisplay.js";
 
 
 function App() {
@@ -33,7 +34,6 @@ function App() {
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/signup" element={<Signup />} />
         <Route exact path="/communities" element={<Community />} />
-        <Route exact path="/feeds" element={<Feeds />} />
         <Route exact path="/notifications" element={<Notifications />} />
         <Route exact path="/users" element={<Users />} />
         <Route exact path="/moderators" element={<Moderators />} />
@@ -41,7 +41,9 @@ function App() {
         <Route exact path="/profile/seeUserProfile/:id" element={<SeeProfile />} />
         <Route exact path="/myProfile/:id" element={<UpdateUser />} />
         <Route exact path="/publications" element={<Publications />} />
-        publications
+        <Route exact path="/feedDisplay" element={<FeedDisplay />} />
+        
+        
         {/* 
           <Route path="/communities" element={}></Route>
           <Route path="/network" element={}></Route>

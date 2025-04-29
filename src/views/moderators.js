@@ -155,7 +155,9 @@ export default function Moderators() {
               <tbody>
                 {users.map((user, index) => (
                   user.role=="moderateur" && <tr key={user._id || index}>
-                  <td>{index + 1}</td>
+                  <td className='avatarCtr' >
+                    <img src={user.userAvatar} alt="" />
+                  </td>
                   <td>{user.prenom}</td>
                   <td>{user.nom}</td>
                   <td>{formatTimestampToFrenchDate(user.dateNaissance)}</td>

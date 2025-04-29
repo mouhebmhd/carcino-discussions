@@ -3,6 +3,7 @@ import Navbar from '../components/NavBar';
 import axios from "axios";
 import { Modal, Button } from 'react-bootstrap'; 
 import { useNavigate } from 'react-router-dom';
+import "../styles/managePosts.css"
 export default function Utilisateurs() {
   const navigate=useNavigate()
   const [error, setError] = useState(false);
@@ -155,7 +156,9 @@ export default function Utilisateurs() {
               <tbody>
                 {users.map((user, index) => (
                   user.role=="membre" && <tr key={user._id || index}>
-                  <td>{index + 1}</td>
+                  <td className='avatarCtr' >
+                    <img src={user.userAvatar} alt="" />
+                  </td>
                   <td>{user.prenom}</td>
                   <td>{user.nom}</td>
                   <td>{formatTimestampToFrenchDate(user.dateNaissance)}</td>

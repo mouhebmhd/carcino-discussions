@@ -66,7 +66,7 @@ function Login() {
                         <div className="d-flex align-items-center mb-3 pb-1">
                           <i
                             className="fas fa-cubes fa-2x me-3"
-                            style={{ color: "#FF69B4" }}
+                            style={{ color: "#833F92" }}
                           ></i>
                           <span className="h1 fw-bold mb-0">Bienvenue</span>
                         </div>

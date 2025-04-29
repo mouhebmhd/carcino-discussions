@@ -2,6 +2,12 @@
     display: flex;
     flex-direction: column;
     height: 100vh;
+    background-image: url("../images/bgCancer.jpg");
+    background-size: contain;
+  }
+  .postCard
+  {
+    background-color: rgba(255, 255, 255, 0.718) !important;
   }
   .commentInput
   {
@@ -14,13 +20,13 @@
   }
   .newPost button:hover
   {
-    background-color: #8e7ab7;
+    background-color: #833F92;
     color: #fff;
     font-weight: 600;
   }
   .newPost button
   {
-    background-color: #B39AE5;
+    background-color: #833F92;
     color: #fff;
     font-weight: 600;
   }

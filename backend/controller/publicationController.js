@@ -48,6 +48,7 @@ const addPublication = async (req, res) => {
       const pubId = pubs.length + 1;
       var newPublication = (req.body);
       newPublication["publicationId"]=pubId;
+      newPublication["posttatus"]="waiting";
       newPublication=new PublicationSchema(newPublication)
       const savedPublication = await newPublication.save();
       res.status(200).json(savedPublication);

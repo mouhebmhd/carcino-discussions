@@ -15,7 +15,7 @@ export default function NewPost(props) {
         .then(response=>{
             setCommunities(response.data)
             console.log(response.data)
-            navigate("/")
+            
         })
         .catch(error=>{
             console.log(error)
@@ -92,8 +92,8 @@ export default function NewPost(props) {
     }}
   >
     <option value="">Select a community</option>
-    {communities.map((comm) => (
-      <option key={comm.communauteId} value={comm.communauteId}>
+    {communities.map((comm,index) => (
+      <option key={index} value={comm.communauteId}>
         {comm.nomCommunaute}
       </option>
     ))}
