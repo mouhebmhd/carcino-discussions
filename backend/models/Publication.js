@@ -6,6 +6,7 @@ const PublicationSchema = new mongoose.Schema({
   titrePublication: { type: String },
   contenuPublication: { type: String },
   tagPublication: { type: String },
+  postStatus: { type: String },
   communityTag: { type: String },
   upVotes: { type: Number , default:0},
   downVotes: { type: Number , default:0},

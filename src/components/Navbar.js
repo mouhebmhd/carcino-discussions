@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from "../components/LandingPage/style.module.css";
 import { MdDynamicFeed } from "react-icons/md";
+import { CiTextAlignLeft } from "react-icons/ci";
+import { NavLink } from 'react-router-dom';
 import { 
   FaHome, FaInfoCircle, FaTools, FaPhone, FaChartLine, 
   FaUsers, FaNetworkWired, FaUserFriends, FaUserShield, 
@@ -10,13 +12,13 @@ import {
 
 function NavBar() {
   const isLoggedOn = JSON.parse(localStorage.getItem("user")) != undefined;
-
+  const user=JSON.parse(localStorage.getItem("user"))
   return (
     <nav className="navbar  navbar-expand-lg navbar-light bg-white">
       <div className="container-fluid px-5">
-        <Link className={`navbar-brand ${styles.navbarBrand}`} to="/">
+        <NavLink  className={`navbar-brand ${styles.navbarBrand}`} to="/">
           CarsinoDisc
-        </Link>
+        </NavLink >
         <button
           className="navbar-toggler"
           type="button"
@@ -33,80 +35,141 @@ function NavBar() {
 
             {/* Home */}
             <li className="nav-item">
-              <Link className={`nav-link ${styles.navLink}`} to="/home">
-                <FaHome className="mx-2 h4" /> Home
-              </Link>
+              <NavLink
+  className={({ isActive }) =>
+    `nav-link ${styles.navLink} ${isActive ? styles.activeLink : ''}`
+  }
+ to="/home">
+                <FaHome className="mx-2 " /> Home
+              </NavLink >
             </li>
 
             {/* Public Links */}
             {!isLoggedOn && (
               <>
                 <li className="nav-item">
-                  <Link className={`nav-link ${styles.navLink}`} to="/about">
-                    <FaInfoCircle className="mx-2 h4" /> About
-                  </Link>
+                  <NavLink
+  className={({ isActive }) =>
+    `nav-link ${styles.navLink} ${isActive ? styles.activeLink : ''}`
+  }
+ to="/about">
+                    <FaInfoCircle className="mx-2 " /> About
+                  </NavLink >
                 </li>
                 <li className="nav-item">
-                  <Link className={`nav-link ${styles.navLink}`} to="/services">
-                    <FaTools className="mx-2 h4" /> Services
-                  </Link>
+                  <NavLink
+  className={({ isActive }) =>
+    `nav-link ${styles.navLink} ${isActive ? styles.activeLink : ''}`
+  }
+ to="/services">
+                    <FaTools className="mx-2 " /> Services
+                  </NavLink >
                 </li>
                 <li className="nav-item">
-                  <Link className={`nav-link ${styles.navLink}`} to="/contact">
-                    <FaPhone className="mx-2 h4" /> Contact
-                  </Link>
+                  <NavLink
+  className={({ isActive }) =>
+    `nav-link ${styles.navLink} ${isActive ? styles.activeLink : ''}`
+  }
+ to="/contact">
+                    <FaPhone className="mx-2 " /> Contact
+                  </NavLink >
                 </li>
                 <li className="nav-item">
-                  <Link className={`nav-link ${styles.navLink}`} to="/stats">
-                    <FaChartLine className="mx-2 h4" /> Stats
-                  </Link>
+                  <NavLink
+  className={({ isActive }) =>
+    `nav-link ${styles.navLink} ${isActive ? styles.activeLink : ''}`
+  }
+ to="/stats">
+                    <FaChartLine className="mx-2 " /> Stats
+                  </NavLink >
                 </li>
               </>
             )}
             {isLoggedOn && (
               <>
                 <li className="nav-item">
-                  <Link className={`nav-link ${styles.navLink}`} to="/feed">
-                    <MdDynamicFeed className="mx-2 h4" /> Fil d'actualité
-                  </Link>
+                  <NavLink
+  className={({ isActive }) =>
+    `nav-link ${styles.navLink} ${isActive ? styles.activeLink : ''}`
+  }
+ to="/feed">
+                    <MdDynamicFeed className="mx-2 " /> Fil d'actualité
+                  </NavLink >
                 </li>
                 <li className="nav-item">
-                  <Link className={`nav-link ${styles.navLink}`} to="/communities">
-                    <FaUsers className="mx-2 h4" /> Communautés
-                  </Link>
+                  <NavLink
+  className={({ isActive }) =>
+    `nav-link ${styles.navLink} ${isActive ? styles.activeLink : ''}`
+  }
+ to="/communities">
+                    <FaUsers className="mx-2 " /> Communautés
+                  </NavLink >
                 </li>
                 <li className="nav-item">
-                  <Link className={`nav-link ${styles.navLink}`} to="/network">
-                    <FaNetworkWired className="mx-2 h4" /> Network
-                  </Link>
+                  <NavLink
+  className={({ isActive }) =>
+    `nav-link ${styles.navLink} ${isActive ? styles.activeLink : ''}`
+  }
+ to="/network">
+                    <FaNetworkWired className="mx-2 " /> Network
+                  </NavLink >
                 </li>
                 <li className="nav-item">
-                  <Link className={`nav-link ${styles.navLink}`} to="/users">
-                    <FaUserFriends className="mx-2 h4" /> Utilisateurs
-                  </Link>
+                  <NavLink
+  className={({ isActive }) =>
+    `nav-link ${styles.navLink} ${isActive ? styles.activeLink : ''}`
+  }
+ to="/users">
+                    <FaUserFriends className="mx-2 " /> Utilisateurs
+                  </NavLink >
                 </li>
                 <li className="nav-item">
-                  <Link className={`nav-link ${styles.navLink}`} to="/moderators">
-                    <FaUserShield className="mx-2 h4" /> Modérateurs
-                  </Link>
+                  <NavLink
+  className={({ isActive }) =>
+    `nav-link ${styles.navLink} ${isActive ? styles.activeLink : ''}`
+  }
+ to="/moderators">
+                    <FaUserShield className="mx-2 " /> Modérateurs
+                  </NavLink >
                 </li>
                 <li className="nav-item">
-                  <Link className={`nav-link ${styles.navLink}`} to="/notifications">
-                    <FaBell className="mx-2 h4" /> Notifications
-                  </Link>
+                  <NavLink
+  className={({ isActive }) =>
+    `nav-link ${styles.navLink} ${isActive ? styles.activeLink : ''}`
+  }
+ to="/publications">
+                    <CiTextAlignLeft  className="mx-2 " /> Publications
+                  </NavLink >
                 </li>
                 <li className="nav-item">
-                  <Link className={`nav-link ${styles.navLink}`} to="/myProfile">
-                    <FaUserCircle className="mx-2 h4" /> Mon Profil
-                  </Link>
+                  <NavLink
+  className={({ isActive }) =>
+    `nav-link ${styles.navLink} ${isActive ? styles.activeLink : ''}`
+  }
+ to="/notifications">
+                    <FaBell className="mx-2 " /> Notifications
+                  </NavLink >
+                </li>
+                <li className="nav-item">
+                  <NavLink
+  className={({ isActive }) =>
+    `nav-link ${styles.navLink} ${isActive ? styles.activeLink : ''}`
+  }
+ to={`/myProfile/ ${user._id}`}>
+                    <FaUserCircle className="mx-2 " /> Mon Profil
+                  </NavLink >
                 </li>
                
               </>
             )}
                 <li className="nav-item">
-                  <Link className={`nav-link ${styles.navLink}`} to="/login">
-                    <FaSignInAlt className="mx-2 h4" /> Sign In
-                  </Link>
+                  <NavLink
+  className={({ isActive }) =>
+    `nav-link ${styles.navLink} ${isActive ? styles.activeLink : ''}`
+  }
+ to="/login">
+                    <FaSignInAlt className="mx-2 " /> Sign In
+                  </NavLink >
                 </li>
           </ul>
         </div>

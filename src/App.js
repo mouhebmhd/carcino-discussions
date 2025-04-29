@@ -14,6 +14,10 @@ import Users from "./views/users.js"
 import Moderators from "./views/moderators.js"
 import Network  from "./views/Network.js";
 import SeeProfile  from "./views/SeeProfile.js";
+import UpdateUser from "./views/updateProfile.js";
+import Publications from "./views/publications.js";
+
+
 function App() {
   const isLoggedOn = JSON.parse(localStorage.getItem("user")) !== undefined;
 
@@ -35,7 +39,9 @@ function App() {
         <Route exact path="/moderators" element={<Moderators />} />
         <Route exact path="/network" element={<Network />} />
         <Route exact path="/profile/seeUserProfile/:id" element={<SeeProfile />} />
-        
+        <Route exact path="/myProfile/:id" element={<UpdateUser />} />
+        <Route exact path="/publications" element={<Publications />} />
+        publications
         {/* 
           <Route path="/communities" element={}></Route>
           <Route path="/network" element={}></Route>
