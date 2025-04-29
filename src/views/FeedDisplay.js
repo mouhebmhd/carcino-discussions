@@ -160,8 +160,14 @@ export default function FeedDisplay() {
                           
                         </div>
                         <div className="d-flex justify-content-between align-items-start">
-                        <p className='text-primary'>{findUser(post.publisherId).nom + "  " +findUser(post.publisherId).prenom  }</p>
-                          
+                        {findUser(post.publisherId) ? (
+                        <p className='text-primary'>
+                            {findUser(post.publisherId).nom + " " + findUser(post.publisherId).prenom}
+                          </p>
+                        ) : (
+                          <p className='text-secondary'>Chargement de l'utilisateur...</p>
+                        )}
+                                                  
                         </div>
                         <p className="text-muted">{post.contenuPublication}</p>
                         <span className="alert alert-success rounded-pill p-2 tagAlert w-auto" style={{ fontSize: "12px" }}>
