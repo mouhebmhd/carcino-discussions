@@ -87,7 +87,7 @@ function Network() {
                   <p className="card-text small text-muted">
                     {user.aboutMe}
                   </p>
-                  <p className="card-text small text-muted text-center">
+                  <p className="card-text small text-muted text-center d-flex flex-wrap justify-content-center">
                     {user.tags.map((tag,index)=>{return <span className='alert alert-primary p-2 mx-1 rounded-pill'>{tag}</span>})}
                   </p>
                   <div className="d-flex flex-wrap justify-content-center gap-2">
