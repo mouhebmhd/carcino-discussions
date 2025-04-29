@@ -89,7 +89,8 @@ export default function Utilisateurs() {
   };
 
   const deleteUserAccount = (userId) => {
-    axios.delete(`${API_URL}/users/deleteOne/${userId}`)
+    console.log(userId)
+    axios.delete(`${API_URL}/Utilisateur/deleteUtilisateur/${userId}`)
       .then(response => {
         console.log(response);
         loadUsers();

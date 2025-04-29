@@ -88,7 +88,7 @@ export default function Moderators() {
   };
 
   const deleteUserAccount = (userId) => {
-    axios.delete(`${API_URL}/users/deleteOne/${userId}`)
+    axios.delete(`${API_URL}/Utilisateur/deleteUtilisateur/${userId}`)
       .then(response => {
         console.log(response);
         loadUsers();
@@ -168,7 +168,7 @@ export default function Moderators() {
                     
                     </td>
                   <td>{user.accountStatus}</td>
-                  <td>
+                  <td className> 
                     <button className="btn btn-primary btn-sm mx-1" onClick={() => navigate("/profile/seeUserProfile/"+user._id)}>
                       Voir Détails
                     </button>

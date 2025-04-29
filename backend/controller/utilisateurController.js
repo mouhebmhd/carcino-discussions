@@ -68,7 +68,7 @@ const addUtilisateur = async (req, res) => {
      
       const { id } = req.params;
       console.log(id)
-      const deleted = await UtilisateurSchema.findOneAndDelete({UserId:{$eq:id}});
+      const deleted = await UtilisateurSchema.findByIdAndDelete(id);
       if (!deleted) return res.status(404).json({ error: "Utilisateur not found" });
       res.status(200).json({ message: " deleted successfully" });
     } catch (error) {
