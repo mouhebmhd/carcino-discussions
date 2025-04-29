@@ -7,7 +7,8 @@ const { getUtilisateurById,
     deleteUtilisateur,
     loginUtilisateur,
     logoutUtilisateur,
-    getUserRole
+    getUserRole,
+    getUtilisateurStats
 
 } =require("../controller/utilisateurController.js")
 
@@ -16,6 +17,8 @@ const { getUtilisateurById,
 router.get("/Utilisateur/getAllUtilisateur/",getAllUtilisateur);
 //get utilisateur by ID 
 router.get("/Utilisateur/getUtilisateurById/:id",getUtilisateurById);
+//get stats by userID 
+router.get("/Utilisateur/getUtilisateurStats/:id",getUtilisateurStats);
 //get utilisateur by ID 
 router.get("/Utilisateur/getUserRole/:email",getUserRole);
 /**************** DELETE ROUTES  ************/

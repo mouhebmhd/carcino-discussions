@@ -2,6 +2,10 @@ const UtilisateurSchema=require("../models/Utilisateur");
 const bcrypt=require("bcrypt");
 const jsonwebToken=require("jsonwebtoken")
 const secretKey="3493eb041692ecfe5ca21a854a5641a6d32c4bf0849141552ef62920664e5e4b";
+const Publication=require("../models/Publication")
+const Interaction=require("../models/Interaction")
+const Comments=require("../models/Commentaire")
+const CommunitiesSubs=require("../models/Abonnement")
 const getAllUtilisateur=async (req,res)=>{ 
 
     try
@@ -19,7 +23,7 @@ const getAllUtilisateur=async (req,res)=>{
 const getUtilisateurById = async (req, res) => {
     try {
       var { id } = req.params;
-      const Utilisateur = await UtilisateurSchema.findOne({userId:id});
+      const Utilisateur = await UtilisateurSchema.findById(id);
      
       res.status(200).json(Utilisateur);
     } catch (error) {
@@ -114,6 +118,25 @@ const addUtilisateur = async (req, res) => {
       res.status(400).json({ error: error.message });
     }
   }
+  const getUtilisateurStats=async (req,res)=>{
+    try 
+    {
+    const publicationsCount=await Publication.find({publisherId:req.params.id})
+    const interactionsCount=await Interaction.find({interactorId:req.params.id})
+    const commentsCount=await Comments.find({authorId:req.params.id})
+    const subsCount= await CommunitiesSubs.find({userId:req.params.id})
+    res.status(200).json({ 
+      "pubCount":publicationsCount.length,
+      "interactionsCount": interactionsCount.length,
+      "commentsCount":commentsCount.length,
+      "subscribtionsCount":subsCount.length,
+      })
+    }
+    catch(error)
+    {
+      res.status(500).json({message:"an error occured . please try againt "})
+    }
+  }
   module.exports =
   {
     getUtilisateurById,
@@ -123,5 +146,6 @@ const addUtilisateur = async (req, res) => {
     deleteUtilisateur,
     loginUtilisateur,
     logoutUtilisateur,
-    getUserRole
+    getUserRole,
+    getUtilisateurStats
   };

@@ -39,7 +39,7 @@ export default function PostDetails(props) {
     const Comment = {
       contenuCommentaire: newComment,
       dateCommentaire: new Date().toISOString(),
-      authorId: user.userId,
+      authorId: user._id,
       publicationId: post.publicationId,
     };
 

@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import Navbar from '../components/NavBar';
 import axios from "axios";
 import { Modal, Button } from 'react-bootstrap'; 
-
+import { useNavigate } from 'react-router-dom';
 export default function Utilisateurs() {
+  const navigate=useNavigate()
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
   const [users, setUsers] = useState([]);
@@ -166,7 +167,7 @@ export default function Utilisateurs() {
                     </td>
                   <td>{user.accountStatus}</td>
                   <td>
-                    <button className="btn btn-primary btn-sm mx-1" onClick={() => handleViewDetails(user)}>
+                    <button className="btn btn-primary btn-sm mx-1" onClick={() => navigate("/profile/seeUserProfile/"+user._id)}>
                       Voir Détails
                     </button>
                     {user.accountStatus === "active" ? (

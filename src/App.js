@@ -13,6 +13,7 @@ import Notifications from "./views/Notifications.js"
 import Users from "./views/users.js"
 import Moderators from "./views/moderators.js"
 import Network  from "./views/Network.js";
+import SeeProfile  from "./views/SeeProfile.js";
 function App() {
   const isLoggedOn = JSON.parse(localStorage.getItem("user")) !== undefined;
 
@@ -33,7 +34,8 @@ function App() {
         <Route exact path="/users" element={<Users />} />
         <Route exact path="/moderators" element={<Moderators />} />
         <Route exact path="/network" element={<Network />} />
-
+        <Route exact path="/profile/seeUserProfile/:id" element={<SeeProfile />} />
+        
         {/* 
           <Route path="/communities" element={}></Route>
           <Route path="/network" element={}></Route>

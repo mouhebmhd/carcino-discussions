@@ -108,7 +108,7 @@ export default function Community() {
         
 
         {/* Groups */}
-        <div className=" container-fluid d-flex flex-wrap justify-content-center mt-3">
+        <div className=" container-fluid d-flex flex-wrap justify-content-center mt-3 row-gap-3">
           {communities.map((c) => (
             <div
               className="card communityCard col-lg-3 col-md-4 col-sm-6 mx-2"
