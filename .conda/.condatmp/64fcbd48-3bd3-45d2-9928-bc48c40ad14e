@@ -1,0 +1,13 @@
+prefix=g:/carcino-discussions/.conda/Library
+exec_prefix=g:/carcino-discussions/.conda/Library
+libdir=g:/carcino-discussions/.conda/Library/lib
+sharedlibdir=g:/carcino-discussions/.conda/Library/lib
+includedir=g:/carcino-discussions/.conda/Library/include
+
+Name: zlib
+Description: zlib compression library
+Version: 1.2.13
+
+Requires:
+Libs: -L${libdir} -L${sharedlibdir} -lz
+Cflags: -I${includedir}

@@ -4,6 +4,7 @@ import axios from 'axios';
 import {useNavigate} from "react-router-dom"
 import { useRef } from 'react';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 export default function NewPost(props) {
     const item = useRef(null);
     const navigate=useNavigate()
@@ -52,6 +53,9 @@ export default function NewPost(props) {
           <button className='btn  mt-2'  data-bs-toggle="modal" data-bs-target="#publicationModal" >
           <MdOutlinePublish className='mx-1 fs-5'/> Publish New Post
           </button>
+          <Link className='btn btn-warning  mt-2 mx-2' to="/analyse"  >
+          <MdOutlinePublish className='mx-1 fs-5'/> Analyse An Image
+          </Link>
      </div>
 
 <div className="modal modal-lg fade"  data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1"  id="publicationModal"   aria-labelledby="publicationModalLabel" >
