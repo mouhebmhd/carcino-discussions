@@ -1,5 +1,5 @@
 import React from 'react';
-import NavBar from '../components/NavBar';
+import NavBar from '../components/Navbar';
 import Footer from '../components/LandingPage/Footer';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AboutUs from '../components/LandingPage/AboutUs';

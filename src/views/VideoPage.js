@@ -3,7 +3,7 @@ import Header from "../components/Header";
 import SidebarS from "../components/Sidebar";
 import Post from "../components/Post";
 import "../styles/VideoPage.css";
-import NavBar from "../components/NavBar";
+import NavBar from "../components/Navbar";
 import SuggestionsS from "../components/Suggestions";
 import NewsN from "../components/News";
 

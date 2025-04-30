@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import NavBar from '../components/NavBar';
+import NavBar from '../components/Navbar';
 import axios from "axios";
 import { Modal, Button } from 'react-bootstrap'; 
 import { useNavigate } from 'react-router-dom';

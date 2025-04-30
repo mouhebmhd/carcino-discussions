@@ -1,5 +1,5 @@
 import React from 'react'
-import NavBar from '../components/NavBar'
+import NavBar from '../components/Navbar'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import { FaCheck } from "react-icons/fa";

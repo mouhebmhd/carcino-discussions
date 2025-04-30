@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import NavBar from "../components/NavBar";
+import NavBar from "../components/Navbar";
 import axios from "axios";
 import "../styles/communityStyle.css";
 import { MdDelete, MdEdit } from "react-icons/md";

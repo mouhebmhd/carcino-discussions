@@ -2,7 +2,7 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 
 import { Container, Row, Col } from "react-bootstrap";
-import NavBar from "../../components/NavBar";
+import NavBar from "../../components/Navbar";
 import SuggestionsS from "../../components/Suggestions";
 import SidebarS from "../../components/Sidebar";
 

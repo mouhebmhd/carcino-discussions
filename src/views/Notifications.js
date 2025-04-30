@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Bell, Check } from 'lucide-react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import NavBar from '../components/NavBar';
+import NavBar from '../components/Navbar';
 import axios from 'axios';
 const NotificationManager = () => {
   const [notifications, setNotifications] = useState([]);

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import NavBar from '../components/NavBar'
+import NavBar from '../components/Navbar'
 import '../styles/networkStyle.css'
 import { RiUserFollowFill } from 'react-icons/ri'
 import axios from 'axios'

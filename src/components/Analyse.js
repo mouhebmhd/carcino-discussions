@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Button, Card } from 'react-bootstrap';
 import { Upload } from 'lucide-react';
-import NavBar from "../components/NavBar";
+import NavBar from "../components/Navbar";
 
 const TumorAnalysisApp = () => {
   const [isDragging, setIsDragging] = useState(false);
