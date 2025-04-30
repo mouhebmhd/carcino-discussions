@@ -36,6 +36,7 @@ export default function FeedDisplay() {
   const loadPosts = async () => {
     try {
       const response = await axios.get("http://localhost:3030/Publication/getAllPublication/");
+      console.log(response.data);
       setPosts(response.data);
     } catch (error) {
       console.error("Error fetching posts:", error);
@@ -123,27 +124,28 @@ export default function FeedDisplay() {
 
   return (
     <>
-      <div className="community-page">
+      <div className="community-page" style={{height:"fit-content"}}>
         <NavBar />
         {users.length<=0 && <p> Loading content </p>}
+      
         {users.length>0 && 
         <>
         <div className="text-center mt-3">
             <h6 className="section-title text-center specialText px-3">Actualité</h6>
             <h1 className="">Fil d'actualité</h1>
           </div>
-        <div className="container-fluid">
+        <div className="container-fluid" style={{height:"fit-content"}}>
           <div className="row">
             
 
             {/* Main content column */}
-            <div className="col-12 p-4 main-content">
+            <div className="col-12 p-4 main-content" style={{height:"fit-content"}}>
               <NewPost  onAddPost={loadPosts} />
 
-              <div className="postsContainer">
+              <div className="postsContainer p-2" >
                 {posts.length === 0 && <p className='alert alert-danger'>Posts Fetching ...</p>}
                 {posts.length > 0 && posts.map((post) => (
-                  <div className="card postCard mb-4 border-0 shadow-sm" key={post._id}>
+                  <div className="card postCard mb-4 border-0 p-2  shadow-sm" key={post._id}>
                     <div className="card-body d-flex">
                       <div className="me-3">
                         <img
@@ -196,8 +198,8 @@ export default function FeedDisplay() {
                         <RiExpandDiagonalLine className='fs-4 mx-2' />
                         View Details
                       </button>
-
-                      {post.publisherId === user.userId && (
+                        
+                      {post.publisherId == user._id && (
                         <>
                           <button className="btn btn-danger" onClick={() => deletePost(post)}>
                             <MdDelete className='mx-1' /> Delete Post

@@ -35,7 +35,7 @@ export default function NewPost(props) {
         newPost["signals"]=0;
         newPost["upVotes"]=0;
         newPost["downVotes"]=0;
-        newPost["publisherId"]=user.userId;
+        newPost["publisherId"]=user._id;
         axios.post("http://localhost:3030/Publication/postPublication/",newPost)
         .then(response=>{
             console.log(response.data)

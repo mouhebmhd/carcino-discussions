@@ -15,7 +15,7 @@ export default function UpdatePost(props) {
             .then(response => {
                 setCommunities(response.data);
                 console.log(response.data);
-                navigate("/feed");
+                 
             })
             .catch(error => {
                 console.log(error);
@@ -37,8 +37,9 @@ export default function UpdatePost(props) {
     };
 
     const updatePost = () => {
-        axios.put(`http://localhost:3030/Publication/updatePublication/${postToUpdate.publicationId}`, postToUpdate)
+        axios.put(`http://localhost:3030/Publication/updatePublication/${postToUpdate._id}`, postToUpdate)
             .then(response => {
+                console.log(postToUpdate._id);
                 console.log(response.data);
                 item.current?.click(); 
                 props.onUpdatePost();  
@@ -110,7 +111,7 @@ export default function UpdatePost(props) {
                                 </div>
                             </div>
                             <div className="modal-footer">
-                                <button  className="btn btn-success" onClick={updatePost}>Save Changes</button>
+                                <button  type="button" className="btn btn-success" onClick={updatePost}>Save Changes</button>
                                 <button type="button" ref={item} onClick={props.onCloseModal} className="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                             </div>
                         </div>

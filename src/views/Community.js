@@ -93,14 +93,14 @@ export default function Community() {
         </div>
 
      
-        
+        {user.role=="adminitrateur" && 
           <AddCommunity
             onAddSuccess={() => {
               setShowAddModal(false);
               loadData();
             }}
             onClose={() => setShowAddModal(false)}
-          />
+          />}
        
           
         
@@ -123,21 +123,23 @@ export default function Community() {
               <div className="card-body">
                 <h5 className="card-title">{c.nomCommunaute}</h5>
                 <p className="card-text small text-muted">
-                  {c.descriptionCommunaute}
+                  {c.descriptionCommunaute.slice(50,)}
                 </p>
                 <div className="d-flex flex-wrap justify-content-center gap-2">
+                 {user.role=="administrateur" && 
                   <button
                     className="btn btn-danger"
                     onClick={() => deleteCommunity(c._id)}
                   >
                     <MdDelete /> Supprimer
-                  </button>
+                  </button>}
+                  {user.role=="administrateur" && 
                   <button
                     className="btn btn-warning"
                     onClick={() => updateCommunity(c)}
                   >
                     <MdEdit /> Modifier
-                  </button>
+                  </button>}
                   {subscribtions.includes(c._id)==true && <button
                     className="btn btn-dark"
                     onClick={() => unfollowCommunity(c._id,user._id)}

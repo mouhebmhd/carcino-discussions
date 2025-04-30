@@ -5,6 +5,7 @@ import { MdDynamicFeed } from "react-icons/md";
 import { CiTextAlignLeft } from "react-icons/ci";
 import { NavLink } from 'react-router-dom';
 import { VscGitPullRequestDraft } from "react-icons/vsc";
+import { TbLayoutDashboardFilled } from "react-icons/tb";
 
 import {
   FaHome, FaInfoCircle, FaTools, FaPhone, FaChartLine,
@@ -37,6 +38,7 @@ function NavBar() {
           <ul className="navbar-nav ms-auto">
 
             {/* Home */}
+            {role=="membre" && 
             <li className="nav-item">
               <NavLink
                 className={({ isActive }) =>
@@ -46,7 +48,7 @@ function NavBar() {
                 <FaHome className="mx-2 " /> Home
               </NavLink >
             </li>
-
+            }
             {!isLoggedOn._id && (
   <>
     <li className="nav-item">
@@ -94,6 +96,16 @@ function NavBar() {
 
             {isLoggedOn._id  && (
               <>
+              {role=="administrateur" && 
+                <li className="nav-item">
+                  <NavLink
+                    className={({ isActive }) =>
+                      `nav-link ${styles.navLink} ${isActive ? styles.activeLink : ''}`
+                    }
+                    to="/dashboard">
+                    <TbLayoutDashboardFilled  className="mx-2 " /> Dashboard
+                  </NavLink >
+                </li>}
               {role!="administrateur" && 
                 <li className="nav-item">
                   <NavLink
@@ -104,7 +116,6 @@ function NavBar() {
                     <MdDynamicFeed className="mx-2 " /> Fil d'actualité
                   </NavLink >
                 </li>}
-                {role=="administrateur" && 
                 <li className="nav-item">
                   <NavLink
                     className={({ isActive }) =>
@@ -113,7 +124,7 @@ function NavBar() {
                     to="/communities">
                     <FaUsers className="mx-2 " /> Communautés
                   </NavLink >
-                </li>}
+                </li>
                 {role!="administrateur" && 
                 <li className="nav-item">
                   <NavLink
@@ -124,7 +135,7 @@ function NavBar() {
                     <FaNetworkWired className="mx-2 " /> Network
                   </NavLink >
                 </li>}
-                {role=="administrateur" && 
+                {role!="membre" && 
                 <li className="nav-item">
                   <NavLink
                     className={({ isActive }) =>
@@ -144,7 +155,7 @@ function NavBar() {
                     <FaUserShield className="mx-2 " /> Modérateurs
                   </NavLink >
                 </li>}
-                {role=="administrateur" && 
+                {role!="membre" && 
                 <li className="nav-item">
                   <NavLink
                     className={({ isActive }) =>
@@ -164,6 +175,7 @@ function NavBar() {
                     <VscGitPullRequestDraft  className="mx-2 " /> Abonnements
                   </NavLink >
                 </li>}
+                {user.role!="administrateur" && 
                 <li className="nav-item">
                   <NavLink
                     className={({ isActive }) =>
@@ -172,7 +184,7 @@ function NavBar() {
                     to="/notifications">
                     <FaBell className="mx-2 " /> Notifications
                   </NavLink >
-                </li>
+                </li>}
                 <li className="nav-item">
                   <NavLink
                     className={({ isActive }) =>

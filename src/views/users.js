@@ -183,15 +183,20 @@ export default function Utilisateurs() {
                         Activer
                       </button>
                     )}
-                    {user.role === "membre" ? (
-                      <button className="btn btn-dark btn-sm mx-1" onClick={() => makeModerator(user)}>
-                        Définir Modérateur
-                      </button>
-                    ) : (
-                      <button className="btn btn-primary  btn-sm mx-1" onClick={() => makeMember(user)}>
-                        Définir Membre
-                      </button>
+                    {role === "administrateur" && (
+                      <>
+                        {user.role === "membre" ? (
+                          <button className="btn btn-dark btn-sm mx-1" onClick={() => makeModerator(user)}>
+                            Définir Modérateur
+                          </button>
+                        ) : (
+                          <button className="btn btn-primary btn-sm mx-1" onClick={() => makeMember(user)}>
+                            Définir Membre
+                          </button>
+                        )}
+                      </>
                     )}
+
                     <button className="btn btn-danger btn-sm mx-1" onClick={() => deleteUserAccount(user._id)}>
                       Supprimer
                     </button>
