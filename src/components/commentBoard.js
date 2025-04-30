@@ -11,6 +11,7 @@ import { ToastContainer } from 'react-toastify';
 
 const CommentBoard = (props) => {
   const currentUser = JSON.parse(localStorage.getItem("user"));
+  const userId = currentUser._id;
   const [author, setAuthor] = useState({});
   const comment = props.comment;
 
@@ -19,7 +20,7 @@ const CommentBoard = (props) => {
 
   const deleteComment = async () => {
     try {
-      const response = await axios.delete(`http://localhost:3030/Commentaire/deleteCommentaire/${comment.commentaireId}`);
+      const response = await axios.delete(`http://localhost:3030/Commentaire/deleteCommentaire/${comment._id}`);
       console.log("Comment deleted:", response.data);
       if (props.onDelete) {
         toast.success("Interaction Removed!");
@@ -43,7 +44,7 @@ const CommentBoard = (props) => {
     };
 
     try {
-      const response = await axios.put("http://localhost:3030/Commentaire/updateCommentaire/"+comment.commentaireId, updatedComment);
+      const response = await axios.put("http://localhost:3030/Commentaire/updateCommentaire/"+comment._id, updatedComment);
       console.log("Comment updated:", response.data);
       setIsEditing(false);
       props.onUpdate(response.data.commentaireId,response.data);
@@ -107,7 +108,7 @@ const CommentBoard = (props) => {
                     <div className="ac5">{comment.contenuCommentaire}</div>
                   )}
 
-                  {currentUser.userId === comment.authorId && (
+                  {userId == comment.authorId && (
                     <div className="actions d-flex mt-2">
                       <button className="deleteComment me-2" onClick={deleteComment}><MdDelete /></button>
                       <button className="updateComment" onClick={() => setIsEditing(true)}><FaPen /></button>

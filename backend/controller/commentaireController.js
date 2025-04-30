@@ -64,7 +64,7 @@ const addCommentaire = async (req, res) => {
     try {
       const { id } = req.params;
       console.log(id)
-      const updatedCommentaire = await commentaireSchema.findOneAndUpdate({commentaireId:{$eq:id}}, req.body, { new: true });
+      const updatedCommentaire = await commentaireSchema.findByIdAndUpdate(id, req.body, { new: true });
       if (!updatedCommentaire) return res.status(404).json({ error: "Comentaire not found" });
       await saveNotification(
         new Date().toISOString(),
@@ -84,7 +84,7 @@ const addCommentaire = async (req, res) => {
      
       const { id } = req.params;
       console.log(id)
-      const deleted = await commentaireSchema.findOneAndDelete({commentaireId:{$eq:id}});
+      const deleted = await commentaireSchema.findByIdAndDelete(id);
       if (!deleted) return res.status(404).json({ error: "Commentaire not found" });
       await saveNotification(
         new Date().toISOString(),
