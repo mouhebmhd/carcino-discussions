@@ -3,10 +3,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Button, Card } from 'react-bootstrap';
 import { Upload } from 'lucide-react';
 import NavBar from "../components/NavBar";
+import axios from 'axios';
 
 const TumorAnalysisApp = () => {
   const [isDragging, setIsDragging] = useState(false);
   const [imageSrc, setImageSrc] = useState(null);
+  const [prediction, setPrediction] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleDragEnter = (e) => {
     e.preventDefault();
@@ -47,8 +50,31 @@ const TumorAnalysisApp = () => {
     const reader = new FileReader();
     reader.onloadend = () => {
       setImageSrc(reader.result);
+      setPrediction(null); // reset prediction if a new image is selected
     };
     reader.readAsDataURL(file);
+  };
+
+  const handlePredict = async () => {
+    if (!imageSrc) return;
+
+    setLoading(true);
+    try {
+      axios.post("http://127.0.0.1:5000/predict",{ image: imageSrc })
+      .then((response=>{
+        console.log(response.data)
+        setPrediction(response.data);
+      }))
+     .catch(error=>{
+      console.log(error)
+     })
+
+     
+    } catch (error) {
+      console.error("Prediction error:", error);
+      setPrediction({ error: "Erreur lors de la prédiction." });
+    }
+    setLoading(false);
   };
 
   return (
@@ -66,7 +92,7 @@ const TumorAnalysisApp = () => {
         </div>
 
         <div
-          className={`upload-area border border-dashed rounded p-5 mb-5 text-center ${isDragging ? 'bg-light' : ''}`}
+          className={`upload-area border border-dashed rounded p-5 mb-4 text-center ${isDragging ? 'bg-light' : ''}`}
           style={{
             borderColor: '#833F92',
             borderWidth: '2px',
@@ -105,10 +131,47 @@ const TumorAnalysisApp = () => {
         </div>
 
         {imageSrc && (
-          <div className="text-center mb-5">
+          <div className="text-center mb-4">
             <h5 style={{ color: '#833F92' }}>Aperçu de l'image</h5>
             <img src={imageSrc} alt="Uploaded preview" style={{ maxWidth: '100%', maxHeight: '400px' }} />
+           <div className="container-fluid d-flex justify-content-center">
+           <Button
+              variant="success"
+              onClick={handlePredict}
+              className="mt-3 d-block"
+              style={{ backgroundColor: '#28a745', borderColor: '#28a745' }}
+            >
+              Analyser l'image
+            </Button>
+           </div>
+           
           </div>
+        )}
+
+        {loading && <p className="text-center text-info">Analyse en cours...</p>}
+
+        {prediction && !prediction.error && (
+          <div className="text-center mb-4">
+            <h4 className="text-success">Résultat de l'analyse :</h4>
+            <p><strong>Probabilité d'être Tumeur Sain:</strong> {(prediction["probability_of_being_tumor"] * 100).toFixed(2)}%</p>
+            <p><strong>Catégorie prédite :</strong> 
+  {prediction["probability_of_being_tumor"] > 0.5 ? '  Pas de tumeur' :' Tumeur détectée' }
+</p>
+
+
+{prediction["probability_of_being_tumor"] > 0.5 && <p className="alert alert-success">
+    Aucune tumeur détectée. Il est conseillé de maintenir un suivi médical régulier.
+  </p>}
+  {prediction["probability_of_being_tumor"]  < 0.5 && <p className="alert alert-danger">
+    La probabilité d'une tumeur est élevée. Veuillez consulter un professionnel de santé pour une évaluation plus approfondie.
+  </p>
+  }
+
+          </div>
+        )}
+
+        {prediction?.error && (
+          <p className="text-danger text-center">{prediction.error}</p>
         )}
 
         <h3 className="text-center mb-4" style={{ color: '#833F92' }}>Comment ça marche</h3>
@@ -159,7 +222,6 @@ const TumorAnalysisApp = () => {
             </Card>
           </Col>
         </Row>
-
       </section>
     </>
   );
