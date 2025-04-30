@@ -7,7 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import LandingPage from "./views/landingPage.js";
 import Login from "./views/login/Login.js";
 import Signup from "./views/Signup.js";
-import Feeds from "./views/Feeds.js";
+import Analyse from "./views/Analyse.js";
 import Community from "./views/Community.js"
 import Notifications from "./views/Notifications.js"
 import Users from "./views/users.js"
@@ -46,6 +46,7 @@ function App() {
         <Route exact path="/feedDisplay" element={<FeedDisplay />} />
         <Route exact path="/dashboard" element={<Dashboard />} />
         <Route exact path="/abonnements" element={<Abonnements />} />
+        <Route exact path="/analyse" element={<Analyse />} />
         
         
         {/* 
