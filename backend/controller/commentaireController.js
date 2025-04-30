@@ -1,4 +1,5 @@
 const commentaireSchema=require("../models/Commentaire.js");
+const {saveNotification} =require("../controller/notificationController.js")
 
 const getAllCommentaire=async (req,res)=>{ 
 
@@ -44,10 +45,19 @@ const addCommentaire = async (req, res) => {
       var newCommentaire = new commentaireSchema(req.body);
       newCommentaire["commentaireId"]=commentId;
       const savedCommentaire = await newCommentaire.save();
+      await saveNotification(
+        new Date().toISOString(),
+        "New Comment Has been Posted  ",
+        "Your Comment Has Been Posted Successfully ",
+        savedCommentaire.authorId
+      );
+      
       res.status(200).json(savedCommentaire);
+      
     } catch (error) {
       res.status(400).json({ error: error.message });
     }
+    
   }
   // update  Commentaire
   const updateCommentaire = async (req, res) => {
@@ -56,7 +66,14 @@ const addCommentaire = async (req, res) => {
       console.log(id)
       const updatedCommentaire = await commentaireSchema.findOneAndUpdate({commentaireId:{$eq:id}}, req.body, { new: true });
       if (!updatedCommentaire) return res.status(404).json({ error: "Comentaire not found" });
+      await saveNotification(
+        new Date().toISOString(),
+        "New Comment Has been Updated  ",
+        "Your Comment Has Been Updated Successfully ",
+        updatedCommentaire.authorId
+      );
       res.status(200).json(updatedCommentaire);
+      
     } catch (error) {
       res.status(400).json({ error: error.message });
     }
@@ -69,6 +86,12 @@ const addCommentaire = async (req, res) => {
       console.log(id)
       const deleted = await commentaireSchema.findOneAndDelete({commentaireId:{$eq:id}});
       if (!deleted) return res.status(404).json({ error: "Commentaire not found" });
+      await saveNotification(
+        new Date().toISOString(),
+        "New Comment Has been Deleted  ",
+        "Your Comment Has Been Deleted Successfully ",
+        deleted.authorId
+      );
       res.status(200).json({ message: "Commentaire deleted successfully" });
     } catch (error) {
       res.status(400).json({ error: error.message });

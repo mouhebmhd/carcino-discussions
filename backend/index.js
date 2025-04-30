@@ -57,6 +57,9 @@ server.use("/",PublicationRoute)
 /* Stats ROUTE */
 const statsRoute=require("./routes/statisitcsRouter");
 server.use("/",statsRoute)
+/* notifications ROUTE */
+const notificationsRoute=require("./routes/notificationsRoute");
+server.use("/",notificationsRoute)
 
 
 server.listen(port,()=>{

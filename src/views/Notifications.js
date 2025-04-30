@@ -2,19 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { Bell, Check } from 'lucide-react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavBar from '../components/NavBar';
-
+import axios from 'axios';
 const NotificationManager = () => {
   const [notifications, setNotifications] = useState([]);
   const [loading, setLoading] = useState(true);
-  const userId = '661fa7dc3b62d0c8fe1cf1d1'; // 🔁 بدّل بـ userId الحقيقي من الـ Auth
+  const userId = JSON.parse(localStorage.getItem("user"))._id; 
 
-  // Define rose/pink theme color for consistency
-  const roseColor = '#833F92'; // Bootstrap pink color
 
-  // 🟢 Get Notifications
-  useEffect(() => {
-    setLoading(true);
-    fetch(`http://localhost:3000/api/notifications/${userId}`,{withCredentials:true})
+  const roseColor = '#833F92'; 
+const loadNotifications=()=>{
+  setLoading(true);
+    fetch(`http:///localhost:3030/notifications/getUserNotifications/${userId}`,{withCredentials:true})
       .then(res => {
         if (!res.ok) {
           throw new Error('Network response was not ok');
@@ -46,74 +44,28 @@ const NotificationManager = () => {
           }
         ]);
       });
+}
+  // 🟢 Get Notifications
+  useEffect(() => {
+    loadNotifications()
   }, [userId]);
 
-  // ✅ Mark one as read - Fixed function
-  const markAsRead = (id) => {
-    console.log(`Marking notification ${id} as read`); // Debug log
-    
-    fetch(`http://localhost:5000/api/notifications/read/${id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(res => {
-        if (!res.ok) {
-          throw new Error('Failed to mark notification as read');
-        }
-        return res.json();
+  const markAsRead = (notification) => {
+    if(notification.notificationReceiver==userId)
+    {
+      axios.delete("http://localhost:3030/notification/deleteNotification/"+notification._id)
+      .then((response)=>{
+        console.log(response)
+        loadNotifications()
       })
-      .then(() => {
-        // Update the state to mark the notification as read
-        setNotifications(prevNotifications => 
-          prevNotifications.map(notif => 
-            notif._id === id ? { ...notif, read: true } : notif
-          )
-        );
+      .catch((error)=>{
+        console.log(error)
       })
-      .catch(err => {
-        console.error('Error marking notification as read:', err);
-        
-        // Even if API fails, update UI state for better UX
-        setNotifications(prevNotifications => 
-          prevNotifications.map(notif => 
-            notif._id === id ? { ...notif, read: true } : notif
-          )
-        );
-      });
+    }
+   
   };
 
-  // ✅ Mark all as read - Fixed function
-  const markAllAsRead = () => {
-    console.log("Marking all notifications as read"); // Debug log
-    
-    fetch(`http://localhost:5000/api/notifications/read-all/${userId}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(res => {
-        if (!res.ok) {
-          throw new Error('Failed to mark all notifications as read');
-        }
-        return res.json();
-      })
-      .then(() => {
-        setNotifications(prevNotifications =>
-          prevNotifications.map(notif => ({ ...notif, read: true }))
-        );
-      })
-      .catch(err => {
-        console.error('Error marking all notifications as read:', err);
-        
-        // Even if API fails, update UI state for better UX
-        setNotifications(prevNotifications =>
-          prevNotifications.map(notif => ({ ...notif, read: true }))
-        );
-      });
-  };
+ 
 
   // Custom style for rose theme
   const roseStyle = {
@@ -159,20 +111,18 @@ const NotificationManager = () => {
           {notifications.map((notif) => (
             <div
               key={notif._id}
-              className={`alert d-flex justify-content-between align-items-center ${
-                notif.read ? 'alert-light' : 'alert-light'
-              }`}
+              className={`alert d-flex justify-content-between align-items-center`}
               style={!notif.read ? roseStyle.alertBorder : {}}
             >
               <div>
-                <h6 className="mb-1 fw-bold">{notif.title}</h6>
-                <p className="mb-0">{notif.message}</p>
-                <small className="text-muted">{new Date(notif.date).toLocaleString('fr-FR')}</small>
+                <h6 className="mb-1 fw-bold">{notif.notificationTitle}</h6>
+                <p className="mb-0">{notif.notificationDescription}</p>
+                <small className="text-muted">{new Date(notif.notificationDate).toLocaleString('fr-FR')}</small>
               </div>
-              {!notif.read && (
+              {notif.notificationReceiver==userId && (
                 <button
                   className="btn btn-sm rounded-pill text-white"
-                  onClick={() => markAsRead(notif._id)}
+                  onClick={() => markAsRead(notif)}
                   style={roseStyle.button}
                   type="button"
                 >

@@ -2,7 +2,7 @@ const Abonnement = require("../models/Abonnement.js");
 const abonnementSchema=require("../models/Abonnement.js");
 const User=require("../models/Utilisateur.js")
 const Community=require("../models/Communaute.js")
-
+const {saveNotification} =require("../controller/notificationController.js")
 const getAllAbonnement=async (req,res)=>{ 
 
     try
@@ -17,11 +17,18 @@ const getAllAbonnement=async (req,res)=>{
 
 }
 const deleteAbonnementUserCommunity = async (req, res) => {
-  const { userId, communityId } = req.params;  // Corrected: directly get from req.params
+  const { userId, communityId } = req.params;
   console.log({ userId, communityId });
-  
+
   try {
-    // Corrected: Make sure to use userId and communityId from req.params
+    // Await and catch errors from saveNotification
+    await saveNotification(
+      new Date().toISOString(),
+      "Subscription Deletion",
+      "One of your subscriptions to communities has been deleted by a user. Please check the Communities window.",
+      userId
+    );
+
     const abonnement = await Abonnement.findOneAndDelete({ userId, communityId });
 
     if (abonnement) {
@@ -29,8 +36,10 @@ const deleteAbonnementUserCommunity = async (req, res) => {
     } else {
       res.status(404).json({ message: "Subscription not found" });
     }
+
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    console.error("Error in deletion process:", error.message);
+    res.status(500).json({ error: error.message });
   }
 };
 
@@ -53,6 +62,12 @@ const addAbonnement = async (req, res) => {
       newAbonnement["abonnementStatus"]="waiting"
       const savedAbonnement = await newAbonnement.save();
       res.status(200).json(savedAbonnement);
+      await saveNotification(
+        new Date().toISOString(),
+        "Subscription Success",
+        "One of your subscriptions to communities has successfully saved. Please check the Communities window.",
+        newAbonnement.userId
+      );
     } catch (error) {
       res.status(400).json({ error: error.message });
     }
@@ -60,6 +75,12 @@ const addAbonnement = async (req, res) => {
   // update  abonnement
   const updateAbonnement = async (req, res) => {
     try {
+      await saveNotification(
+        new Date().toISOString(),
+        "Subscription Updated",
+        "The status of One of your subscriptions to communities has successfully updated. Please check the Communities window.",
+        newAbonnement.userId
+      );
       const { id } = req.params;
       console.log(id)
       const updatedAbonnement = await Abonnement.findByIdAndUpdate(id, req.body, { new: true });
@@ -72,7 +93,12 @@ const addAbonnement = async (req, res) => {
   // delete abonnement
   const deleteAbonnement = async (req, res) => {
     try {
-     
+      await saveNotification(
+        new Date().toISOString(),
+        "Subscription Deleted",
+        "One of your subscriptions to communities has been deleted . Please check the Communities window.",
+        newAbonnement.userId
+      );
       const { id } = req.params;
       const deleted = await Abonnement.findByIdAndDelete(id);
       if (!deleted) return res.status(404).json({ error: "Abonnement not found" });
