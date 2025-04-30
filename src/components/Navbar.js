@@ -4,6 +4,8 @@ import styles from "../components/LandingPage/style.module.css";
 import { MdDynamicFeed } from "react-icons/md";
 import { CiTextAlignLeft } from "react-icons/ci";
 import { NavLink } from 'react-router-dom';
+import { VscGitPullRequestDraft } from "react-icons/vsc";
+
 import {
   FaHome, FaInfoCircle, FaTools, FaPhone, FaChartLine,
   FaUsers, FaNetworkWired, FaUserFriends, FaUserShield,
@@ -150,6 +152,16 @@ function NavBar() {
                     }
                     to="/publications">
                     <CiTextAlignLeft className="mx-2 " /> Publications
+                  </NavLink >
+                </li>}
+                {role!="membre" && 
+                <li className="nav-item">
+                  <NavLink
+                    className={({ isActive }) =>
+                      `nav-link ${styles.navLink} ${isActive ? styles.activeLink : ''}`
+                    }
+                    to="/abonnements">
+                    <VscGitPullRequestDraft  className="mx-2 " /> Abonnements
                   </NavLink >
                 </li>}
                 <li className="nav-item">

@@ -18,6 +18,7 @@ import UpdateUser from "./views/updateProfile.js";
 import Publications from "./views/publications.js";
 import FeedDisplay from "./views/FeedDisplay.js";
 import Dashboard from "./views/Dashboard.js";
+import Abonnements from "./views/Abonnements.js";
 
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
         <Route exact path="/publications" element={<Publications />} />
         <Route exact path="/feedDisplay" element={<FeedDisplay />} />
         <Route exact path="/dashboard" element={<Dashboard />} />
+        <Route exact path="/abonnements" element={<Abonnements />} />
         
         
         {/* 

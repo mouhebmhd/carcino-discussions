@@ -4,14 +4,15 @@ const {getAllAbonnement,
     getAbonnementById,
     addAbonnement,
     updateAbonnement,
-    deleteAbonnement,deleteAbonnementUserCommunity} =require("../controller/abonnementsController.js")
+    deleteAbonnement,deleteAbonnementUserCommunity,getAllSubscriptionsWithDetails} =require("../controller/abonnementsController.js")
 
 /**************** GET ROUTES  ************/
 // get all abonnement
 router.get("/getAllAbonemment/",getAllAbonnement);
 //get abonnement by ID 
 router.get("/Abonnement/getAbonnementById/:id",getAbonnementById);
-
+//get abonnement by ID 
+router.get("/Abonnement/getAbonnementsByDetails/",getAllSubscriptionsWithDetails);
 /**************** DELETE ROUTES  ************/
 //delete abonnement
 router.delete("/Abonnement/deleteAbonnement/:id",deleteAbonnement);
