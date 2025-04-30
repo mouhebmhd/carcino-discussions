@@ -34,7 +34,7 @@ export default function Community() {
   
   const loadData = () => {
     axios
-      .get("http://localhost:3030/communitiy/getAllCommunities/")
+      .get("http://localhost:3030/communitiy/getAllCommunities/",{withCredentials:true})
       .then((res) => setCommunities(res.data))
       .catch((err) => console.error(err));
   };
@@ -46,7 +46,7 @@ export default function Community() {
 
   const deleteCommunity = (id) =>
     axios
-      .delete(`http://localhost:3030/community/deleteCommunity/${id}`)
+      .delete(`http://localhost:3030/community/deleteCommunity/${id}`,{withCredentials:true})
       .then(() => loadData())
       .catch((err) => console.error(err));
 
@@ -58,7 +58,7 @@ export default function Community() {
       communityId:id,
       dateDebutAbonnement : new Date ()
      }
-     axios.post("http://localhost:3030/Abonnement/postAbonnement/",data)
+     axios.post("http://localhost:3030/Abonnement/postAbonnement/",data,{withCredentials:true})
      .then(response=>{
       console.log(response.data)
       loadData()
@@ -70,7 +70,7 @@ export default function Community() {
     };
     const unfollowCommunity = (communityId,userId) =>{
       const data= {communityId,userId}
-      axios.delete("http://localhost:3030/Abonnement/deleteAbonnementUserCommunity/"+userId+"/"+communityId)
+      axios.delete("http://localhost:3030/Abonnement/deleteAbonnementUserCommunity/"+userId+"/"+communityId,{withCredentials:true})
       .then(response=>{
        console.log(response.data)
        loadData()

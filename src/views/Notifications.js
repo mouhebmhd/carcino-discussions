@@ -14,7 +14,7 @@ const NotificationManager = () => {
   // 🟢 Get Notifications
   useEffect(() => {
     setLoading(true);
-    fetch(`http://localhost:5000/api/notifications/${userId}`)
+    fetch(`http://localhost:3000/api/notifications/${userId}`,{withCredentials:true})
       .then(res => {
         if (!res.ok) {
           throw new Error('Network response was not ok');

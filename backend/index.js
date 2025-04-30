@@ -2,6 +2,8 @@ const express=require("express"); // create a server
 const dotenv=require("dotenv"); // read config file 
 dotenv.config()
 const cors=require("cors")
+const cookieParser = require('cookie-parser');
+
 const portPrimary=process.env.portPrimary;
 const portSecondary=process.env.portSecondary;
 const portTertiary=process.env.portTertiary;
@@ -15,8 +17,12 @@ const connectToDatabase=require("./database/connectDatabase");
 connectToDatabase();
 
 server.use(express.json())
+server.use(cookieParser());  
 
-server.use(cors())
+server.use(cors({
+    origin: 'http://localhost:3000',  // Don't use '*'
+    credentials: true
+  }));
 
 /***************** ADDING ROUTES ***********************/
 /* COMMUNITY ROUTE */

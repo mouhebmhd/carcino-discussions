@@ -22,7 +22,7 @@ function Network() {
 
   const loadUsers = async () => {
     try {
-      const response = await axios.get(`${API_URL}/Utilisateur/getAllUtilisateur/`);
+      const response = await axios.get(`${API_URL}/Utilisateur/getAllUtilisateur/`,{withCredentials:true});
       
       // Fetch tags for each user asynchronously
       const usersWithData = await Promise.all(response.data.map(async (user) => {

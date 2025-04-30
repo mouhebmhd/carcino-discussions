@@ -25,7 +25,7 @@ export default function FeedDisplay() {
   // Load communities
   const loadCommunities = async () => {
     try {
-      const response = await axios.get("http://localhost:3030/communitiy/getAllCommunities/");
+      const response = await axios.get("http://localhost:3030/communitiy/getAllCommunities/",{withCredentials:true});
       setCommunities(response.data);
     } catch (error) {
       console.error("Error fetching communities:", error);
@@ -45,7 +45,7 @@ export default function FeedDisplay() {
 
   };
   const loadUsers= ()=>{
-        axios.get("http://localhost:3030/Utilisateur/getAllUtilisateur/")
+        axios.get("http://localhost:3030/Utilisateur/getAllUtilisateur/",{withCredentials:true})
         .then((response)=>{
             console.log(response.data)
             setUsers(response.data)

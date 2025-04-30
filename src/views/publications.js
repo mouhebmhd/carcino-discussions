@@ -15,7 +15,7 @@ export default function Publications() {
     const [posts, setPosts] = useState([])
     const loadPosts = async () => {
         try {
-            const response = await axios.get("http://localhost:3030/Publication/getAllPublication/");
+            const response = await axios.get("http://localhost:3030/Publication/getAllPublication/",{withCredentials:true});
             setPosts(response.data);
         } catch (error) {
             console.error("Error fetching posts:", error);
@@ -25,7 +25,7 @@ export default function Publications() {
 
     const deletePost = async (post) => {
         try {
-            await axios.delete(`http://localhost:3030/Publication/deletePublication/${post._id}`);
+            await axios.delete(`http://localhost:3030/Publication/deletePublication/${post._id}`,{withCredentials:true});
             loadPosts();
         } catch (error) {
             console.error("Error deleting post:", error);
@@ -33,7 +33,7 @@ export default function Publications() {
     };
     const approvePost=(post)=>{
         post["postStatus"]="approved";
-        axios.put("http://localhost:3030/Publication/updatePublication/"+post._id,post)
+        axios.put("http://localhost:3030/Publication/updatePublication/"+post._id,post,{withCredentials:true})
         .then((response)=>{
             console.log(response.data)
             loadPosts()
@@ -44,7 +44,7 @@ export default function Publications() {
     }
     const disapprovePost=(post)=>{
         post["postStatus"]="disapproved";
-        axios.put("http://localhost:3030/Publication/updatePublication/"+post._id,post)
+        axios.put("http://localhost:3030/Publication/updatePublication/"+post._id,post,{withCredentials:true})
         .then((response)=>{
             console.log(response.data)
             loadPosts()

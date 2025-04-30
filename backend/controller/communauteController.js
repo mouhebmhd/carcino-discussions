@@ -8,6 +8,7 @@ const getAllCommunities=async (req,res)=>{
 
     try
     {
+      console.log(req.cookies.auth_token)
         const communities=await communauteSchema.find();
         res.status(200).json(communities);
     }

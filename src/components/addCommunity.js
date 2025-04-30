@@ -16,7 +16,7 @@ export default function AddCommunity({ onAddSuccess }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    axios.post("http://localhost:3030/community/postCommunity/", communityData)
+    axios.post("http://localhost:3030/community/postCommunity/", communityData,{withCredentials:true})
       .then((response) => {
         console.log(response.data);
         onAddSuccess();

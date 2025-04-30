@@ -36,7 +36,7 @@ export default function SeeProfile() {
     };
 
     const loadUserProfile = () => {
-        axios.get(baseUrl + "/Utilisateur/getUtilisateurById/" + userId)
+        axios.get(baseUrl + "/Utilisateur/getUtilisateurById/" + userId,{withCredentials:true})
             .then((response) => {
                 const userData = response.data;
                 
@@ -48,7 +48,7 @@ export default function SeeProfile() {
                 setError("Failed to load user profile");
             });
             
-        axios.get(baseUrl + "/utilisateur/getUtilisateurStats/" + userId)
+        axios.get(baseUrl + "/utilisateur/getUtilisateurStats/" + userId,{withCredentials:true})
             .then((response) => {
                 console.log(response.data);
                 setData(response.data);

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import "./login.css"
+import Cookies from 'js-cookie';
 import loginImage from "../../images/undraw_secure-login_m11a .png"
 function Login() {
   const [email, setEmail] = useState("");
@@ -34,6 +35,8 @@ function Login() {
         console.log("Login Success ! ")
 
         setUser(response.data.userData);
+        const token=(response.data.token)
+        Cookies.set('auth_token', token, { expires: 7 }); 
         localStorage.setItem("user", JSON.stringify(response.data.userData));
       }
       

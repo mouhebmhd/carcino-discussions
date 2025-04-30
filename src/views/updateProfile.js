@@ -19,13 +19,13 @@ export default function UpdateUser() {
     const baseUrl = "http://localhost:3030"
 
     const loadUserProfile = () => {
-        axios.get(baseUrl + "/Utilisateur/getUtilisateurById/" + userId)
+        axios.get(baseUrl + "/Utilisateur/getUtilisateurById/" + userId,{withCredentials:true})
             .then((response) => {
                 setUser(response.data);
             })
             .catch(() => setError("Failed to load user profile"));
 
-        axios.get(baseUrl + "/utilisateur/getUtilisateurStats/" + userId)
+        axios.get(baseUrl + "/utilisateur/getUtilisateurStats/" + userId,{withCredentials:true})
             .then((response) => setData(response.data))
             .catch((error) => console.log(error));
     }

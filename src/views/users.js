@@ -18,7 +18,7 @@ export default function Utilisateurs() {
   const API_URL = "http://localhost:3030";  
 
   const loadUsers = () => {
-    axios.get(`${API_URL}/Utilisateur/getAllUtilisateur/`)
+    axios.get(`${API_URL}/Utilisateur/getAllUtilisateur/`,{withCredentials:true})
       .then(response => {
         setUsers(response.data);
         setSuccess(false);
@@ -33,7 +33,7 @@ export default function Utilisateurs() {
   const activateAccount = (user) => {
     const updatedUser = { ...user, accountStatus: "active" };
     console.log(updatedUser)
-    axios.put(`${API_URL}/Utilisateur/updateUtilisateur/${user._id}`, updatedUser)
+    axios.put(`${API_URL}/Utilisateur/updateUtilisateur/${user._id}`, updatedUser,{withCredentials:true})
       .then(response => {
         console.log(response);
         loadUsers();
@@ -47,7 +47,7 @@ export default function Utilisateurs() {
   const makeModerator = (user) => {
     const updatedUser = { ...user, role: "moderateur" };
     console.log(updatedUser)
-    axios.put(`${API_URL}/Utilisateur/updateUtilisateur/${user._id}`, updatedUser)
+    axios.put(`${API_URL}/Utilisateur/updateUtilisateur/${user._id}`, updatedUser,{withCredentials:true})
       .then(response => {
         console.log(response);
         loadUsers();
@@ -61,7 +61,7 @@ export default function Utilisateurs() {
   const makeMember = (user) => {
     const updatedUser = { ...user, role: "membre" };
     console.log(updatedUser)
-    axios.put(`${API_URL}/Utilisateur/updateUtilisateur/${user._id}`, updatedUser)
+    axios.put(`${API_URL}/Utilisateur/updateUtilisateur/${user._id}`, updatedUser,{withCredentials:true})
       .then(response => {
         console.log(response);
         loadUsers();
@@ -76,7 +76,7 @@ export default function Utilisateurs() {
   const blockAccount = (user) => {
     const updatedUser = { ...user, accountStatus: "waiting" };
     console.log(updatedUser)
-    axios.put(`${API_URL}/Utilisateur/updateUtilisateur/${user._id}`, updatedUser)
+    axios.put(`${API_URL}/Utilisateur/updateUtilisateur/${user._id}`, updatedUser,{withCredentials:true})
       .then(response => {
         console.log(response);
         loadUsers();
@@ -90,7 +90,7 @@ export default function Utilisateurs() {
 
   const deleteUserAccount = (userId) => {
     console.log(userId)
-    axios.delete(`${API_URL}/Utilisateur/deleteUtilisateur/${userId}`)
+    axios.delete(`${API_URL}/Utilisateur/deleteUtilisateur/${userId}`,{withCredentials:true})
       .then(response => {
         console.log(response);
         loadUsers();

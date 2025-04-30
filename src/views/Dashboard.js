@@ -7,7 +7,7 @@ function Dashboard() {
   const [stats, setStats] = useState(null);
 
   useEffect(() => {
-    axios.get('http://localhost:3030/stats/getStats')
+    axios.get('http://localhost:3030/stats/getStats',{withCredentials:true})
       .then(response => setStats(response.data))
       .catch(error => console.error("Error fetching stats:", error));
   }, []);
