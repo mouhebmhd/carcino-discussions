@@ -152,13 +152,13 @@ export default function SeeProfile() {
                             <div className="col-6 col-lg-3 dataBox">
                                 <div className="count-data text-center">
                                     <h6 className="count h2 dark-color" data-to="150" data-speed="150">{data.interactionsCount}</h6>
-                                    <p className="m-0px font-w-600">Total Comments</p>
+                                    <p className="m-0px font-w-600">Total Interactions</p>
                                 </div>
                             </div>
                             <div className="col-6 col-lg-3 dataBox">
                                 <div className="count-data text-center">
                                     <h6 className="count h2 dark-color" data-to="850" data-speed="850">{data.commentsCount}</h6>
-                                    <p className="m-0px font-w-600">Total Interactions </p>
+                                    <p className="m-0px font-w-600">Total Comments </p>
                                 </div>
                             </div>
                             <div className="col-6 col-lg-3 dataBox">

@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 export default function UpdateUser() {
     const navigate=useNavigate()
-    const userId = useParams().id.slice(1)
+    const userId = useParams().id
     const [user, setUser] = useState({ userAvatar: '' })
     const [data, setData] = useState({
         "pubCount": 0,
