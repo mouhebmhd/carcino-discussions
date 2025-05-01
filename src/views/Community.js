@@ -70,7 +70,7 @@ export default function Community() {
      })
     };
     const seeCommunity=(communityId)=>{
-      navigate("/community/SeePublications")
+      navigate("/community/SeePublications/"+communityId)
     }
     const unfollowCommunity = (communityId,userId) =>{
       const data= {communityId,userId}
