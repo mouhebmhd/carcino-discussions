@@ -16,7 +16,12 @@ import { useState } from 'react';
 function NavBar() {
   const [isLoggedOn,setIsLoggedOn]=useState(JSON.parse(localStorage.getItem("user")));
   const user = JSON.parse(localStorage.getItem("user"))
-  const role=user.role;
+  var role="visitor";
+  if(user)
+  {
+     role=user.role;
+     setIsLoggedOn(user)
+  }
   return (
     <nav className="navbar  navbar-expand-lg navbar-light bg-white">
       <div className="container-fluid px-5">
@@ -49,37 +54,46 @@ function NavBar() {
               </NavLink >
             </li>
             }
-            {!isLoggedOn._id && (
+            {role=="visitor" && (
   <>
+   <li className="nav-item">
+              <NavLink
+                className={({ isActive }) =>
+                  `nav-link ${styles.navLink} ${isActive ? styles.activeLink : ''}`
+                }
+                to="/home">
+                <FaHome className="mx-2 " /> Home
+              </NavLink >
+            </li>
     <li className="nav-item">
-      <NavLink
+      <a
         className={({ isActive }) =>
           `nav-link ${styles.navLink} ${isActive ? styles.activeLink : ''}`
         }
-        to="/about"
+        href="#about"
       >
         <FaInfoCircle className="mx-2" /> About
-      </NavLink>
+      </a>
     </li>
     <li className="nav-item">
-      <NavLink
+      <a
         className={({ isActive }) =>
           `nav-link ${styles.navLink} ${isActive ? styles.activeLink : ''}`
         }
-        to="/services"
+        href="#services"
       >
         <FaTools className="mx-2" /> Services
-      </NavLink>
+      </a>
     </li>
     <li className="nav-item">
-      <NavLink
+      <a
         className={({ isActive }) =>
           `nav-link ${styles.navLink} ${isActive ? styles.activeLink : ''}`
         }
-        to="/contact"
+        href="#contact"
       >
         <FaPhone className="mx-2" /> Contact
-      </NavLink>
+      </a>
     </li>
     <li className="nav-item">
       <NavLink
@@ -94,7 +108,7 @@ function NavBar() {
   </>
 )}
 
-            {isLoggedOn._id  && (
+            {role!="visitor"  && (
               <>
               {role=="administrateur" && 
                 <li className="nav-item">
