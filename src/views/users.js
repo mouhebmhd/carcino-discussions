@@ -45,7 +45,7 @@ export default function Utilisateurs() {
       });
   };
   const makeModerator = (user) => {
-    const updatedUser = { ...user, role: "moderateur" };
+    const updatedUser = { ...user, role: "moderateur" ,update:"isModerator"};
     console.log(updatedUser)
     axios.put(`${API_URL}/Utilisateur/updateUtilisateur/${user._id}`, updatedUser,{withCredentials:true})
       .then(response => {

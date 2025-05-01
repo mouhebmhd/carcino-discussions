@@ -133,8 +133,8 @@ export default function Moderators() {
            
             <div className="container">
           <div className="text-center mb-5">
-            <h6 className="section-title bg-white text-center specialText px-3">Membres</h6>
-            <h1 className="mb-5">Gestions des Membres</h1>
+            <h6 className="section-title bg-white text-center specialText px-3">Modérateur</h6>
+            <h1 className="mb-5">Gestions des Modérateurs</h1>
             {error && <p className="alert alert-danger">Erreur lors du traitement de votre demande. Veuillez réessayer plus tard.</p>}
             {success && <p className="alert alert-success">Opération réussie.</p>}
           </div>
@@ -169,28 +169,28 @@ export default function Moderators() {
                     </td>
                   <td>{user.accountStatus}</td>
                   <td className> 
-                    <button className="btn btn-primary btn-sm mx-1" onClick={() => navigate("/profile/seeUserProfile/"+user._id)}>
+                    <button className="btn btn-primary btn-sm m-1" onClick={() => navigate("/profile/seeUserProfile/"+user._id)}>
                       Voir Détails
                     </button>
                     {user.accountStatus === "active" ? (
-                      <button className="btn btn-warning btn-sm mx-1" onClick={() => blockAccount(user)}>
+                      <button className="btn btn-warning btn-sm m-1" onClick={() => blockAccount(user)}>
                         Bloquer
                       </button>
                     ) : (
-                      <button className="btn btn-success btn-sm mx-1" onClick={() => activateAccount(user)}>
+                      <button className="btn btn-success btn-sm m-1" onClick={() => activateAccount(user)}>
                         Activer
                       </button>
                     )}
                     {user.role === "membre" ? (
-                      <button className="btn btn-dark btn-sm mx-1" onClick={() => makeModerator(user)}>
+                      <button className="btn btn-dark btn-sm m-1" onClick={() => makeModerator(user)}>
                         Définir Modérateur
                       </button>
                     ) : (
-                      <button className="btn btn-primary  btn-sm mx-1" onClick={() => makeMember(user)}>
+                      <button className="btn btn-primary  btn-sm m-1" onClick={() => makeMember(user)}>
                         Définir Membre
                       </button>
                     )}
-                    <button className="btn btn-danger btn-sm mx-1" onClick={() => deleteUserAccount(user._id)}>
+                    <button className="btn btn-danger btn-sm m-1" onClick={() => deleteUserAccount(user._id)}>
                       Supprimer
                     </button>
                   </td>
