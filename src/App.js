@@ -19,6 +19,7 @@ import Publications from "./views/publications.js";
 import FeedDisplay from "./views/FeedDisplay.js";
 import Dashboard from "./views/Dashboard.js";
 import Abonnements from "./views/Abonnements.js";
+import ViewCommunity from "./views/viewCommunity.js";
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/signup" element={<Signup />} />
         <Route exact path="/communities" element={<Community />} />
+        <Route exact path="/community/SeePublications/:communityId" element={<ViewCommunity />} />
         <Route exact path="/notifications" element={<Notifications />} />
         <Route exact path="/users" element={<Users />} />
         <Route exact path="/moderators" element={<Moderators />} />
