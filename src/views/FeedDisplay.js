@@ -140,8 +140,10 @@ export default function FeedDisplay() {
 
             {/* Main content column */}
             <div className="col-12 p-4 main-content" style={{height:"fit-content"}}>
-              <NewPost  onAddPost={loadPosts} />
-
+              {user.accountStatus=="active" && 
+              <NewPost  onAddPost={loadPosts} />}
+            {user.accountStatus=="frozen" && 
+              <p className='alert alert-danger'>Vous n'avez pas le droit de publier. Votre compte n'est pas encore activé</p>} 
               <div className="postsContainer p-2" >
                 {posts.length === 0 && <p className='alert alert-danger'>Posts Fetching ...</p>}
                 {posts.length > 0 && posts.map((post) => (

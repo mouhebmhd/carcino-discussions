@@ -7,12 +7,13 @@ import UpdateCommunity from "../components/updateCommunity";
 import AddCommunity from "../components/addCommunity";
 import { RiUserFollowFill } from "react-icons/ri";
 import { RiUserUnfollowFill } from "react-icons/ri";
-
+import { useNavigate } from "react-router-dom";
 export default function Community() {
   const user = JSON.parse(localStorage.getItem("user"));
   const [communities, setCommunities] = useState([]);
   const [subscribtions, setSubscribtions] = useState([]);
   const [updatedCommunity, setUpdatedCommunity] = useState(null);
+  const navigate=useNavigate()
   const [showAddModal, setShowAddModal] = useState(false);
   const loadSubscribtions = () => {
     axios.get("http://localhost:3030/getAllAbonemment/")
@@ -68,6 +69,9 @@ export default function Community() {
       console.log(error)
      })
     };
+    const seeCommunity=(communityId)=>{
+      navigate("/community/SeePublications")
+    }
     const unfollowCommunity = (communityId,userId) =>{
       const data= {communityId,userId}
       axios.delete("http://localhost:3030/Abonnement/deleteAbonnementUserCommunity/"+userId+"/"+communityId,{withCredentials:true})
@@ -89,7 +93,12 @@ export default function Community() {
         <div className="text-center ">
           <h6 className="section-title bg-white specialText px-3">Communautés</h6>
           <h1 className="mb-5">Gérer les Communautés</h1>
-          
+          {user.accountStatus=="frozen" && 
+                   <p className='alert alert-danger'>
+                    Vous n'avez pas le droit de rejoindre des communautés. Votre compte n'est pas encore activé.
+                    </p>
+
+                  }
         </div>
 
      
@@ -140,6 +149,8 @@ export default function Community() {
                   >
                     <MdEdit /> Modifier
                   </button>}
+                  {user.accountStatus=="active" && 
+                  <>
                   {subscribtions.includes(c._id)==true && <button
                     className="btn btn-dark"
                     onClick={() => unfollowCommunity(c._id,user._id)}
@@ -153,7 +164,15 @@ export default function Community() {
                     
                     <RiUserFollowFill  /> Subscribe
                   </button>}
-
+                  {subscribtions.includes(c._id)==true && <button
+                    className="btn btn-danger"
+                    onClick={() => seeCommunity(c._id)}
+                  >
+                    
+                    <RiUserFollowFill  /> Consulter les Publications 
+                  </button>}
+                  </>}
+                
 
                   
                 </div>

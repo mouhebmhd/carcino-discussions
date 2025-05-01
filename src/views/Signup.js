@@ -14,6 +14,7 @@ function SignupS() {
     email: "",
     motDePasse: "",
     numeroTelephone: "",
+    accountStatus: "frozen",
     role: "membre",
     userAvatar: "" // Added avatar field
   });
