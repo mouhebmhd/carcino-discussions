@@ -20,8 +20,7 @@ function Dashboard() {
 
   return (
     <>
-      <NavBar />
-      <div className="text-center mt-3">
+      <div className="text-center ">
         <h6 className="section-title text-center specialText px-3">Statistiques</h6>
         <h1 className="">Dashboard</h1>
       </div>

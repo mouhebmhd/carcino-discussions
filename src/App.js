@@ -20,6 +20,7 @@ import FeedDisplay from "./views/FeedDisplay.js";
 import Dashboard from "./views/Dashboard.js";
 import Abonnements from "./views/Abonnements.js";
 import ViewCommunity from "./views/viewCommunity.js";
+import AdminDashboard from "./views/ControlPanel.js";
 
 
 function App() {
@@ -49,6 +50,7 @@ function App() {
         <Route exact path="/dashboard" element={<Dashboard />} />
         <Route exact path="/abonnements" element={<Abonnements />} />
         <Route exact path="/analyse" element={<Analyse />} />
+        <Route exact path="/adminDashboard" element={<AdminDashboard />} />
        
 
         

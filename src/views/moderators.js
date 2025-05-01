@@ -127,8 +127,7 @@ export default function Moderators() {
 
   return (
     <>
-      <NavBar color="var(--mainColor)" />
-      <div className="container-xxl py-5 category">
+      <div className="container-xxl  category" >
          
            
             <div className="container">

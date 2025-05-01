@@ -21,3 +21,7 @@
     height: 95vh;
     margin: 0;
 }
+.navbar
+{
+    position: sticky !important  ;
+}

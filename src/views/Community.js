@@ -88,8 +88,8 @@ export default function Community() {
 
   return (
     <>
-      <NavBar />
-      <div className="row p-5 d-flex flex-column">
+ 
+      <div className="row d-flex flex-column">
         <div className="text-center ">
           <h6 className="section-title bg-white specialText px-3">Communautés</h6>
           <h1 className="mb-5">Gérer les Communautés</h1>

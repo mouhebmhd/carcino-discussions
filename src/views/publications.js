@@ -59,8 +59,8 @@ export default function Publications() {
     }, [user._id])
     return (
         <>
-            <NavBar></NavBar>
-            <div className="text-center mb-5 mt-3">
+  
+            <div className="text-center mb-5 ">
                 <h6 className="section-title bg-white text-center specialText px-3">Publications</h6>
                 <h1 className="mb-5">Gestions des publications</h1>
             </div>
@@ -100,17 +100,17 @@ export default function Publications() {
                     <div className="card-footer column-gap-2 bg-white border-0 pt-3 d-flex justify-content-around px-4" style={{fontSize:"14x"}}>
                       <div className="text-center">
                         <span className="d-inline-flex align-items-center gap-1 text-primary border border-primary rounded-pill px-3 py-1 fw-semibold">
-                          <FaRegThumbsDown /> Down Votes {post.downVotes}
+                          <FaRegThumbsDown />  {post.downVotes}
                         </span>
                       </div>
                       <div className="text-center">
                         <span className="d-inline-flex align-items-center gap-1 text-success border border-success rounded-pill px-3 py-1 fw-semibold">
-                          <FaRegThumbsUp /> Up Votes {post.upVotes}
+                          <FaRegThumbsUp />   {post.upVotes}
                         </span>
                       </div>
                       <div className="text-center">
                         <span className="d-inline-flex align-items-center gap-1 text-danger border border-danger rounded-pill px-3 py-1 fw-semibold">
-                          <IoWarning /> Signals {post.signals}
+                          <IoWarning />  {post.signals}
                         </span>
                       </div>
                     </div>

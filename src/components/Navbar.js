@@ -96,13 +96,13 @@ function NavBar() {
 
             {isLoggedOn._id  && (
               <>
-              {role=="administrateur" && 
+              {role!="membre" && 
                 <li className="nav-item">
                   <NavLink
                     className={({ isActive }) =>
                       `nav-link ${styles.navLink} ${isActive ? styles.activeLink : ''}`
                     }
-                    to="/dashboard">
+                    to="/dashboardAdmin">
                     <TbLayoutDashboardFilled  className="mx-2 " /> Dashboard
                   </NavLink >
                 </li>}

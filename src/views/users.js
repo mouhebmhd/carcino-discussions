@@ -129,8 +129,8 @@ export default function Utilisateurs() {
 
   return (
     <>
-      <NavBar color="var(--mainColor)" />
-      <div className="container-xxl py-5 category">
+
+      <div className="container-xxlcategory">
          
            
             <div className="container">
