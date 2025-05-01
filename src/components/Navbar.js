@@ -124,6 +124,17 @@ function NavBar() {
                     </NavLink>
                   </li>
                 )}
+                {role == "membre" && (
+                  <li className="nav-item">
+                    <NavLink
+                      className={({ isActive }) =>
+                        `nav-link ${styles.navLink} ${isActive ? styles.activeLink : ''}`
+                      }
+                      to="/communitiesDisplay">
+                      <FaNetworkWired className="mx-2" /> Communauté
+                    </NavLink>
+                  </li>
+                )}
                 {role !== "membre" && (
                   <>
                     

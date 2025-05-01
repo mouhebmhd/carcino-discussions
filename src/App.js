@@ -21,7 +21,7 @@ import Dashboard from "./views/Dashboard.js";
 import Abonnements from "./views/Abonnements.js";
 import ViewCommunity from "./views/viewCommunity.js";
 import AdminDashboard from "./views/ControlPanel.js";
-
+import CommunitiesDisplay from "./views/communitiesDisplay.js"
 
 function App() {
   const isLoggedOn = JSON.parse(localStorage.getItem("user")) !== undefined;
@@ -38,6 +38,7 @@ function App() {
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/signup" element={<Signup />} />
         <Route exact path="/communities" element={<Community />} />
+        <Route exact path="/communitiesDisplay" element={<CommunitiesDisplay />} />
         <Route exact path="/community/SeePublications/:communityId" element={<ViewCommunity />} />
         <Route exact path="/notifications" element={<Notifications />} />
         <Route exact path="/users" element={<Users />} />
@@ -51,7 +52,7 @@ function App() {
         <Route exact path="/abonnements" element={<Abonnements />} />
         <Route exact path="/analyse" element={<Analyse />} />
         <Route exact path="/dashboardAdmin" element={<AdminDashboard />} />
-       
+        
 
         
         
