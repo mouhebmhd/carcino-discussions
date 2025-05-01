@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import NavBar from '../components/Navbar';
 import Moderators from "./moderators"
 import Users from "./users"
-import "../../styles/sideBarStyle.css"
+import "../styles/sideBarStyle.css"
 import Communities from "./Community"
 import Posts from "./publications"
 import Dashboard from "./Dashboard"
