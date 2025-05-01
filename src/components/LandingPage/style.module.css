@@ -9,7 +9,15 @@
     text-decoration: underline;
     text-underline-offset: 5px;
 }
-
+li a
+{
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    height: 5vh;
+    text-decoration: none;
+    color: #595959;
+}
 .navLink:hover
 {
     color: #833F92 !important;
