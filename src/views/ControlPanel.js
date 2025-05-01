@@ -1,114 +1,93 @@
 import React, { useState } from 'react';
 import NavBar from '../components/Navbar';
-import Moderators from "./moderators"
-import Users from "./users"
-import "../styles/sideBarStyle.css"
-import Communities from "./Community"
-import Posts from "./publications"
-import Dashboard from "./Dashboard"
+import Moderators from "./moderators";
+import Users from "./users";
+import Communities from "./Community";
+import Posts from "./publications";
+import Dashboard from "./Dashboard";
+import styles from "../styles/sideBarStyle.module.css"; // Import CSS Module
+
 export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState('dashboard');
-  
-  
-  
+
   return (
     <>
-    <NavBar></NavBar>
-    <div className="container-fluid ">
-      <div className="row ">
-        {/* Sidebar */}
-        <nav className="col-md-3 col-lg-2  sideBar vh-100">
-  <div className="position-sticky pt-3 ">
-    <div className="d-flex align-items-center pb-3 mb-3 border-bottom border-secondary px-3">
-      <span className=" fw-semibold text-center">Panneau d'administration</span>
-    </div>
-    <ul className="nav flex-column px-3 sideItems">
-    <li className="nav-item">
+    <section className={styles.navbarItem} >
+      <NavBar />
+    </section>
+      
+      <div className="container-fluid ">
+        <div className="row ">
+          {/* Sidebar */}
+          <nav className={`${styles.sideBar} col-md-3 col-lg-2`}>
+  <div className={styles.positionSticky}>
+    <div className={styles.sidebarHeader}>Dashboard</div>
+    <ul className={styles.sidebarNav}>
+      <li className={styles.navItem}>
         <a
-          className={`nav-link d-flex align-items-center  ${activeTab === 'dashboard' ? 'active ' : ''}`}
+          className={`${styles.navLink} ${activeTab === 'dashboard' ? styles.active : ''}`}
           href="#"
           onClick={(e) => { e.preventDefault(); setActiveTab('dashboard'); }}
         >
-          <i className="bi bi-people me-2"></i>
-          Dashboard
+          <i className="bi bi-house-door"></i>
+          Activity Center
         </a>
       </li>
-      <li className="nav-item">
+      <li className={styles.navItem}>
         <a
-          className={`nav-link d-flex align-items-center ${activeTab === 'moderators' ? 'active ' : ''}`}
+          className={`${styles.navLink} ${activeTab === 'moderators' ? styles.active : ''}`}
           href="#"
           onClick={(e) => { e.preventDefault(); setActiveTab('moderators'); }}
         >
-          <i className="bi bi-people me-2"></i>
+          <i className="bi bi-person-check"></i>
           Gérer les modérateurs
         </a>
       </li>
-      <li className="nav-item">
+      <li className={styles.navItem}>
         <a
-          className={`nav-link d-flex align-items-center ${activeTab === 'users' ? 'active ' : ''}`}
+          className={`${styles.navLink} ${activeTab === 'users' ? styles.active : ''}`}
           href="#"
           onClick={(e) => { e.preventDefault(); setActiveTab('users'); }}
         >
-          <i className="bi bi-person me-2"></i>
+          <i className="bi bi-person"></i>
           Gérer les utilisateurs
         </a>
       </li>
-      <li className="nav-item">
+      <li className={styles.navItem}>
         <a
-          className={`nav-link d-flex align-items-center ${activeTab === 'communities' ? 'active  ' : ''}`}
+          className={`${styles.navLink} ${activeTab === 'communities' ? styles.active : ''}`}
           href="#"
           onClick={(e) => { e.preventDefault(); setActiveTab('communities'); }}
         >
-          <i className="bi bi-people-fill me-2"></i>
+          <i className="bi bi-people-fill"></i>
           Gérer les communautés
         </a>
       </li>
-      <li className="nav-item">
+      <li className={styles.navItem}>
         <a
-          className={`nav-link d-flex align-items-center ${activeTab === 'posts' ? 'active   ' : ''}`}
+          className={`${styles.navLink} ${activeTab === 'posts' ? styles.active : ''}`}
           href="#"
           onClick={(e) => { e.preventDefault(); setActiveTab('posts'); }}
         >
-          <i className="bi bi-file-earmark-text me-2"></i>
+          <i className="bi bi-file-earmark-text"></i>
           Gérer les publications
         </a>
       </li>
     </ul>
-    
   </div>
 </nav>
 
-        
-        {/* Main content */}
-        <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
-          {activeTab === 'moderators' && (
-            <Moderators></Moderators>
-          )}
-          
-          {activeTab === 'users' && (
-            <Users></Users>
-          )}
-          {activeTab === 'communities' && (
-            <Communities></Communities>
-          )}
-          {activeTab === 'posts' && (
-            <Posts></Posts>
-          )}
-           {activeTab === 'dashboard' && (
-            <Dashboard></Dashboard>
-          )}
-          
-         
-          
-          
-          
-          
-         
-        </main>
-      </div>
-    </div>
 
+          {/* Main content */}
+          <main className={`${styles.contentSections}  col-md-9 ms-sm-auto col-lg-10  `}>
+            {activeTab === 'dashboard' && <Dashboard />}
+            {activeTab === 'moderators' && <Moderators />}
+            {activeTab === 'users' && <Users />}
+            {activeTab === 'communities' && <Communities />}
+            {activeTab === 'posts' && <Posts />}
+          </main>
+        </div>
+      </div>
     </>
-  
   );
 }

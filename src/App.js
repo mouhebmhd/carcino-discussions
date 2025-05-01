@@ -50,7 +50,7 @@ function App() {
         <Route exact path="/dashboard" element={<Dashboard />} />
         <Route exact path="/abonnements" element={<Abonnements />} />
         <Route exact path="/analyse" element={<Analyse />} />
-        <Route exact path="/adminDashboard" element={<AdminDashboard />} />
+        <Route exact path="/dashboardAdmin" element={<AdminDashboard />} />
        
 
         
