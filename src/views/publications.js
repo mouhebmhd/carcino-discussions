@@ -60,14 +60,14 @@ export default function Publications() {
     return (
         <>
             <NavBar></NavBar>
-            <div className="text-center mb-5 mt-2">
+            <div className="text-center mb-5 mt-3">
                 <h6 className="section-title bg-white text-center specialText px-3">Publications</h6>
                 <h1 className="mb-5">Gestions des publications</h1>
             </div>
-            <div className="postsContainer d-flex column-gap-3 p-2 flex-wrap">
+            <div className="postsContainer d-flex  flex-wrap justify-content-around">
                 {posts.length === 0 && <p className='alert alert-danger'>Posts Fetching ...</p>}
                 {posts.length > 0 && posts.map((post) => (
-                    <div className="card postCard mb-4 border-1 shadow-sm rounded-4" key={post._id}>
+                    <div className="card postCard mb-4 border-1 shadow-sm rounded-4" style={{width:"32%"}} key={post._id}>
                     <div className="card-body p-4">
                       <div className="d-flex align-items-start">
                         <img
@@ -97,7 +97,7 @@ export default function Publications() {
                       </div>
                     </div>
                   
-                    <div className="card-footer column-gap-2 bg-white border-0 pt-3 d-flex justify-content-around px-4">
+                    <div className="card-footer column-gap-2 bg-white border-0 pt-3 d-flex justify-content-around px-4" style={{fontSize:"14x"}}>
                       <div className="text-center">
                         <span className="d-inline-flex align-items-center gap-1 text-primary border border-primary rounded-pill px-3 py-1 fw-semibold">
                           <FaRegThumbsDown /> Down Votes {post.downVotes}

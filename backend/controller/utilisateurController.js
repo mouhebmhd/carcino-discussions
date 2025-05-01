@@ -6,6 +6,8 @@ const Publication=require("../models/Publication")
 const Interaction=require("../models/Interaction")
 const Comments=require("../models/Commentaire")
 const CommunitiesSubs=require("../models/Abonnement")
+const {saveNotification} =require("../controller/notificationController.js")
+
 const getAllUtilisateur=async (req,res)=>{ 
 
     try
@@ -53,11 +55,21 @@ const addUtilisateur = async (req, res) => {
   // update  utilisateur
   const updateUtilisateur = async (req, res) => {
     try {
-      const { id } = req.params;
-      console.log(req.body)
+      const { id } = req.params;      
+      const { update } = req.body;      
+
       const updatedUtilisateur = await UtilisateurSchema.findOneAndUpdate({_id:{$eq:id}}, req.body, { new: true });
       if (!updatedUtilisateur) return res.status(404).json({ error: "Utilisateur not found" });
       res.status(200).json(updatedUtilisateur);
+      if(update)
+      {
+        saveNotification(
+          new Date(),
+          "You are now designated as a moderator",
+          "Your account has been updated, and you now have moderator privileges.",
+          updatedUtilisateur._id
+        );
+              }
     } catch (error) {
       res.status(400).json({ error: error.message });
     }
@@ -84,7 +96,7 @@ const addUtilisateur = async (req, res) => {
         return res.status(401).json({ error: "Invalid credentials" });
       }
       const isPasswordValid=await bcrypt.compare(password,Utilisateur.motDePasse);
-      if(Utilisateur.accountStatus!="active")
+      if(Utilisateur.accountStatus=="waiting" )
         {
           res.status(500).json({ message: "Login Error ! Your Account is Blocked",  Utilisateur });
         }

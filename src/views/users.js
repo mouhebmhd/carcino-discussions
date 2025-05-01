@@ -45,7 +45,7 @@ export default function Utilisateurs() {
       });
   };
   const makeModerator = (user) => {
-    const updatedUser = { ...user, role: "moderateur" };
+    const updatedUser = { ...user, role: "moderateur" ,update:"isModerator"};
     console.log(updatedUser)
     axios.put(`${API_URL}/Utilisateur/updateUtilisateur/${user._id}`, updatedUser,{withCredentials:true})
       .then(response => {
@@ -169,7 +169,12 @@ export default function Utilisateurs() {
                     {user.role=="membre" && <p className='alert alert-success p-0 d-flex justify-content-center'>Membre</p>}
                     
                     </td>
-                  <td>{user.accountStatus}</td>
+                  <td>
+                  {user.accountStatus=="active" && <p className=" p-0 text-success">Active</p>}
+                  {user.accountStatus=="frozen" && <p className="  p-0 text-warning">Suspendu</p>}
+                  {user.accountStatus=="waiting" && <p className=" p-0 text-danger">En Attente</p>}
+      
+                    </td>
                   <td>
                     <button className="btn btn-primary btn-sm mx-1" onClick={() => navigate("/profile/seeUserProfile/"+user._id)}>
                       Voir Détails
