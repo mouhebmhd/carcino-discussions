@@ -22,6 +22,7 @@ import Abonnements from "./views/Abonnements.js";
 import ViewCommunity from "./views/viewCommunity.js";
 import AdminDashboard from "./views/ControlPanel.js";
 import CommunitiesDisplay from "./views/communitiesDisplay.js"
+import ModerateurMo from "./views/Moderateur1.js";
 
 function App() {
   const isLoggedOn = JSON.parse(localStorage.getItem("user")) !== undefined;
@@ -52,6 +53,7 @@ function App() {
         <Route exact path="/abonnements" element={<Abonnements />} />
         <Route exact path="/analyse" element={<Analyse />} />
         <Route exact path="/dashboardAdmin" element={<AdminDashboard />} />
+        <Route exact path="/ModerateurMo" element={<ModerateurMo />} />
         
 
         

@@ -1,9 +1,5 @@
 const communauteSchema=require("../models/Communaute.js");
 
-
-
-
-
 const getAllCommunities=async (req,res)=>{ 
 
     try
