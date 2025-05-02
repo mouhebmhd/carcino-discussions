@@ -88,9 +88,9 @@ function NavBar() {
             )}
 
             {/* Authenticated User Links */}
-            {role !== "visitor" && (
+            {role != "visitor" && (
               <>
-                {role !== "membre" && (
+                {role != "membre" && (
                   <li className="nav-item">
                     <NavLink
                       className={({ isActive }) =>

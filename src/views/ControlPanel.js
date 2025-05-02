@@ -34,7 +34,7 @@ export default function AdminDashboard() {
           Activity Center
         </a>
       </li>
-      {user.role=="moderateur" && 
+      {user.role=="administrateur" && 
       <li className={styles.navItem}>
         <a
           className={`${styles.navLink} ${activeTab === 'moderators' ? styles.active : ''}`}
