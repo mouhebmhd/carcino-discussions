@@ -9,7 +9,7 @@ import styles from "../styles/sideBarStyle.module.css"; // Import CSS Module
 
 export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState('dashboard');
-
+  const user=JSON.parse(localStorage.getItem("user"))
   return (
     <>
     <section className={styles.navbarItem} >
@@ -23,6 +23,7 @@ export default function AdminDashboard() {
   <div className={styles.positionSticky}>
     <div className={styles.sidebarHeader}>Dashboard</div>
     <ul className={styles.sidebarNav}>
+      
       <li className={styles.navItem}>
         <a
           className={`${styles.navLink} ${activeTab === 'dashboard' ? styles.active : ''}`}
@@ -33,6 +34,7 @@ export default function AdminDashboard() {
           Activity Center
         </a>
       </li>
+      {user.role=="moderateur" && 
       <li className={styles.navItem}>
         <a
           className={`${styles.navLink} ${activeTab === 'moderators' ? styles.active : ''}`}
@@ -43,6 +45,7 @@ export default function AdminDashboard() {
           Gérer les modérateurs
         </a>
       </li>
+      }
       <li className={styles.navItem}>
         <a
           className={`${styles.navLink} ${activeTab === 'users' ? styles.active : ''}`}
