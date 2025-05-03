@@ -46,6 +46,7 @@ export default function AdminDashboard() {
         </a>
       </li>
       }
+      {user.role=="administrateur" && 
       <li className={styles.navItem}>
         <a
           className={`${styles.navLink} ${activeTab === 'users' ? styles.active : ''}`}
@@ -55,7 +56,7 @@ export default function AdminDashboard() {
           <i className="bi bi-person"></i>
           Gérer les utilisateurs
         </a>
-      </li>
+      </li>}
       <li className={styles.navItem}>
         <a
           className={`${styles.navLink} ${activeTab === 'communities' ? styles.active : ''}`}

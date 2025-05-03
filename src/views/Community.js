@@ -102,7 +102,7 @@ export default function Community() {
         </div>
 
      
-        {user.role=="adminitrateur" && 
+        {user.role=="administrateur" && 
           <AddCommunity
             onAddSuccess={() => {
               setShowAddModal(false);
