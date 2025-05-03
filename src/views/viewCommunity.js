@@ -18,24 +18,24 @@ import { useParams } from 'react-router-dom';
 export default function ViewCommunity() {
   const user = JSON.parse(localStorage.getItem("user"));
   const communityId=useParams().communityId
-  const [communities, setCommunities] = useState([]);
   const [community, setCommunity] = useState({});
   const [posts, setPosts] = useState([]);
   const [users, setUsers] = useState([]);
   const [targetPost, setTargetPost] = useState({});
   const [postToUpdate, setPostToUpdate] = useState(null);
-
+  const [interaction,setInteraction]=useState("")
+  const [interactionType,setInteractionType]=useState("")
+  const [error,setError]=useState("")
   // Load communities
   const loadCommunities = async () => {
     try {
-      const response = await axios.get("http://localhost:3030/communitiy/getAllCommunities/",{withCredentials:true});
-      setCommunities(response.data);
-      const targetCommunity=communities.filter((comm)=>{
-        console.log(comm._id , " == ",communityId)
-        return comm._id==communityId
-    })
-    setCommunity(targetCommunity)
-    console.log("community not found YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY",communities)
+      axios.get("http://localhost:3030/community/getCommunityById/"+communityId,{withCredentials:true})
+      .then((response)=>{
+        setCommunity(response.data)
+      })
+     .catch((error)=>{
+      console.log(error)
+     })
     } catch (error) {
       console.error("Error fetching communities:", error);
     }
@@ -46,15 +46,26 @@ export default function ViewCommunity() {
   };
 
   // Load posts
-  const loadPosts = async () => {
+  const loadPosts =  () => {
     try {
-      const response = await axios.get("http://localhost:3030/Publication/getAllPublication/");
-      console.log(response.data);
-      const postsFiltered=response.data.filter((post,index)=>{
-        return post.communityId==communityId
+      console.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
+      axios.get("http://localhost:3030/Publication/getAllPublication/")
+      .then((response)=>{
+        console.log(response);
+        const postsFiltered=response.data.filter((post,index)=>{
+          return true
+        })
+        console.log("filtererd posts are ",postsFiltered);
+        setPosts(postsFiltered);
       })
-      setPosts(postsFiltered);
-    } catch (error) {
+      .catch (error=>{
+        
+          console.error("Error fetching posts:", error);
+          setPosts([]);
+        
+      })
+    } 
+    catch (error) {
       console.error("Error fetching posts:", error);
       setPosts([]);
     }
@@ -64,7 +75,6 @@ export default function ViewCommunity() {
   const loadUsers= ()=>{
         axios.get("http://localhost:3030/Utilisateur/getAllUtilisateur/",{withCredentials:true})
         .then((response)=>{
-            console.log(response.data)
             setUsers(response.data)
         })
         .catch((error)=>{
@@ -84,24 +94,10 @@ export default function ViewCommunity() {
   const closeModal = () => setPostToUpdate(null);
 
 
-  // Handle interaction (upvote, downvote, etc.)
-  const addInteraction = async (post, interaction) => {
-    if (typeof post[interaction] !== 'number') {
-      post[interaction] = 0;
-    }
-    post[interaction] += 1;
-
-    try {
-      await axios.put(`http://localhost:3030/Publication/updatePublication/`+post._id, post);
-      loadPosts();
-    } catch (error) {
-      console.error("Update failed:", error);
-    }
-  };
+ 
   const  findUser = (userId) => {
   
    const userFound = users.find((user) => user._id == userId);
-    console.log("Found user:", userFound);
     return userFound; 
   };
   
@@ -119,25 +115,47 @@ export default function ViewCommunity() {
   const handleUpdatePost = (post) => {
     setPostToUpdate(post);
   };
-  useEffect(() => {
-    loadCommunities();
-    loadPosts();
-    loadUsers(); // fetch users
-  }, [user._id]);
-  
+ 
   useEffect(() => {
     if (users.length > 0) {
       findUser("6804f11809734e73e73637ee");
     }
   }, [users]);
   
-
+  useEffect(() => {
+    loadCommunities();
+    loadPosts()
+    loadUsers(); 
+  }, [user._id]);
+  
   const reactions = [
     { label: "Upvote", emoji: <FaHeart className='fs-5 text-danger' />, field: "upVotes" },
     { label: "DownVote", emoji: <FaHeartCrack className='fs-5 text-muted' />, field: "downVotes" },
     { label: "Signals", emoji: <FaHeartCrack className='fs-5 text-warning' />, field: "signals" },
   ];
+  const addInteraction = async (post, interaction) => {
+    if(interaction.indexOf(post._id)==-1)
+    {
 
+    
+    if (typeof post[interaction] !== 'number') {
+      post[interaction] = 0;
+    }
+    post[interaction] += 1;
+
+    try {
+      await axios.put(`http://localhost:3030/Publication/updatePublication/`+post._id, post);
+      setInteraction(prev => prev + post._id);
+      setInteractionType("Vous avez déjà interagi avec cette publication 💔 ! ")
+      loadPosts();
+    } catch (error) {
+      console.error("Update failed:", error);
+    }}
+    else 
+    {
+      setError("You already reacted to this post ! ")
+    }
+  };
   return (
     <>
       <div className="community-page" style={{height:"fit-content"}}>
@@ -163,6 +181,9 @@ export default function ViewCommunity() {
               <div className="postsContainer p-2" >
                 {posts.length === 0 && <p className='alert alert-danger'>No Content Found For this Community</p>}
                 {posts.length > 0 && posts.map((post) => (
+                  <>
+                  {community.nomCommunaute == post.communityTag && 
+                  
                   <div className="card postCard mb-4 border-0 p-2  shadow-sm" key={post._id}>
                     <div className="card-body d-flex">
                       <div className="me-3">
@@ -196,39 +217,42 @@ export default function ViewCommunity() {
                       </div>
                     </div>
 
-                    <div className="actions d-flex flex-wrap justify-content-center column-gap-2 row-gap-2">
-                      {reactions.map((reaction, index) => (
-                        <button
-                          key={index}
-                          className="btn rounded-pill px-3 py-1 d-flex align-items-center gap-2"
-                          onClick={() => addInteraction(post, reaction.field)}
-                        >
-                          <span>{reaction.emoji}</span>
-                          <span>{reaction.label}</span>
-                          <span>{post[reaction.field]}</span>
-                        </button>
-                      ))}
-
-                      <button
-                        className="btn rounded-pill px-3 py-1 d-flex align-items-center gap-2"
-                        onClick={() => openModal(post)}
-                      >
-                        <RiExpandDiagonalLine className='fs-4 mx-2' />
-                        View Details
-                      </button>
-                        
-                      {post.publisherId == user._id && (
-                        <>
-                          <button className="btn btn-danger" onClick={() => deletePost(post)}>
-                            <MdDelete className='mx-1' /> Delete Post
-                          </button>
-                          <button className="btn btn-warning" onClick={() => handleUpdatePost(post)}>
-                            <MdOutlinePublish className='mx-1' /> Update Post
-                          </button>
-                        </>
-                      )}
-                    </div>
+                     <div className="actions d-flex flex-wrap justify-content-center column-gap-2 row-gap-2">
+                                          {interaction.indexOf(post._id)!=-1 && interactionType!="" && <p className="d-block alert alert-warning">{interactionType}</p>}
+                                          {interaction.indexOf(post._id)==-1 && reactions.map((reaction, index) => (
+                                            <button
+                                              key={index}
+                                              className="btn rounded-pill px-3 py-1 d-flex align-items-center gap-2"
+                                              onClick={() => addInteraction(post, reaction.field)}
+                                            >
+                                              <span>{reaction.emoji}</span>
+                                              <span>{reaction.label}</span>
+                                              <span>{post[reaction.field]}</span>
+                                            </button>
+                                          ))}
+                                          
+                                          <button
+                                            className="btn rounded-pill px-3 py-1 d-flex align-items-center gap-2"
+                                            onClick={() => openModal(post)}
+                                          >
+                                            <RiExpandDiagonalLine className='fs-4 mx-2' />
+                                            View Details
+                                          </button>
+                                            
+                                          {post.publisherId == user._id && (
+                                            <>
+                                              <button className="btn btn-danger" onClick={() => deletePost(post)}>
+                                                <MdDelete className='mx-1' /> Delete Post
+                                              </button>
+                                              <button className="btn btn-warning" onClick={() => handleUpdatePost(post)}>
+                                                <MdOutlinePublish className='mx-1' /> Update Post
+                                              </button>
+                                            </>
+                                          )}
+                                        </div>
                   </div>
+                  }
+                  </>
                 ))}
               </div>
             </div>

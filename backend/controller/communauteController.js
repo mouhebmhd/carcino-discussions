@@ -18,7 +18,7 @@ const getAllCommunities=async (req,res)=>{
 const getCommunityById = async (req, res) => {
     try {
       const { id } = req.params;
-      const community = await communauteSchema.findOne({communauteId:id});
+      const community = await communauteSchema.findById(id);
       if (!community) return res.status(404).json({ error: "Community not found" });
       res.status(200).json(community);
     } catch (error) {
