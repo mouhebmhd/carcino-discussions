@@ -1,6 +1,6 @@
 const commentaireSchema=require("../models/Commentaire.js");
 const {saveNotification} =require("../controller/notificationController.js")
-
+const Post =require("../models/Publication.js")
 const getAllCommentaire=async (req,res)=>{ 
 
     try
@@ -44,17 +44,22 @@ const addCommentaire = async (req, res) => {
       const commentId = comments.length + 1; 
       var newCommentaire = new commentaireSchema(req.body);
       newCommentaire["commentaireId"]=commentId;
+      newCommentaire["publicationId"]=req.body.publicationId;
+      const publication=await Post.findById({_id:req.body.publicationId})
+      console.log(newCommentaire)
       const savedCommentaire = await newCommentaire.save();
+     
       await saveNotification(
         new Date().toISOString(),
         "New Comment Has been Posted  ",
-        "Your Comment Has Been Posted Successfully ",
-        savedCommentaire.authorId
+        "Your Post got a new Commnent !  ",
+        publication.publisherId
       );
       
       res.status(200).json(savedCommentaire);
       
     } catch (error) {
+      console.log(error)
       res.status(400).json({ error: error.message });
     }
     

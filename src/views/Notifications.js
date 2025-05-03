@@ -28,20 +28,7 @@ const loadNotifications=()=>{
         setLoading(false);
         // Provide fallback data for testing if API fails
         setNotifications([
-          {
-            _id: '1',
-            title: 'Bienvenue!',
-            message: 'Bienvenue sur notre plateforme.',
-            date: new Date(),
-            read: false
-          },
-          {
-            _id: '2',
-            title: 'Nouveau message',
-            message: 'Vous avez reçu un nouveau message.',
-            date: new Date(),
-            read: false
-          }
+          
         ]);
       });
 }

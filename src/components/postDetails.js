@@ -15,7 +15,7 @@ export default function PostDetails(props) {
 
   useEffect(() => {
     if (!post?.publicationId) return;
-    axios.get(`http://localhost:3030/Commentaire/getCommentaireByPostId/${post.publicationId}`)
+    axios.get(`http://localhost:3030/Commentaire/getCommentaireByPostId/${post._id}`)
       .then((response) => {
         console.log(response.data);
         setComments(response.data);
@@ -40,7 +40,7 @@ export default function PostDetails(props) {
       contenuCommentaire: newComment,
       dateCommentaire: new Date().toISOString(),
       authorId: user._id,
-      publicationId: post.publicationId,
+      publicationId: post._id,
     };
 
     axios.post("http://localhost:3030/Commentaire/postCommentaire/", Comment)
