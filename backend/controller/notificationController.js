@@ -45,6 +45,18 @@ const saveNotification = async (notificationDate, notificationTitle, notificatio
   await newNotification.save();
   return true;
 };
+const postNotification=(req,res)=>{
+    const {notificationDate, notificationTitle, notificationDescription, notificationReceiver}=req.body;
+    try{
+        saveNotification(notificationDate, notificationTitle, notificationDescription, notificationReceiver);
+        res.status(200).json({message:"Operation success"})
+    }
+    catch(error)
+    {
+        res.status(500).json({message:"Operation Failed"})
+    }
+    
+}
 const deleteNotifications = async (req, res) => {
     try {
         const {id}=req.params;
@@ -64,4 +76,4 @@ const deleteNotifications = async (req, res) => {
   
 module.exports={getAllNotifications,
     getUserNotifications,deleteNotifications,
-    saveNotification}
+    saveNotification,postNotification}

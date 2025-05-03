@@ -3,6 +3,8 @@ import NavBar from '../components/Navbar'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import { FaCheck } from "react-icons/fa";
+import { CiWarning } from "react-icons/ci";
+
 
 import axios from 'axios'
 import { FaRegThumbsDown } from "react-icons/fa";
@@ -31,6 +33,26 @@ export default function Publications() {
             console.error("Error deleting post:", error);
         }
     };
+    const signalPost = (post) => {
+      const message = `Your post titled "${post.titrePublication}" has been signaled by the moderator. Please check it again.`;
+      const date=new Date().toISOString()
+      const title ="Warning !  "
+      const userId=post.publisherId;
+      const waring={
+        notificationDate:date,
+        notificationTitle:title,
+        notificationDescription:message,
+        notificationReceiver:userId,
+      }
+      axios.post("http://localhost:3030/notifications/postNotifications/",waring)
+      .then((response)=>{
+        console.log(response.data)
+      })
+      .catch(error=>{
+        console.log(error)
+      })
+    };
+    
     const approvePost=(post)=>{
         post["postStatus"]="approved";
         axios.put("http://localhost:3030/Publication/updatePublication/"+post._id,post,{withCredentials:true})
@@ -115,17 +137,20 @@ export default function Publications() {
                       </div>
                     </div>
                     <div className="text-center d-flex justify-content-center p-2 column-gap-2 ">
-                        <button className="d-inline-flex btn btn-danger align-items-center gap-1  px-3 py-1 fw-semibold" onClick={()=>{deletePost(post)}}>
-                          <MdDelete  /> Delete Post  
+                        <button className="d-inline-flex btn btn-danger align-items-center gap-1  px-1 py-1 fw-semibold" onClick={()=>{deletePost(post)}}>
+                          <MdDelete  /> Delete   
                         </button>
                        {post.postStatus=="approved" && <button className="d-inline-flex btn btn-dark align-items-center gap-1  px-3 py-1 fw-semibold" onClick={()=>{disapprovePost(post)}}>
-                          <FaCheck   /> Disapprove Post  
+                          <FaCheck   /> Disapprove   
                         </button>}
                         {post.postStatus!="approved" && 
-                        <button className="d-inline-flex btn btn-primary align-items-center gap-1  px-3 py-1 fw-semibold" onClick={()=>{approvePost(post)}}>
-                          <FaCheck   /> Approve Post  
+                        <button className="d-inline-flex btn btn-primary align-items-center gap-1  px-1 py-1 fw-semibold" onClick={()=>{approvePost(post)}}>
+                          <FaCheck   /> Approve   
                         </button>
                         }
+                         <button className="d-inline-flex btn btn-warning align-items-center gap-1  px-1 py-1 fw-semibold" onClick={()=>{signalPost(post)}}>
+                          <CiWarning    /> Signaler   
+                        </button>
                       </div>
                   </div>
                   
