@@ -21,7 +21,9 @@ export default function FeedDisplay() {
   const [users, setUsers] = useState([]);
   const [targetPost, setTargetPost] = useState({});
   const [postToUpdate, setPostToUpdate] = useState(null);
-
+  const [interaction,setInteraction]=useState("")
+  const [interactionType,setInteractionType]=useState("")
+  const [error,setError]=useState("")
   // Load communities
   const loadCommunities = async () => {
     try {
@@ -70,6 +72,10 @@ export default function FeedDisplay() {
 
   // Handle interaction (upvote, downvote, etc.)
   const addInteraction = async (post, interaction) => {
+    if(interaction.indexOf(post._id)==-1)
+    {
+
+    
     if (typeof post[interaction] !== 'number') {
       post[interaction] = 0;
     }
@@ -77,9 +83,15 @@ export default function FeedDisplay() {
 
     try {
       await axios.put(`http://localhost:3030/Publication/updatePublication/`+post._id, post);
+      setInteraction(prev => prev + post._id);
+      setInteractionType("Vous avez déjà interagi avec cette publication 💔 ! ")
       loadPosts();
     } catch (error) {
       console.error("Update failed:", error);
+    }}
+    else 
+    {
+      setError("You already reacted to this post ! ")
     }
   };
   const  findUser = (userId) => {
@@ -179,9 +191,10 @@ export default function FeedDisplay() {
                         </span>
                       </div>
                     </div>
-
+                          
                     <div className="actions d-flex flex-wrap justify-content-center column-gap-2 row-gap-2">
-                      {reactions.map((reaction, index) => (
+                      {interaction.indexOf(post._id)!=-1 && interactionType!="" && <p className="d-block alert alert-warning">{interactionType}</p>}
+                      {interaction.indexOf(post._id)==-1 && reactions.map((reaction, index) => (
                         <button
                           key={index}
                           className="btn rounded-pill px-3 py-1 d-flex align-items-center gap-2"
@@ -192,7 +205,7 @@ export default function FeedDisplay() {
                           <span>{post[reaction.field]}</span>
                         </button>
                       ))}
-
+                      
                       <button
                         className="btn rounded-pill px-3 py-1 d-flex align-items-center gap-2"
                         onClick={() => openModal(post)}
