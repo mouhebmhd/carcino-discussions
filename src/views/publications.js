@@ -32,6 +32,7 @@ export default function Publications() {
         } catch (error) {
             console.error("Error deleting post:", error);
         }
+     
     };
     const signalPost = (post) => {
       const message = `Your post titled "${post.titrePublication}" has been signaled by the moderator. Please check it again.`;

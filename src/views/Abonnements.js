@@ -16,7 +16,26 @@ export default function Subscribtion() {
         console.error("Erreur lors du chargement des abonnements :", error);
       });
   };
-
+  const warnUser=(user)=>{
+    console.log(user._id)
+    const message = `Your account has received a warning from the moderator. Please review your behavior on the platform.`;
+    const date=new Date().toISOString()
+    const title ="Warning !  "
+    const waring={
+      notificationDate:date,
+      notificationTitle:title,
+      notificationDescription:message,
+      notificationReceiver:user._id,
+    }
+    console.log(waring)
+    axios.post("http://localhost:3030/notifications/postNotifications/",waring)
+    .then((response)=>{
+      console.log(response.data)
+    })
+    .catch(error=>{
+      console.log(error)
+    })
+  };
   const deleteSubscribe = (subscribeId) => {
     axios.delete("http://localhost:3030/Abonnement/deleteAbonnement/" + subscribeId)
       .then(response => {
@@ -106,6 +125,10 @@ export default function Subscribtion() {
                   {subscribe.abonnementStatus === 'waiting' && 
                    <button className="btn btn-primary  btn-sm" onClick={() => approveDemand(subscribe)}>
                     Approuver
+                  </button>}
+                  {subscribe.abonnementStatus !== 'waiting' && 
+                   <button className="btn btn-dark  btn-sm" onClick={() => warnUser(subscribe.userInfo)}>
+                    Avertir
                   </button>}
                   {subscribe.abonnementStatus != 'waiting' && 
                   <button className="btn btn-warning  btn-sm" onClick={() => desapproveDemand(subscribe)}>
