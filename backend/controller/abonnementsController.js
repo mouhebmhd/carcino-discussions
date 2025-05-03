@@ -58,6 +58,7 @@ const getAbonnementById = async (req, res) => {
 // add abonnement
 const addAbonnement = async (req, res) => {
     try {
+      console.log(abonnementSchema(req.body));
       const newAbonnement = new abonnementSchema(req.body);
       newAbonnement["abonnementStatus"]="waiting"
       const savedAbonnement = await newAbonnement.save();
@@ -79,7 +80,7 @@ const addAbonnement = async (req, res) => {
         new Date().toISOString(),
         "Subscription Updated",
         "The status of One of your subscriptions to communities has successfully updated. Please check the Communities window.",
-        newAbonnement.userId
+        req.body.userId
       );
       const { id } = req.params;
       console.log(id)
