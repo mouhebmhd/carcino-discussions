@@ -24,7 +24,7 @@ export default function AdminDashboard() {
     <div className={styles.sidebarHeader}>Dashboard</div>
     <ul className={styles.sidebarNav}>
       
-      <li className={styles.navItem}>
+    {user.role=="administrateur" &&  <li className={styles.navItem}>
         <a
           className={`${styles.navLink} ${activeTab === 'dashboard' ? styles.active : ''}`}
           href="#"
@@ -33,7 +33,7 @@ export default function AdminDashboard() {
           <i className="bi bi-house-door"></i>
           Activity Center
         </a>
-      </li>
+      </li>}
       {user.role=="administrateur" && 
       <li className={styles.navItem}>
         <a

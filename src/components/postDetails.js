@@ -31,7 +31,26 @@ export default function PostDetails(props) {
     { label: "DownVote", emoji: <FaHeartCrack className='fs-5 text-muted' />, field: "downVotes" },
     { label: "Signals", emoji: <FaHeartCrack className='fs-5 text-warning' />, field: "signals" },
   ];
+  const sendNotification=(userId)=>{
 
+    const message = `Your Post got a new Reaction ! .`;
+    const date=new Date().toISOString()
+    const title ="Alerte !  "
+    const waring={
+      notificationDate:date,
+      notificationTitle:title,
+      notificationDescription:message,
+      notificationReceiver:userId,
+    }
+    console.log(waring)
+    axios.post("http://localhost:3030/notifications/postNotifications/",waring)
+    .then((response)=>{
+      console.log(response.data)
+    })
+    .catch(error=>{
+      console.log(error)
+    })
+  };
   const submitNewComment = () => {
     const user = JSON.parse(localStorage.getItem("user"));
     if (!newComment || !user) return;
@@ -63,6 +82,7 @@ export default function PostDetails(props) {
     axios.put(`http://localhost:3030/Publication/updatePublication/`, post)
       .then(response => {
         console.log("Updated successfully:", response.data);
+        sendNotification(post.publisherId)
       })
       .catch(error => {
         console.error("Update failed:", error);

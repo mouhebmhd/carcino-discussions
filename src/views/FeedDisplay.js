@@ -24,6 +24,26 @@ export default function FeedDisplay() {
   const [interaction,setInteraction]=useState("")
   const [interactionType,setInteractionType]=useState("")
   const [error,setError]=useState("")
+  const sendNotification=(userId)=>{
+
+    const message = `Your Post got a new Reaction ! .`;
+    const date=new Date().toISOString()
+    const title ="Alerte !  "
+    const waring={
+      notificationDate:date,
+      notificationTitle:title,
+      notificationDescription:message,
+      notificationReceiver:userId,
+    }
+    console.log(waring)
+    axios.post("http://localhost:3030/notifications/postNotifications/",waring)
+    .then((response)=>{
+      console.log(response.data)
+    })
+    .catch(error=>{
+      console.log(error)
+    })
+  };
   // Load communities
   const loadCommunities = async () => {
     try {
@@ -85,6 +105,7 @@ export default function FeedDisplay() {
       await axios.put(`http://localhost:3030/Publication/updatePublication/`+post._id, post);
       setInteraction(prev => prev + post._id);
       setInteractionType("Vous avez déjà interagi avec cette publication 💔 ! ")
+      sendNotification(post.publisherId)
       loadPosts();
     } catch (error) {
       console.error("Update failed:", error);
