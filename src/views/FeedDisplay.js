@@ -86,7 +86,26 @@ export default function FeedDisplay() {
     modal.show();
     setTargetPost(post);
   };
-
+  const saveInteraction = (typeInteraction,
+    dateInteraction,
+    interactorId,
+    publicationId)=>
+    {
+      const data={
+        typeInteraction,
+        dateInteraction,
+        interactorId,
+        publicationId
+      }
+      console.log(data)
+      axios.post("http://localhost:3030/Interaction/postInteraction/",data)
+      .then((response)=>{
+        console.log(response.data)
+      })
+      .then((error)=>{
+        console.log(error)
+      })
+    }
   const closeModal = () => setPostToUpdate(null);
 
 
@@ -103,6 +122,7 @@ export default function FeedDisplay() {
 
     try {
       await axios.put(`http://localhost:3030/Publication/updatePublication/`+post._id, post);
+      saveInteraction("interaction",new Date().toISOString(),user._id,post._id)
       setInteraction(prev => prev + post._id);
       setInteractionType("Vous avez déjà interagi avec cette publication 💔 ! ")
       sendNotification(post.publisherId)

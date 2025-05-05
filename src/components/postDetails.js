@@ -10,14 +10,33 @@ export default function PostDetails(props) {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
   const [newCommentAdded, setNewCommentAdded] = useState(false);
-
+  const user=JSON.parse(localStorage.getItem("user"))
+  const saveInteraction = (typeInteraction,
+    dateInteraction,
+    interactorId,
+    publicationId)=>
+    {
+      const data={
+        typeInteraction,
+        dateInteraction,
+        interactorId,
+        publicationId
+      }
+      console.log(data)
+      axios.post("http://localhost:3030/Interaction/postInteraction/",data)
+      .then((response)=>{
+        console.log(response.data)
+      })
+      .then((error)=>{
+        console.log(error)
+      })
+    }
   const post = props.post;
 
   useEffect(() => {
     if (!post?.publicationId) return;
     axios.get(`http://localhost:3030/Commentaire/getCommentaireByPostId/${post._id}`)
       .then((response) => {
-        console.log(response.data);
         setComments(response.data);
         setNewCommentAdded(false);
       })
@@ -64,7 +83,7 @@ export default function PostDetails(props) {
 
     axios.post("http://localhost:3030/Commentaire/postCommentaire/", Comment)
       .then((response) => {
-        console.log(response.data);
+        saveInteraction("Comment",new Date().toISOString(),user._id)
         setNewComment(""); // Clear input
         setNewCommentAdded(true); // Trigger refresh
       })
@@ -81,7 +100,6 @@ export default function PostDetails(props) {
 
     axios.put(`http://localhost:3030/Publication/updatePublication/`, post)
       .then(response => {
-        console.log("Updated successfully:", response.data);
         sendNotification(post.publisherId)
       })
       .catch(error => {

@@ -1,3 +1,4 @@
+const { default: axios } = require('axios');
 const mongoose = require('mongoose');
 
 const InteractionSchema = new mongoose.Schema({
