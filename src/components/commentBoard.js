@@ -88,7 +88,7 @@ const CommentBoard = (props) => {
                 <div className="commentIconContainer"><MdLocalPostOffice /></div>
 
                 <div className="ac2">
-                  <div className="ac4">{author.nom + " " + author.prenom}</div>
+                  <div className="ac4">{author.nom+ " " + author.prenom}</div>
 
                   {isEditing ? (
                     <div className="ac5">

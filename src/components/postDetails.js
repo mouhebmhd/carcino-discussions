@@ -7,10 +7,11 @@ import CommentBoard from "./commentBoard";
 import axios from 'axios';
 
 export default function PostDetails(props) {
+  const user=JSON.parse(localStorage.getItem("user"))
+
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
   const [newCommentAdded, setNewCommentAdded] = useState(false);
-  const user=JSON.parse(localStorage.getItem("user"))
   const saveInteraction = (typeInteraction,
     dateInteraction,
     interactorId,
@@ -80,8 +81,8 @@ export default function PostDetails(props) {
       authorId: user._id,
       publicationId: post._id,
     };
-
-    axios.post("http://localhost:3030/Commentaire/postCommentaire/", Comment)
+    console.log(Comment)
+     axios.post("http://localhost:3030/Commentaire/postCommentaire/", Comment)
       .then((response) => {
         saveInteraction("Comment",new Date().toISOString(),user._id)
         setNewComment(""); // Clear input
@@ -89,7 +90,7 @@ export default function PostDetails(props) {
       })
       .catch((error) => {
         console.log(error);
-      });
+      }); 
   };
 
   const addInteraction = (interaction) => {
