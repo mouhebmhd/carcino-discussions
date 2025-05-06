@@ -204,7 +204,7 @@ export default function FeedDisplay() {
                     <div className="card-body d-flex">
                       <div className="me-3">
                         <img
-                          src={user.userAvatar}
+                          src={post.user.userAvatar}
                           alt="Ideas For Wealth Generation"
                           className="rounded-circle"
                           width="75"

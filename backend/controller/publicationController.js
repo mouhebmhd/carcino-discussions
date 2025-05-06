@@ -1,22 +1,26 @@
 const PublicationSchema=require("../models/Publication.js");
+const Utilisateur=require("../models/Utilisateur.js")
 
 
 
 
+const getAllPublication = async (req, res) => {
+  try {
+    const publications = await PublicationSchema.find();
 
-const getAllPublication=async (req,res)=>{ 
+    const enrichedPublications = await Promise.all(
+      publications.map(async (publication) => {
+        const user = await Utilisateur.findById(publication.publisherId);
+        return { ...publication.toObject(), user };
+      })
+    );
 
-    try
-    {
-        const Publication=await PublicationSchema.find();
-        res.status(200).json(Publication);
-    }
-    catch(error)
-    {
-        res.status(400).json({error:error.message})
-    }
+    res.status(200).json(enrichedPublications);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
 
-}
 // get publication by id 
 const getPublicationById = async (req, res) => {
     try {
