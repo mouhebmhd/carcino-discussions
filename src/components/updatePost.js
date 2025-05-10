@@ -58,12 +58,12 @@ export default function UpdatePost(props) {
                     <form id="updatePublicationForm">
                         <div className="modal-content">
                             <div className="modal-header">
-                                <h5 className="modal-title" id="updatePublicationModalLabel">Update Publication</h5>
+                                <h5 className="modal-title" id="updatePublicationModalLabel"> Mettre à jour la publication</h5>
                                 <button type="button" onClick={props.onCloseModal} className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div className="modal-body">
                                 <div className="mb-3">
-                                    <label htmlFor="titrePublication" className="form-label">Title</label>
+                                    <label htmlFor="titrePublication" className="form-label">Titre</label>
                                     <input
                                         type="text"
                                         className="form-control"
@@ -75,7 +75,7 @@ export default function UpdatePost(props) {
                                     />
                                 </div>
                                 <div className="mb-3">
-                                    <label htmlFor="contenuPublication" className="form-label">Content</label>
+                                    <label htmlFor="contenuPublication" className="form-label"> Contenu</label>
                                     <textarea
                                         className="form-control"
                                         id="contenuPublication"
@@ -87,7 +87,7 @@ export default function UpdatePost(props) {
                                     ></textarea>
                                 </div>
                                 <div className="mb-3">
-                                    <label htmlFor="tagPublication" className="form-label">Community</label>
+                                    <label htmlFor="tagPublication" className="form-label">Communauté</label>
                                     <select
                                         className="form-select"
                                         id="tagPublication"
@@ -101,7 +101,7 @@ export default function UpdatePost(props) {
                                         }}
                                         required
                                     >
-                                        <option value="">Select a community</option>
+                                        <option value="">Sélectionner une communauté</option>
                                         {communities.map((comm) => (
                                             <option key={comm.communauteId} value={comm.communauteId}>
                                                 {comm.nomCommunaute}
@@ -111,8 +111,8 @@ export default function UpdatePost(props) {
                                 </div>
                             </div>
                             <div className="modal-footer">
-                                <button  type="button" className="btn btn-success" onClick={updatePost}>Save Changes</button>
-                                <button type="button" ref={item} onClick={props.onCloseModal} className="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <button  type="button" className="btn btn-success" onClick={updatePost}> Sauvegarder les modifications</button>
+                                <button type="button" ref={item} onClick={props.onCloseModal} className="btn btn-secondary" data-bs-dismiss="modal"> Annuler</button>
                             </div>
                         </div>
                     </form>

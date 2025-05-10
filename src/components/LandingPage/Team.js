@@ -66,7 +66,7 @@ function Team() {
     <>
       <section id="team" className="team-section bg-light py-3">
         <div className="container py-5">
-          <h2 className="text-center mb-4 display-4 fw-bold mainTextColor">Meet The Team</h2>
+          <h2 className="text-center mb-4 display-4 fw-bold mainTextColor">Rencontrez l'équipe</h2>
           
           <Carousel indicators={false} interval={null} variant="dark">
             {/* Split team members into chunks for carousel slides */}

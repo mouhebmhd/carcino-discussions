@@ -56,14 +56,14 @@ export default function AddCommunity({ onAddSuccess }) {
             <div className="modal-content">
 
               <div className="modal-header">
-                <h5 className="modal-title">Add New Community</h5>
+                <h5 className="modal-title">Ajouter une nouvelle communauté</h5>
                 <button type="button" className="btn-close" onClick={handleClose}></button>
               </div>
 
               <div className="modal-body">
                 <form onSubmit={handleSubmit}>
                   <div className="mb-3">
-                    <label htmlFor="nomCommunaute" className="form-label">Community Name</label>
+                    <label htmlFor="nomCommunaute" className="form-label">Nom de la communauté</label>
                     <input
                       type="text"
                       className="form-control"
@@ -75,7 +75,7 @@ export default function AddCommunity({ onAddSuccess }) {
                   </div>
 
                   <div className="mb-3">
-                    <label htmlFor="descriptionCommunaute" className="form-label">Community Description</label>
+                    <label htmlFor="descriptionCommunaute" className="form-label">Description de la communauté</label>
                     <textarea
                       className="form-control"
                       id="descriptionCommunaute"
@@ -88,10 +88,10 @@ export default function AddCommunity({ onAddSuccess }) {
 
                   <div className="modal-footer">
                     <button type="button" className="btn btn-secondary" onClick={handleClose}>
-                      Close
+                    Fermer
                     </button>
                     <button type="submit" className="btn btn-primary">
-                      Add Community
+                    Ajouter une communauté
                     </button>
                   </div>
 

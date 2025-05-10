@@ -63,7 +63,7 @@ const CreatePost = () => {
     <div className="create-post-container">
       <div className="create-post-input" onClick={() => setShowPopup(true)}>
         <img src="avat2.jpg" alt="User" className="profile-picture" />
-        <div className="input-placeholder">Start a post</div>
+        <div className="input-placeholder"> Créer une publication</div>
       </div>
       <div className="post-options">
         <button>Media</button>

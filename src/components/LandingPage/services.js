@@ -14,17 +14,17 @@ export default function Services() {
                   lineHeight: "48px",
                   marginBottom: "10px",
                 }}>
-                  Safe Space for Healing
+                  Espace sécurisé pour la guérison
                 </h2>
                 <h2 style={{
                   fontSize: "50px",
                   lineHeight: "60px",
                   marginBottom: "20px",
                 }} >
-                 <p className='display-4 mainTextColor'> Our Support Services</p>
+                 <p className='display-4 mainTextColor'> Nos services de soutien</p>
                 </h2>
                 <p className='fs-3 mainColorText'>
-                  Our platform provides <span className="highlight">dedicated</span> discussion rooms where patients facing <strong>cancer</strong> and other health challenges can connect, share, and support each other.
+                Notre plateforme offre <span className="highlight">dédié</span>  salles de discussion où les patients confrontés à <strong>cancer</strong>  et d'autres défis de santé peuvent se connecter, partager et se soutenir mutuellement.
                 </p>
               </div>
             </div>

@@ -52,7 +52,7 @@ function NavBar() {
                     `nav-link ${styles.navLink} ${isActive ? styles.activeLink : ''}`
                   }
                   to="/home">
-                  <FaHome className="mx-2" /> Home
+                  <FaHome className="mx-2" />  Accueil
                 </NavLink>
               </li>
             )}
@@ -62,7 +62,7 @@ function NavBar() {
               <>
                 <li className="nav-item">
                   <a className={`nav-link ${styles.navLink}`} href="#about">
-                    <FaInfoCircle className="mx-2" /> About
+                    <FaInfoCircle className="mx-2" />  À propos
                   </a>
                 </li>
                 <li className="nav-item">
@@ -81,7 +81,7 @@ function NavBar() {
                       `nav-link ${styles.navLink} ${isActive ? styles.activeLink : ''}`
                     }
                     to="/login">
-                    <FaSignInAlt className="mx-2" /> Sign In
+                    <FaSignInAlt className="mx-2" /> Se connecter
                   </NavLink>
                 </li>
               </>
@@ -120,7 +120,7 @@ function NavBar() {
                         `nav-link ${styles.navLink} ${isActive ? styles.activeLink : ''}`
                       }
                       to="/network">
-                      <FaNetworkWired className="mx-2" /> Network
+                      <FaNetworkWired className="mx-2" /> Réseau
                     </NavLink>
                   </li>
                 )}

@@ -130,7 +130,7 @@ export default function PostDetails(props) {
           </div>
 
           <div className="newcomment p-2">
-            <h5 className='text-center'>New Comment</h5>
+            <h5 className='text-center'> Nouveau commentaire</h5>
             <input
               type="text"
               className='commentInput'
@@ -143,7 +143,7 @@ export default function PostDetails(props) {
             </button>
           </div>
 
-          <h5 className="modal-title text-center">Comments</h5>
+          <h5 className="modal-title text-center"> Commentaires</h5>
           {comments.length > 0 ? (
   comments.map((comment) => (
     <CommentBoard
@@ -162,7 +162,7 @@ export default function PostDetails(props) {
     />
   ))
 ) : (
-  <p className='fs-5 text-center'>Sorry, no comments for this post!</p>
+  <p className='fs-5 text-center'>Désolé, aucun commentaire pour cette publication !</p>
 )}
 
 

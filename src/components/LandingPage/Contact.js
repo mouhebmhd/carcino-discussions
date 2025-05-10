@@ -63,9 +63,9 @@ const ContactForm = () => {
           <div className="container px-5">
             <div className="bg-light rounded-4 py-5 px-4 px-md-5">
               <div className="text-center mb-5">
-                <h1 className="fw-bold display-4 mainTextColor">Get In Touch</h1>
+                <h1 className="fw-bold display-4 mainTextColor">Contactez-nous</h1>
                 <p className="lead fw-normal text-muted mb-0">
-                  You have a question? Do not hesitate!
+                Vous avez une question ? N’hésitez pas !
                 </p>
               </div>
 
@@ -82,7 +82,7 @@ const ContactForm = () => {
                       onChange={handleChange}
                       required
                     />
-                    <label htmlFor="name">Full name</label>
+                    <label htmlFor="name"> Nom complet</label>
                   </div>
 
                   {/* Email input */}
@@ -96,7 +96,7 @@ const ContactForm = () => {
                       onChange={handleChange}
                       required
                     />
-                    <label htmlFor="email">Email address</label>
+                    <label htmlFor="email">Adresse e-mail</label>
                   </div>
 
                   {/* Phone input */}
@@ -110,7 +110,7 @@ const ContactForm = () => {
                       onChange={handleChange}
                       required
                     />
-                    <label htmlFor="phone">Phone number</label>
+                    <label htmlFor="phone">Numéro de téléphone</label>
                   </div>
 
                   {/* Message input */}
@@ -138,17 +138,17 @@ const ContactForm = () => {
                   {formStatus.isSubmitted && (
                     <div className="text-center mb-3 animate__animated animate__fadeInDown">
                       <div className="fw-bolder text-success">
-                        Form submission successful!
+                      Soumission du formulaire réussie !
                       </div>
                       <p className="text-muted">
-                        We'll get back to you as soon as possible.
+                      Nous reviendrons vers vous dans les plus brefs délais.
                       </p>
                     </div>
                   )}
 
                   {formStatus.isError && (
                     <div className="text-center text-danger mb-3 animate__animated animate__shakeX">
-                      Error sending message! Please check all fields and try again.
+                      Erreur lors de l'envoi du message ! Veuillez vérifier tous les champs et réessayer.
                     </div>
                   )}
 
@@ -168,7 +168,7 @@ const ContactForm = () => {
                     ) : (
                       <>
                         <FiSend className="me-2" />
-                        Submit
+                        Envoyer
                       </>
                     )}
                     </button>

@@ -7,8 +7,8 @@ const Footer = () => {
       <div className="container text-center">
         <div className="row">
           <div className="col-12">
-            <h5>Stay Connected</h5>
-            <p className="mb-4">Join our community and find support through every step of your journey.</p>
+            <h5>Restez connectés</h5>
+            <p className="mb-4">Rejoignez notre communauté et trouvez du soutien à chaque étape de votre parcours.</p>
             
             {/* Social Media Icons */}
             <div className="social-icons mb-4">
@@ -32,13 +32,13 @@ const Footer = () => {
         <div className="row">
           <div className="col-12">
             <p className="mb-2">
-              <strong>Contact Us:</strong> carcino@contact.com
+              <strong> Contactez-nous :</strong> carcino@contact.com
             </p>
             <p className="mb-2">
-              <strong>Phone:</strong> +1 (123) 456-7890
+              <strong>Téléphone:</strong> +1 (123) 456-7890
             </p>
             <p className="mb-2">
-              <strong>Address:</strong> 123 Health St, Wellness City, Country
+              <strong>Address:</strong> 123 Rue de la Santé, Ville du Bien-être, Pays
             </p>
           </div>
         </div>
@@ -46,7 +46,7 @@ const Footer = () => {
         {/* Copyright */}
         <div className="row mt-3">
           <div className="col-12">
-            <p className="mb-0">&copy; 2025 Carcino Disc . All Rights Reserved.</p>
+            <p className="mb-0">&copy; 2025 Carcino Disc . Tous droits réservés.</p>
           </div>
         </div>
       </div>

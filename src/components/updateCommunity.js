@@ -42,7 +42,7 @@ export default function UpdateCommunity({ community, setUpdatedCommunity,onUpdat
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title" id="communityModalLabel">
-              Update Community
+            Mettre à jour la communauté
             </h5>
             <button
               type="button"
@@ -56,7 +56,7 @@ export default function UpdateCommunity({ community, setUpdatedCommunity,onUpdat
             <form onSubmit={handleSubmit}>
               <div className="mb-3">
                 <label htmlFor="nomCommunaute" className="form-label">
-                  Community Name
+                Nom de la communauté
                 </label>
                 <input
                   type="text"
@@ -68,7 +68,7 @@ export default function UpdateCommunity({ community, setUpdatedCommunity,onUpdat
               </div>
               <div className="mb-3">
                 <label htmlFor="descriptionCommunaute" className="form-label">
-                  Community Description
+                Description de la communauté
                 </label>
                 <textarea
                   className="form-control"
@@ -86,10 +86,10 @@ export default function UpdateCommunity({ community, setUpdatedCommunity,onUpdat
                   data-bs-dismiss="modal"
                   onClick={() => setUpdatedCommunity(null)}
                 >
-                  Close
+                  Fermer
                 </button>
                 <button type="submit" className="btn btn-primary">
-                  Save changes
+                Sauvegarder les modifications
                 </button>
               </div>
             </form>

@@ -51,10 +51,10 @@ export default function NewPost(props) {
     <div className="newPost mb-2 d-flex align-items-baseline justify-content-end">
           
           <button className='btn  mt-2'  data-bs-toggle="modal" data-bs-target="#publicationModal" >
-          <MdOutlinePublish className='mx-1 fs-5'/> Publish New Post
+          <MdOutlinePublish className='mx-1 fs-5'/>  Publier une nouvelle publication
           </button>
           <Link className='btn btn-warning  mt-2 mx-2' to="/analyse"  >
-          <MdOutlinePublish className='mx-1 fs-5'/> Analyse An Image
+          <MdOutlinePublish className='mx-1 fs-5'/>  Analyser une image
           </Link>
      </div>
 
@@ -63,7 +63,7 @@ export default function NewPost(props) {
     <form id="publicationForm">
       <div className="modal-content">
         <div className="modal-header">
-          <h5 className="modal-title" id="publicationModalLabel">Add New Publication</h5>
+          <h5 className="modal-title" id="publicationModalLabel"> Ajouter une nouvelle publication</h5>
           <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div className="modal-body">
@@ -71,18 +71,18 @@ export default function NewPost(props) {
         
           
           <div className="mb-3">
-            <label htmlFor="titrePublication" className="form-label">Title</label>
+            <label htmlFor="titrePublication" className="form-label">Titre</label>
             <input type="text" className="form-control" id="titrePublication" name="titrePublication" required 
             onChange={(event)=>{setNewPostData("titrePublication",event.target.value)}}/>
           </div>
           <div className="mb-3">
-            <label htmlFor="contenuPublication" className="form-label">Content</label>
+            <label htmlFor="contenuPublication" className="form-label"> Contenu</label>
             <textarea className="form-control" id="contenuPublication" name="contenuPublication" rows="3" required
             onChange={(event)=>{setNewPostData("contenuPublication",event.target.value)}}
             ></textarea>
           </div>
           <div className="mb-3">
-  <label htmlFor="tagPublication" className="form-label">Community</label>
+  <label htmlFor="tagPublication" className="form-label">Communauté</label>
   <select
     className="form-select"
     id="tagPublication"
@@ -95,7 +95,7 @@ export default function NewPost(props) {
       setNewPostData("communityTag", selectedText); // Set the visible name
     }}
   >
-    <option value="">Select a community</option>
+    <option value="">Sélectionner une communauté</option>
     {communities.map((comm,index) => (
       <option key={index} value={comm.communauteId}>
         {comm.nomCommunaute}
@@ -108,8 +108,8 @@ export default function NewPost(props) {
           
         </div>
         <div className="modal-footer">
-          <button type="button" className="btn btn-success" onClick={addNewPost}>Save</button>
-          <button type="button" ref={item} className="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" className="btn btn-success" onClick={addNewPost}> Sauvegarder</button>
+          <button type="button" ref={item} className="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
         </div>
       </div>
     </form>

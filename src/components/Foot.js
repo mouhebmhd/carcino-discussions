@@ -11,9 +11,9 @@ const FooterF = () => {
 
         <div className="footer-grid">
           <div className="footer-column">
-            <h5>About Us</h5>
+            <h5>À propos</h5>
             <p>Contact</p>
-            <p>Terms & Conditions</p>
+            <p>Termes & Conditions</p>
             <p>447 Evergreen Rd, Roseville, CA 95673</p>
             <p>+44 345 678 903</p>
             <p>tradstor12@mail.com</p>
