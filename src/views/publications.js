@@ -88,7 +88,7 @@ export default function Publications() {
                 <h1 className="mb-5">Gestions des publications</h1>
             </div>
             <div className="postsContainer d-flex  flex-wrap justify-content-around">
-                {posts.length === 0 && <p className='alert alert-danger'>Posts Fetching ...</p>}
+                {posts.length === 0 && <p className='alert alert-danger'>Chargement des publications...</p>}
                 {posts.length > 0 && posts.map((post) => (
                     <div className="card postCard mb-4 border-1 shadow-sm rounded-4" style={{width:"32%"}} key={post._id}>
                     <div className="card-body p-4">
@@ -137,19 +137,19 @@ export default function Publications() {
                         </span>
                       </div>
                     </div>
-                    <div className="text-center d-flex justify-content-center p-2 column-gap-2 ">
+                    <div className="text-center d-flex justify-content-center p-1 column-gap-1 ">
                         <button className="d-inline-flex btn btn-danger align-items-center gap-1  px-1 py-1 fw-semibold" onClick={()=>{deletePost(post)}}>
-                          <MdDelete  /> Delete   
+                          <MdDelete  /> Supprimer   
                         </button>
-                       {post.postStatus=="approved" && <button className="d-inline-flex btn btn-dark align-items-center gap-1  px-3 py-1 fw-semibold" onClick={()=>{disapprovePost(post)}}>
-                          <FaCheck   /> Disapprove   
+                       {post.postStatus=="approved" && <button className="d-inline-flex btn btn-sm btn-dark align-items-center gap-1  px-2 py-1 fw-semibold" onClick={()=>{disapprovePost(post)}}>
+                          <FaCheck   /> Désapprouver   
                         </button>}
                         {post.postStatus!="approved" && 
                         <button className="d-inline-flex btn btn-primary align-items-center gap-1  px-1 py-1 fw-semibold" onClick={()=>{approvePost(post)}}>
-                          <FaCheck   /> Approve   
+                          <FaCheck   />Approuver  
                         </button>
                         }
-                         <button className="d-inline-flex btn btn-warning align-items-center gap-1  px-1 py-1 fw-semibold" onClick={()=>{signalPost(post)}}>
+                         <button className="d-inline-flex btn btn-sm btn-warning align-items-center gap-1  px-1 py-1 fw-semibold" onClick={()=>{signalPost(post)}}>
                           <CiWarning    /> Signaler   
                         </button>
                       </div>
