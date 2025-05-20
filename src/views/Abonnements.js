@@ -81,7 +81,6 @@ export default function Subscribtion() {
 
   return (
     <>
-      <Navbar color="var(--mainColor)" />
       <div className="container mt-4">
       <div className="text-center ">
             <h6 className="section-title bg-white text-center specialText px-3">Abonnements</h6>

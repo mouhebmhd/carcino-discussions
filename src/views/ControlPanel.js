@@ -6,7 +6,7 @@ import Communities from "./Community";
 import Posts from "./publications";
 import Dashboard from "./Dashboard";
 import styles from "../styles/sideBarStyle.module.css"; // Import CSS Module
-
+import Abonnements  from "./Abonnements.js";
 export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState('dashboard');
   const user=JSON.parse(localStorage.getItem("user"))
@@ -21,7 +21,6 @@ export default function AdminDashboard() {
           {/* Sidebar */}
           <nav className={`${styles.sideBar} col-md-3 col-lg-2`}>
   <div className={styles.positionSticky}>
-    <div className={styles.sidebarHeader}>Dashboard</div>
     <ul className={styles.sidebarNav}>
       
     {user.role=="administrateur" &&  <li className={styles.navItem}>
@@ -59,12 +58,12 @@ export default function AdminDashboard() {
       </li>}
       <li className={styles.navItem}>
         <a
-          className={`${styles.navLink} ${activeTab === 'communities' ? styles.active : ''}`}
+          className={`${styles.navLink} ${activeTab === 'abonnements' ? styles.active : ''}`}
           href="#"
-          onClick={(e) => { e.preventDefault(); setActiveTab('communities'); }}
+          onClick={(e) => { e.preventDefault(); setActiveTab('abonnements'); }}
         >
           <i className="bi bi-people-fill"></i>
-          Gérer les communautés
+          Gérer les Abonnements
         </a>
       </li>
       <li className={styles.navItem}>
@@ -89,6 +88,7 @@ export default function AdminDashboard() {
             {activeTab === 'users' && <Users />}
             {activeTab === 'communities' && <Communities />}
             {activeTab === 'posts' && <Posts />}
+            {activeTab === 'abonnements' && <Abonnements />}
           </main>
         </div>
       </div>

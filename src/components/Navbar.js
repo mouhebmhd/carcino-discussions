@@ -96,8 +96,8 @@ function NavBar() {
                       className={({ isActive }) =>
                         `nav-link ${styles.navLink} ${isActive ? styles.activeLink : ''}`
                       }
-                      to="/dashboardAdmin">
-                      <TbLayoutDashboardFilled className="mx-2" /> Dashboard
+                      to="/pannel">
+                      <TbLayoutDashboardFilled className="mx-2" /> Panneau
                     </NavLink>
                   </li>
                 )}
@@ -108,7 +108,7 @@ function NavBar() {
                         `nav-link ${styles.navLink} ${isActive ? styles.activeLink : ''}`
                       }
                       to="/feedDisplay">
-                      <MdDynamicFeed className="mx-2" /> Fil d'actualité
+                      <MdDynamicFeed className="mx-2" /> Actualités 
                     </NavLink>
                   </li>
                 )}
@@ -124,7 +124,7 @@ function NavBar() {
                     </NavLink>
                   </li>
                 )}
-                {role == "membre" && (
+                {role != "administrateur" && (
                   <li className="nav-item">
                     <NavLink
                       className={({ isActive }) =>
@@ -137,17 +137,7 @@ function NavBar() {
                 )}
                 {role !== "membre" && (
                   <>
-                    
-                    
-                    <li className="nav-item">
-                      <NavLink
-                        className={({ isActive }) =>
-                          `nav-link ${styles.navLink} ${isActive ? styles.activeLink : ''}`
-                        }
-                        to="/abonnements">
-                        <VscGitPullRequestDraft className="mx-2" /> Abonnements
-                      </NavLink>
-                    </li>
+          
                   </>
                 )}
                 {role !== "administrateur" && (
@@ -167,7 +157,7 @@ function NavBar() {
                       `nav-link ${styles.navLink} ${isActive ? styles.activeLink : ''}`
                     }
                     to={`/myProfile/${user?._id}`}>
-                    <FaUserCircle className="mx-2" /> Mon Profil
+                    <FaUserCircle className="mx-2" />  Profil
                   </NavLink>
                 </li>
                 <li className="nav-item">

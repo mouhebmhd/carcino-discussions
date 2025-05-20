@@ -5,6 +5,7 @@ import axios from 'axios';
  
 function Dashboard() {
   const [stats, setStats] = useState(null);
+  const userRole = JSON.parse(localStorage.getItem("user")).role;
 
   useEffect(() => {
     axios.get('http://localhost:3030/stats/getStats',{withCredentials:true})
@@ -20,40 +21,39 @@ function Dashboard() {
 
   return (
     <>
-      <div className="text-center ">
-        <h6 className="section-title text-center specialText px-3">Statistiques</h6>
-        <h1 className="">Dashboard</h1>
+      <div className="text-center p-3">
+        <h6 className="section-title text-center specialText px-3">Plateforme </h6>
+        <h1 className="">Statistiques</h1>
       </div>
 
       <section className="dashboard">
         <div className="container-fluid d-flex flex-wrap justify-content-center">
-
-          {/* Total Publications */}
+        
           <StatCard title="Total Posts" value={publications.total} icon="fas fa-newspaper" />
-
-          {/* Total Users */}
+         
+          {userRole=="administrateur" && 
           <StatCard title="Total Users" value={users.total} icon="fas fa-users" />
-
-          {/* Moderators */}
+          }
+        {userRole=="administrateur" && 
           <StatCard title="Total Moderators" value={
             users.byRole.find(r => r._id === 'moderateur')?.count || 0
           } icon="fas fa-user-shield" />
-
-          {/* Interactions */}
+}
+{userRole=="administrateur" &&
           <StatCard title="Interactions Made" value={interactions.total} icon="fas fa-hand-pointer" />
-
-          {/* Commentaires */}
+}
+{userRole=="administrateur" &&
           <StatCard title="Total Comments" value={commentaires} icon="fas fa-comments" />
-
-          {/* Abonnements */}
-          <StatCard title="Total Abonnements" value={abonnements} icon="fas fa-user-plus" />
-
-          {/* Communautés */}
+}
+       
+          <StatCard title="Abonnements" value={abonnements} icon="fas fa-user-plus" />
+          
+          {userRole=="administrateur" &&
           <StatCard title="Communautés créées" value={communautes.total} icon="fas fa-layer-group" />
-
-          {/* Active Users */}
+          }
+          {userRole=="administrateur" &&
           <StatCard title="Active Accounts" value={users.active} icon="fas fa-user-check" />
-
+          }
         </div>
 
         {/* Optional: Top Users */}

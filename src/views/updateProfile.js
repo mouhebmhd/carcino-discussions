@@ -19,13 +19,13 @@ export default function UpdateUser() {
     const baseUrl = "http://localhost:3030"
 
     const loadUserProfile = () => {
-        axios.get(baseUrl + "/Utilisateur/getUtilisateurById/" + userId,{withCredentials:true})
+        axios.get(baseUrl + "/Utilisateur/getUtilisateurById/" + userId)
             .then((response) => {
                 setUser(response.data);
             })
             .catch(() => setError("Failed to load user profile"));
 
-        axios.get(baseUrl + "/utilisateur/getUtilisateurStats/" + userId,{withCredentials:true})
+        axios.get(baseUrl + "/utilisateur/getUtilisateurStats/" + userId)
             .then((response) => setData(response.data))
             .catch((error) => console.log(error));
     }
@@ -66,7 +66,7 @@ export default function UpdateUser() {
                         <div className="col-lg-6">
                             <div className="about-text go-to">
                                 <h3 className="dark-color">Gèrer Mon Profil</h3>
-                                <p>I'm <mark>{user.nom + " " + user.prenom}.</mark></p>
+                                <p>I'm <mark> {user.nom + " " + user.prenom}.</mark></p>
                                 <div className="row about-list">
                                     <div className="col-md-6">
                                         <div className="media">
