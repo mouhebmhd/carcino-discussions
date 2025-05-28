@@ -155,14 +155,14 @@ export default function Community() {
                     className="btn btn-dark"
                     onClick={() => unfollowCommunity(c._id,user._id)}
                   >
-                    <RiUserUnfollowFill  /> Unsubscribe
+                    <RiUserUnfollowFill  /> désabonner
                   </button>}
                   {subscribtions.includes(c._id)==false && <button
                     className="btn btn-primary"
                     onClick={() => followCommunity(c._id)}
                   >
                     
-                    <RiUserFollowFill  /> Subscribe
+                    <RiUserFollowFill  /> S'abonner
                   </button>}
                   {subscribtions.includes(c._id)==true && <button
                     className="btn btn-danger"

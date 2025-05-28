@@ -66,7 +66,7 @@ export default function UpdateUser() {
                         <div className="col-lg-6">
                             <div className="about-text go-to">
                                 <h3 className="dark-color">Gèrer Mon Profil</h3>
-                                <p>I'm <mark> {user.nom + " " + user.prenom}.</mark></p>
+                                <p>je suis <mark> {user.nom + " " + user.prenom}.</mark></p>
                                 <div className="row about-list">
                                     <div className="col-md-6">
                                         <div className="media">
@@ -84,24 +84,24 @@ export default function UpdateUser() {
                                     </div>
                                     <div className="col-md-6">
                                         <div className="media">
-                                            <label>First Name</label>
+                                            <label>Nom</label>
                                             <input className='form-control' type="text" name="prenom" value={user.prenom || ''} onChange={handleChange} />
                                         </div>
                                         <div className="media">
-                                            <label>Last Name</label>
+                                            <label>Prénom</label>
                                             <input className='form-control' type="text" name="nom" value={user.nom || ''} onChange={handleChange} />
                                         </div>
                                         <div className="media">
-                                            <label>Phone</label>
+                                            <label>Telé</label>
                                             <input className='form-control' type="text" name="numeroTelephone" value={user.numeroTelephone || ''} onChange={handleChange} />
                                         </div>
                                     </div>
                                     <div className="col-12 d-block">
-                                        <label>About Me</label>
+                                        <label>Sur moi</label>
                                         <textarea className='form-control' name="aboutMe" value={user.aboutMe || ''} onChange={handleChange} rows="4" />
                                     </div>
                                     <div className="col-12 d-block">
-                                        <label>Short Biography</label>
+                                        <label>courte Biographie</label>
                                         <input type='text' className='form-control' name="shortBio" value={user.shortBio || ''} onChange={handleChange} />
                                     </div>
 
